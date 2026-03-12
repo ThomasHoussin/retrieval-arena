@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(PYTHONIOENCODING=utf-8 uv run python tools/bm25_search.py*)",
+      "mcp__bm25s__retrieve",
+      "mcp__qdrant__qdrant-find"
+    ]
+  }
+}

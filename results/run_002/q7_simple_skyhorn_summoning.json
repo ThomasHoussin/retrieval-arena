@@ -1,0 +1,99 @@
+{
+  "question_id": "q7_simple_skyhorn_summoning",
+  "question": "In The Secrets of Skyhorn Lighthouse, what creature is the eelfolk shaman trying to summon in the cave beneath the lighthouse?",
+  "expected_answer": "A water elemental.",
+  "difficulty": "simple",
+  "results": {
+    "bm25_simple": {
+      "answer": "A water elemental. Clarifies the eelfolk scourge (not shaman) forces captured sailor Grigor to use the Bowl of Commanding Water Elementals.",
+      "search_queries": ["eelfolk shaman summon cave"],
+      "search_calls": 1,
+      "sources_cited": ["The Secrets of Skyhorn Lighthouse V8-1.pdf p.4, 9, 12-13"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer with excellent additional context. Corrected the 'shaman' misnomer and explained the coercion mechanic."
+      }
+    },
+    "bm25_2round": {
+      "answer": "A water elemental. Detailed explanation: eelfolk force captive sailor Grigor to use Bowl of Commanding Water Elementals. Not a shaman but an eelfolk scourge.",
+      "search_queries": ["Skyhorn Lighthouse eelfolk shaman", "Skyhorn Lighthouse cave summon creature", "eelfolk shaman summoning ritual"],
+      "search_calls": 3,
+      "sources_cited": ["The Secrets of Skyhorn Lighthouse V8-1.pdf p.4, 12-13"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. 3 queries in Round 1, no Round 2 needed. Very thorough explanation of the summoning mechanic."
+      }
+    },
+    "bm25_free": {
+      "answer": "A water elemental. Eelfolk scourge forces captured sailor Grigor to use Bowl of Commanding Water Elementals.",
+      "search_queries": ["eelfolk shaman summon cave Skyhorn Lighthouse"],
+      "search_calls": 1,
+      "sources_cited": ["The Secrets of Skyhorn Lighthouse V8-1.pdf p.12-13"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer in a single query. Concise and accurate."
+      }
+    },
+    "vector_naive": {
+      "answer": "A water elemental. Eelfolk force captured sailors to use Bowl of Commanding Water Elementals. Eelfolk scourge oversees the ritual in Area 9.",
+      "search_queries": ["eelfolk shaman summoning cave Skyhorn Lighthouse"],
+      "search_calls": 1,
+      "sources_cited": ["The Secrets of Skyhorn Lighthouse p.13"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer in a single query. Good context about the coercion mechanic."
+      }
+    },
+    "vector_2round": {
+      "answer": "A water elemental. Eelfolk scourge (not shaman) oversees the ritual. Forced sailor Grigor uses Bowl of Commanding Water Elementals in Area 9 (Stalagmite Cave).",
+      "search_queries": ["Secrets of Skyhorn Lighthouse eelfolk shaman cave", "Skyhorn Lighthouse summoning ritual creature", "eelfolk shaman summon underwater cave lighthouse"],
+      "search_calls": 3,
+      "sources_cited": ["The Secrets of Skyhorn Lighthouse p.4, 12, 13"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. Most detailed of all agents — included synopsis quote, area numbers, and character details."
+      }
+    },
+    "vector_free": {
+      "answer": "A water elemental. Forced sailor Grigor performs the ritual using Bowl of Commanding Water Elementals. Completes ritual at end of 4th turn of concentration.",
+      "search_queries": ["eelfolk shaman summon cave lighthouse Skyhorn"],
+      "search_calls": 1,
+      "sources_cited": ["The Secrets of Skyhorn Lighthouse p.13, 4"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer in a single query. Included the mechanical detail about 4th turn concentration."
+      }
+    },
+    "hybrid_free": {
+      "answer": "A water elemental. Eelfolk scourge forces captured sailor Grigor to use Bowl of Commanding Water Elementals. Synopsis: 'eelfolk are forcing captured sailors to use a Bowl of Commanding Water Elementals to summon water elementals.'",
+      "search_queries": ["eelfolk shaman summon Skyhorn Lighthouse cave", "eelfolk shaman summoning creature cave beneath lighthouse"],
+      "search_calls": 2,
+      "sources_cited": ["The Secrets of Skyhorn Lighthouse V8-1.pdf p.1-4, 12-13"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. Both BM25 and vector returned the same source. Direct synopsis quote provided."
+      }
+    }
+  }
+}

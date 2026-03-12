@@ -1,0 +1,99 @@
+{
+  "question_id": "q4_medium_disease",
+  "question": "In the Frozen Sick adventure, what disease can characters catch in Croaker Cave, and what are its effects?",
+  "expected_answer": "Frigid woe. DC 11 Constitution save on contact with blue spores. Symptoms appear after 1d4 days: fatigue, chills, blue veins. Speed reduced by 5 feet. Every 10 days, a new DC 11 Con save or take 1d6 Cold damage and speed reduced by another 5 feet. At speed 0, the creature dies.",
+  "difficulty": "medium",
+  "results": {
+    "bm25_simple": {
+      "answer": "Frigid woe. DC 11 Con save vs blue spores. 1d4 days incubation. Symptoms: fatigue, chills, blue veins. Speed -5 ft. Every 10 days DC 11 Con save or speed reduced by another 5 ft. At speed 0, creature dies and body becomes ice statue. Cure: manufactured antidote (milky liquid in gold vials from Salsvault).",
+      "search_queries": ["Croaker Cave disease Frozen Sick"],
+      "search_calls": 1,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure p.1-2"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Excellent answer in a single query. All disease mechanics correct and complete: transmission, incubation, symptoms, progression, death condition, and cure. First time bm25_simple succeeds — Frozen Sick content indexed well."
+      }
+    },
+    "bm25_2round": {
+      "answer": "Frigid woe. Specific exposure in C6 (Hulil's Cavern) via trapped chest with blue powder in 15-ft cube, DC 11 Con save. 1d4 days incubation. Fatigue, chills, blue veins. Speed -5 ft. Every 10 days DC 11 Con save or -5 ft more. Speed 0 = death (ice statue). Cure: antidote in gold vials from Salsvault.",
+      "search_queries": ["Frozen Sick adventure Croaker Cave", "Croaker Cave disease effects", "Frozen Sick disease characters catch"],
+      "search_calls": 3,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure p.1, 8-9"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer with excellent extra detail — the specific C6 trap mechanism (booby-trapped chest, prayer to Tiamat, 15-ft cube, thieves' tools DC 15). All core disease mechanics correct."
+      }
+    },
+    "bm25_free": {
+      "answer": "Frigid woe. C6 exposure via cracked vials, DC 11 Con save. 1d4 days incubation. Fatigue, chills, blue veins. Speed -5 ft. Every 10 days DC 11 Con save or -5 ft more. Speed 0 = death (ice statue). Cure: manufactured antidote in gold vials from Eiselcross ruins.",
+      "search_queries": ["Frozen Sick Croaker Cave disease", "Croaker Cave disease effects characters"],
+      "search_calls": 2,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure p.1-2, 9"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. All disease mechanics correct and complete. Efficient with 2 queries."
+      }
+    },
+    "vector_naive": {
+      "answer": "Frigid woe. DC 11 Con save vs blue spores. 1d4 days incubation. Fatigue, chills, blue veins. Speed -5 ft. Cannot be cured by conventional treatment or magic. Cure: antidote in gold vials from Salsvault. Also mentions frigid pools hazard (DC 10 Con save or exhaustion).",
+      "search_queries": ["Croaker Cave disease effects Frozen Sick"],
+      "search_calls": 1,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure"],
+      "quality": {
+        "accuracy": 4,
+        "completeness": 2,
+        "faithfulness": 2,
+        "total": 8,
+        "notes": "Good but incomplete. Core disease identified correctly with transmission, incubation, and symptoms. Missing the critical progression mechanic (every 10 days DC 11 Con save or -5 ft more) and the death condition (speed 0 = death/ice statue). Single vector query didn't retrieve the full disease block."
+      }
+    },
+    "vector_2round": {
+      "answer": "Frigid woe. DC 11 Con save vs blue spores. 1d4 days incubation. Fatigue, chills, blue veins. Speed -5 ft. Every 10 days DC 11 Con save or -5 ft more. Speed 0 = death (ice statue). Cure: antidote in gold vials from Eiselcross ruins.",
+      "search_queries": ["Frozen Sick adventure Croaker Cave disease", "Croaker Cave infection sickness effects", "Frozen Sick bluerot disease symptoms"],
+      "search_calls": 3,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. All disease mechanics correct and complete. Used 3 queries in Round 1, no Round 2 needed."
+      }
+    },
+    "vector_free": {
+      "answer": "Frigid woe. DC 11 Con save vs blue spores. 1d4 days incubation. Fatigue, chills, blue veins. Speed -5 ft. Every 10 days DC 11 Con save or -5 ft more. Speed 0 = death (ice statue). Cure: manufactured antidote in gold vials. Cannot be cured by conventional treatment or magic.",
+      "search_queries": ["Croaker Cave disease Frozen Sick", "Frozen Sick adventure disease effects characters"],
+      "search_calls": 2,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. All disease mechanics correct and complete. Efficient with 2 queries."
+      }
+    },
+    "hybrid_free": {
+      "answer": "Frigid woe. C6 specific trigger: DC 11 Con save on entering area with cracked vials. 1d4 days incubation. Fatigue, chills, blue veins. Speed -5 ft. Every 10 days DC 11 Con save or -5 ft more. Speed 0 = death (ice statue). Cure: antidote in gold vials from Eiselcross ruins.",
+      "search_queries": ["Croaker Cave disease Frozen Sick", "Croaker Cave disease effects Frozen Sick adventure", "frigid woe spores vials blue Croaker Cave infected characters"],
+      "search_calls": 3,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure p.1, 2, 9"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer with specific C6 trigger details. All disease mechanics correct. Used both BM25 and vector effectively."
+      }
+    }
+  }
+}

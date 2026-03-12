@@ -1,0 +1,99 @@
+{
+  "question_id": "q2_simple_ability",
+  "question": "What is the range and damage of a Young White Dragon's Cold Breath?",
+  "expected_answer": "30-foot Cone, 40 (9d8) Cold damage, DC 15 Constitution saving throw, half damage on success",
+  "difficulty": "simple",
+  "results": {
+    "bm25_simple": {
+      "answer": "30-foot Cone, DC 15 Constitution saving throw, 40 (9d8) Cold damage on failed save, half on success. Recharge 5-6. Source: SRD_CC_v5.2.1.pdf, page 340.",
+      "search_queries": ["Young White Dragon Cold Breath"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.340"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer in a single query. All elements correct: range, damage, save DC, save type, half on success."
+      }
+    },
+    "bm25_2round": {
+      "answer": "30-foot Cone, DC 15 Constitution save, 40 (9d8) Cold damage on failure, half on success. Recharge 5-6. Source: SRD_CC_v5.2.1.pdf, page 340.",
+      "search_queries": ["Young White Dragon Cold Breath", "White Dragon breath weapon damage", "dragon breath cone cold damage dice"],
+      "search_calls": 3,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.340"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. Used 3 queries in Round 1, no Round 2 needed. Slightly over-searched for a simple lookup."
+      }
+    },
+    "bm25_free": {
+      "answer": "30-foot Cone, DC 15 Constitution saving throw, 40 (9d8) Cold damage on failed save, half on success. Recharge 5-6. Source: SRD_CC_v5.2.1.pdf, page 340.",
+      "search_queries": ["Young White Dragon Cold Breath range damage"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.340"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer in a single query. Efficient and complete."
+      }
+    },
+    "vector_naive": {
+      "answer": "30-foot Cone, 40 (9d8) Cold damage on failed save, half on success. Constitution DC 15. Source: SRD 5.2.1.",
+      "search_queries": ["Young White Dragon Cold Breath range damage"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer in a single query. All elements correct."
+      }
+    },
+    "vector_2round": {
+      "answer": "30-foot Cone, DC 15 Constitution save, 40 (9d8) Cold damage on failure, half on success. Recharge 5-6. Source: SRD 5.2.1, page 340.",
+      "search_queries": ["Young White Dragon Cold Breath", "White Dragon breath weapon damage range", "Young dragon breath attack cone", "Young White Dragon stat block chromatic", "White Dragon Ice Walk Cold Breath recharge cone constitution saving throw"],
+      "search_calls": 5,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.340"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer but very inefficient — needed 5 queries across 2 rounds. Round 1 returned Adult/Ancient variants instead of Young. Added useful context comparing Wyrmling/Adult versions."
+      }
+    },
+    "vector_free": {
+      "answer": "30-foot Cone, DC 15 Constitution save, 40 (9d8) Cold damage on failure, half on success. Source: SRD 5.2.1.",
+      "search_queries": ["Young White Dragon Cold Breath range damage"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer in a single query. Efficient and accurate."
+      }
+    },
+    "hybrid_free": {
+      "answer": "30-foot Cone, DC 15 Constitution save, 40 (9d8) Cold damage on failure, half on success. Recharge 5-6. Source: SRD_CC_v5.2.1.pdf, page 340.",
+      "search_queries": ["Young White Dragon Cold Breath", "Young White Dragon Cold Breath range damage"],
+      "search_calls": 2,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.340"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. BM25 found the stat block directly, vector search corroborated. Good complementarity."
+      }
+    }
+  }
+}

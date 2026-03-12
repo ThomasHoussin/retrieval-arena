@@ -1,0 +1,64 @@
+{
+  "question_id": "q8_simple_scions_disguise",
+  "question": "In the Scions of Elemental Evil adventure, what must characters wear to disguise themselves as cultists inside the temple, and what ability check is required when a suspicious NPC interacts with them?",
+  "expected_answer": "Characters must wear silver masks and black robes. They must make a DC 10 Charisma (Deception) check each time a suspicious NPC interacts with them.",
+  "difficulty": "simple",
+  "results": {
+    "bm25_simple": {
+      "answer": "Silver masks and black robes. DC 10 Charisma (Deception) check. If failed, all cultists in the area attack.",
+      "search_queries": ["Scions Elemental Evil cultist disguise temple"],
+      "search_calls": 1,
+      "sources_cited": ["Scions of Elemental Evil p.5-6"],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10,
+        "notes": "Perfect answer in a single query. Both elements correct: disguise items and ability check with DC." }
+    },
+    "bm25_2round": {
+      "answer": "Silver masks and black robes at all times. DC 10 Charisma (Deception) check when suspicious NPC interacts. If failed, all cultists attack.",
+      "search_queries": ["Scions Elemental Evil disguise cultists temple", "Scions Elemental Evil adventure temple", "cultist disguise ability check suspicious NPC"],
+      "search_calls": 3,
+      "sources_cited": ["Scions of Elemental Evil p.5-6"],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10,
+        "notes": "Perfect answer. 3 queries in Round 1, no Round 2 needed." }
+    },
+    "bm25_free": {
+      "answer": "Silver masks and black robes. DC 10 Charisma (Deception) check. Disguises provided by Queen Yolande.",
+      "search_queries": ["Scions of Elemental Evil disguise cultists temple", "cultist disguise ability check suspicious NPC temple"],
+      "search_calls": 2,
+      "sources_cited": ["Scions of Elemental Evil p.5-6"],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10,
+        "notes": "Perfect answer. Nice extra context about Queen Yolande providing disguises." }
+    },
+    "vector_naive": {
+      "answer": "Silver masks and black robes at all times. DC 10 Charisma (Deception) check when suspicious. If failed, all cultists in area attack.",
+      "search_queries": ["Scions of Elemental Evil disguise cultists temple ability check"],
+      "search_calls": 1,
+      "sources_cited": ["Scions of Elemental Evil p.6"],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10,
+        "notes": "Perfect answer in a single query. Concise and complete." }
+    },
+    "vector_2round": {
+      "answer": "Silver masks and black robes at all times. DC 10 Charisma (Deception) check. Disguises provided by Queen Yolande.",
+      "search_queries": ["Scions of Elemental Evil adventure disguise cultists", "Elemental Evil temple disguise robes infiltration", "cult disguise ability check deception NPC suspicious"],
+      "search_calls": 3,
+      "sources_cited": ["Scions of Elemental Evil p.4, 6"],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10,
+        "notes": "Perfect answer. 3 queries in Round 1, no Round 2 needed." }
+    },
+    "vector_free": {
+      "answer": "Silver masks and black robes. DC 10 Charisma (Deception) check. Disguises provided by Queen Yolande.",
+      "search_queries": ["Scions of Elemental Evil disguise cultists temple", "disguise ability check suspicious NPC temple cultist robes"],
+      "search_calls": 2,
+      "sources_cited": ["Scions of Elemental Evil"],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10,
+        "notes": "Perfect answer. Efficient 2-query approach." }
+    },
+    "hybrid_free": {
+      "answer": "Silver masks and black robes at all times. DC 10 Charisma (Deception) check each time a cultist is suspicious. If failed, all cultists in area attack. Disguises provided by Queen Yolande.",
+      "search_queries": ["Scions of Elemental Evil cultist disguise temple", "disguise cultists temple ability check suspicious NPC Scions Elemental Evil"],
+      "search_calls": 2,
+      "sources_cited": ["Scions of Elemental Evil p.5-6"],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10,
+        "notes": "Perfect answer. BM25 and vector both returned consistent results." }
+    }
+  }
+}

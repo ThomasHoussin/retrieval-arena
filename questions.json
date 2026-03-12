@@ -1,0 +1,191 @@
+[
+	{
+		"id": "q1_simple_stat",
+		"question": "What is the Armor Class of an Adult Red Dragon?",
+		"expected_answer": "19",
+		"difficulty": "simple",
+		"reasoning": "Single stat lookup in a monster stat block.",
+		"sources": ["SRD_CC_v5.2.1.pdf"]
+	},
+	{
+		"id": "q2_simple_ability",
+		"question": "What is the range and damage of a Young White Dragon's Cold Breath?",
+		"expected_answer": "30-foot Cone, 40 (9d8) Cold damage, DC 15 Constitution saving throw, half damage on success",
+		"difficulty": "simple",
+		"reasoning": "Lookup of a specific ability within a monster stat block.",
+		"sources": ["SRD_CC_v5.2.1.pdf"]
+	},
+	{
+		"id": "q3_medium_spell",
+		"question": "A wizard casts Dominate Monster on an Adult Red Dragon that is currently fighting the party. What ability score does the dragon use for its saving throw, and what is its modifier for that save?",
+		"expected_answer": "Wisdom saving throw with Advantage (the dragon is currently fighting the party). The Adult Red Dragon has Wis 13 (+1) but its Wisdom save modifier is +7 (proficiency bonus +6).",
+		"difficulty": "medium",
+		"reasoning": "Requires combining the Dominate Monster spell description (Wisdom saving throw) with the Adult Red Dragon stat block (Wis save +7). Also requires noting the dragon has Advantage because the party is fighting it.",
+		"sources": ["SRD_CC_v5.2.1.pdf"]
+	},
+	{
+		"id": "q4_medium_disease",
+		"question": "In the Frozen Sick adventure, what disease can characters catch in Croaker Cave, and what are its effects?",
+		"expected_answer": "Frigid woe. DC 11 Constitution save on contact with blue spores. Symptoms appear after 1d4 days: fatigue, chills, blue veins. Speed reduced by 5 feet. Every 10 days, a new DC 11 Con save or take 1d6 Cold damage and speed reduced by another 5 feet. At speed 0, the creature dies.",
+		"difficulty": "medium",
+		"reasoning": "Requires finding adventure-specific content (not SRD) and synthesizing multiple effects of a disease across the text.",
+		"sources": [
+			"Frozen Sick - Wildemount Adventure - Dungeons & Dragons - Sources - D&D Beyond.pdf"
+		]
+	},
+	{
+		"id": "q5_complex_multistep",
+		"question": "I'm a level 9 Wizard with 20 Intelligence. I want to cast Fireball at a group of enemies 120 feet away. What is the spell save DC, what saving throw do the targets make, and how much damage do they take on a failed save?",
+		"expected_answer": "Spell save DC = 8 + proficiency bonus (+4 at level 9) + Intelligence modifier (+5) = 17. Targets make a Dexterity saving throw. On a failed save, they take 8d6 fire damage (average 28). On a success, half damage. Fireball has a range of 150 feet, so 120 feet is within range.",
+		"difficulty": "complex",
+		"reasoning": "Requires combining: (1) the Spell Save DC formula from spellcasting rules, (2) proficiency bonus for level 9, (3) Intelligence modifier for 20 Int, (4) Fireball spell description for save type and damage, (5) Fireball range to confirm it works at 120 feet.",
+		"sources": ["SRD_CC_v5.2.1.pdf"]
+	},
+	{
+		"id": "q6_simple_death_house_item",
+		"question": "In the Curse of Strahd introductory adventure (Death House), what object is found inside the small wooden coffer in the prison area (Area 36)?",
+		"expected_answer": "A dire wolf's withered tongue.",
+		"difficulty": "simple",
+		"reasoning": "Single item lookup in an adventure module — tests ability to find a specific object in a specific room.",
+		"sources": ["Curse of Strahd Introductory Adventure.pdf"]
+	},
+	{
+		"id": "q7_simple_skyhorn_summoning",
+		"question": "In The Secrets of Skyhorn Lighthouse, what creature is the eelfolk shaman trying to summon in the cave beneath the lighthouse?",
+		"expected_answer": "A water elemental.",
+		"difficulty": "simple",
+		"reasoning": "Single fact lookup in an adventure module — tests finding a key plot element.",
+		"sources": ["The Secrets of Skyhorn Lighthouse V8-1.pdf"]
+	},
+	{
+		"id": "q8_simple_scions_disguise",
+		"question": "In the Scions of Elemental Evil adventure, what must characters wear to disguise themselves as cultists inside the temple, and what ability check is required when a suspicious NPC interacts with them?",
+		"expected_answer": "Characters must wear silver masks and black robes. They must make a DC 10 Charisma (Deception) check each time a suspicious NPC interacts with them.",
+		"difficulty": "simple",
+		"reasoning": "Requires finding two related facts (disguise items + check DC) in an adventure module.",
+		"sources": [
+			"Scions of Elemental Evil - Scions of Elemental Evil - Dungeons & Dragons - Sources - D&D Beyond.pdf"
+		]
+	},
+	{
+		"id": "q9_medium_combat_turn",
+		"question": "In D&D 5e, describe what a character can do on their turn during combat. What types of activities are available?",
+		"expected_answer": "On their turn, a character can: (1) Move up to their Speed, (2) Take one Action (options include Attack, Cast a Spell, Dash, Disengage, Dodge, Help, Hide, Ready, Search, Use an Object), (3) Take a Bonus Action if a class feature, spell, or ability grants one, (4) Interact with one object for free (e.g., draw a sword, open a door). Additionally, each creature gets one Reaction per round, which can be used on their turn or on someone else's turn (e.g., Opportunity Attack). A round represents about 6 seconds in the game world.",
+		"difficulty": "medium",
+		"reasoning": "Requires synthesizing multiple sections of the combat rules (actions, movement, bonus actions, reactions, free interactions).",
+		"sources": ["SRD_CC_v5.2.1.pdf"]
+	},
+	{
+		"id": "q10_medium_surprise",
+		"question": "In D&D 5e (SRD 5.2.1), a group of 4 adventurers is ambushed by goblins. Two adventurers were keeping watch and noticed the goblins, but the other two were asleep. How does surprise work in this situation?",
+		"expected_answer": "The two sleeping adventurers are surprised — they cannot move, take actions, or take reactions until after their first turn ends. The two on watch are NOT surprised and act normally from the first round. The goblins are also not surprised. All creatures still roll initiative normally; the surprised characters simply cannot do anything on their first turn. A member of a group can be surprised even if other members are not.",
+		"difficulty": "medium",
+		"reasoning": "Requires understanding surprise rules and the key nuance that surprise applies per-creature, not per-group.",
+		"sources": ["SRD_CC_v5.2.1.pdf"]
+	},
+	{
+		"id": "q11_medium_death_house_outcomes",
+		"question": "In the Curse of Strahd introductory adventure (Death House), what are the possible outcomes when the characters reach the ritual altar in the basement?",
+		"expected_answer": "Two main outcomes: (1) If the characters sacrifice a creature at the altar, the cult is appeased, Death House harbors no ill will, the mists recede, and the characters can leave freely. (2) If the characters refuse to sacrifice, the shambling mound attacks and the house itself turns hostile — animated furniture and objects attack as the characters try to flee through the now-hostile haunted house. Strahd is satisfied either way.",
+		"difficulty": "medium",
+		"reasoning": "Requires finding the climactic encounter and synthesizing the two branching outcomes.",
+		"sources": ["Curse of Strahd Introductory Adventure.pdf"]
+	},
+	{
+		"id": "q12_medium_valturnax",
+		"question": "In the adventure 'A Dungeon and a Dragon', what is the name and type of the main dragon antagonist, and how has it been monitoring the adventurers throughout the dungeon?",
+		"expected_answer": "Valturnax, an adult green dragon. He has been spying on the party's progress through the dungeon via the eyes of rodents and birds throughout the complex. When the party reaches his lair, he has pre-cast Mislead and sits invisibly on the walkways. He announces himself and monologues before initiating combat, so no creature is surprised.",
+		"difficulty": "medium",
+		"reasoning": "Requires finding the dragon's identity, its spying mechanism, and its lair tactics across multiple pages of the adventure.",
+		"sources": [
+			"A_Dungeon_and_A_Dragon_A_5E_Adventure_for_11_16th_level_characters.pdf"
+		]
+	},
+	{
+		"id": "q13_complex_initiative",
+		"question": "Three adventurers prepare for combat: a Level 7 Champion Fighter with 14 Dexterity, a Level 7 Rogue with 18 Dexterity and the Alert feat, and a Level 7 Cleric with 10 Dexterity. Compare their initiative modifiers and special features. Who is most likely to act first?",
+		"expected_answer": "Champion Fighter (Level 7): Dexterity modifier +2. Remarkable Athlete (Champion feature at level 3) grants Advantage on Initiative rolls — statistically equivalent to ~+3.5 on the die. Effective initiative: ~+5.5. | Rogue with Alert (Level 7): Dexterity modifier +4, plus Proficiency Bonus +3 (from Alert feat's Initiative Proficiency, SRD 5.2.1 version) = +7 flat bonus. Note: Alert in SRD 5.2.1 adds Proficiency Bonus, not the +5 flat bonus from the 2014 rules. | Cleric (Level 7): Dexterity modifier +0, no special initiative features. | The Rogue has the highest flat bonus (+7) and is most likely to go first. The Champion is second with +2 plus Advantage. The Cleric is last with +0.",
+		"difficulty": "complex",
+		"reasoning": "Requires combining: (1) Dexterity modifiers, (2) Champion Fighter's Remarkable Athlete feature (Advantage on Initiative), (3) Alert feat's Initiative Proficiency (SRD 5.2.1 = Proficiency Bonus, not the 2014 +5), (4) Proficiency Bonus for level 7 (+3), and (5) understanding the statistical impact of Advantage vs flat bonus.",
+		"sources": ["SRD_CC_v5.2.1.pdf"]
+	},
+	{
+		"id": "q14_complex_frozen_sick_chain",
+		"question": "In the Frozen Sick adventure, describe the full quest chain: what is the initial hook, what key locations do the characters visit, what is the main antagonist's plan, and what reward do the characters receive upon success?",
+		"expected_answer": "Hook: People are dying of a mysterious disease in Palebank Village. Elro Aldataur hires the party to investigate. They discover frigid woe, a magical disease from the ancient Aeoran mages, with blue spores (DC 11 Constitution save). Investigation leads to Salsvault, a crashed Aeoran laboratory embedded in the ice of Foren. Inside Salsvault, constructs and undead guard the remaining diseases and treasures. The antidote vials are in the Alchemist's Lab area, stored in trapped, locked floor-chests packed with fine sand. Key antagonist: Hulil, a bandit leader who is also sick with frigid woe and plans to weaponize it. Upon returning the antidote, Elro pays 200 gp. If the characters fail to recover the antidote in time, Irven and his family cannot be saved.",
+		"difficulty": "complex",
+		"reasoning": "Requires tracing the full narrative arc across the entire adventure: hook → investigation → dungeon → resolution, synthesizing NPC motivations, locations, and outcomes.",
+		"sources": [
+			"Frozen Sick - Wildemount Adventure - Dungeons & Dragons - Sources - D&D Beyond.pdf"
+		]
+	},
+	{
+		"id": "q15_medium_hoard_items",
+		"question": "In the adventure 'A Dungeon and a Dragon', what magic items can be found in Valturnax's treasure hoard, and how can characters attempt to loot it during combat?",
+		"expected_answer": "Valturnax's hoard contains: a Scroll of Nystul's Magic Aura, Goggles of Night, Potion of Fire Breath, Potion of Water Breathing, Glasses of Minute Seeing, and a magic ring, among other items. During combat, a character can spend their action, bonus action, and movement to steal 200 gp per turn from the hoard, or use their movement to search for a specific magic item. Valturnax will not simply allow looting and will actively contest it.",
+		"difficulty": "medium",
+		"reasoning": "Requires finding both the hoard inventory and the looting mechanics during combat — two related sections in the final encounter.",
+		"sources": [
+			"A_Dungeon_and_A_Dragon_A_5E_Adventure_for_11_16th_level_characters.pdf"
+		]
+	},
+	{
+		"id": "q16_simple_petrified",
+		"question": "In D&D 5e, what are the effects of the Petrified condition?",
+		"expected_answer": "A petrified creature is transformed into a solid inanimate substance (usually stone), along with any nonmagical objects it is wearing and carrying. Its weight increases by a factor of ten, and it ceases aging. It is Incapacitated, its Speed is 0 and can't increase. Attack rolls against it have Advantage. It automatically fails Strength and Dexterity saving throws. It has Resistance to all damage and Immunity to the Poisoned condition.",
+		"difficulty": "simple",
+		"reasoning": "Single condition lookup in the SRD — tests retrieval of a rules definition from the conditions/glossary section.",
+		"sources": ["SRD_CC_v5.2.1.pdf"]
+	},
+	{
+		"id": "q17_simple_delian_tomb_trap",
+		"question": "In The Delian Tomb adventure, what happens if a character tries to open one of the sarcophagi or take items from the treasure room?",
+		"expected_answer": "Three skeletons emerge from random sarcophagi and attack the party.",
+		"difficulty": "simple",
+		"reasoning": "Single trap/event lookup in an adventure module.",
+		"sources": ["The_Delian_Tomb.pdf"]
+	},
+	{
+		"id": "q18_medium_spell_comparison",
+		"question": "Compare the spells Fireball and Lightning Bolt in D&D 5e. What are their similarities and key differences?",
+		"expected_answer": "Both are 3rd-level Evocation spells available to Sorcerers and Wizards. Both deal 8d6 damage (Dexterity saving throw, half on success) and scale at +1d6 per slot above 3rd. Key differences: Fireball has a range of 150 feet and hits a 20-foot-radius Sphere, dealing Fire damage. Lightning Bolt originates from the caster (range: Self) and hits a 100-foot-long, 5-foot-wide Line, dealing Lightning damage. Fireball is better against clustered groups at range; Lightning Bolt is better against enemies in a line or tight corridor.",
+		"difficulty": "medium",
+		"reasoning": "Requires finding two separate spell descriptions and synthesizing a structured comparison of range, area, damage type, and tactical use.",
+		"sources": ["SRD_CC_v5.2.1.pdf"]
+	},
+	{
+		"id": "q19_medium_wild_sheep_chase",
+		"question": "In The Wild Sheep Chase adventure, who is the sheep the party encounters, what happened to it, and what danger is associated with the Wand of True Polymorph?",
+		"expected_answer": "Finethir Shinebright is a wizard who was polymorphed into a sheep by his former apprentice, Ahmed Noke, using the stolen Wand of True Polymorph. In sheep form, Shinebright communicates by nodding and bleating; a scroll allows the party to hear his actual voice. Noke is the antagonist found in his tower. The Wand of True Polymorph is dangerous: characters attempting to use it must make a saving throw as if against a regular casting of True Polymorph, and if they fail by more than 5, the wand explodes violently.",
+		"difficulty": "medium",
+		"reasoning": "Requires finding NPC backstory, the transformation mechanic, and the wand's specific danger across multiple sections of the adventure.",
+		"sources": ["892902-The_Wild_Sheep_Chase_V2.pdf"]
+	},
+	{
+		"id": "q20_medium_six_faces",
+		"question": "In the Six Faces of Death adventure, what is Cube 1717, who controls it, and why can't creatures escape the island by teleportation?",
+		"expected_answer": "Cube 1717 is an Acheronian cube (from the plane of Acheron). It is controlled by Vargo, a skull lord who took power from the rightful ruler, Earl Andromalius. The cube's infernal magic prevents creatures from leaving the island by teleportation without the permission of the cube's ruler, Earl Andromalius — but this permission cannot be granted because Andromalius is dead.",
+		"difficulty": "medium",
+		"reasoning": "Requires finding the setting's nature, the power structure (Vargo vs Andromalius), and the specific teleportation escape restriction across multiple sections.",
+		"sources": ["DRA21_sixfacesdeath.pdf"]
+	},
+	{
+		"id": "q21_complex_cross_doc_golem",
+		"question": "In the Frozen Sick adventure, the characters encounter a flesh golem in Salsvault. How does this golem differ from a standard flesh golem as described in the SRD? What are the standard flesh golem's full stats?",
+		"expected_answer": "Standard Flesh Golem (SRD): Medium Construct, AC 9, HP 127 (15d8+60), Speed 30 ft., STR 19 (+4), DEX 9 (-1), CON 18 (+4), INT 6 (-2), WIS 10 (+0), CHA 5 (-3). Immunities: Lightning and Poison damage; Charmed, Exhaustion, Frightened, Paralyzed, Petrified, Poisoned conditions. Traits: Aversion to Fire, Berserk, Immutable Form, Lightning Absorption, Magic Resistance. CR 5 (1,800 XP). Actions: Multiattack (two Slam), Slam +7 to hit, 13 (2d8+4) Bludgeoning + 4 (1d8) Lightning. | Salsvault version differences: only 5 HP remaining, Berserk trait is already activated, has only one arm so it cannot use Multiattack, reduced to CR 1 (200 XP).",
+		"difficulty": "complex",
+		"reasoning": "Requires cross-referencing two documents: the flesh golem stat block from the SRD and the modified version described in the Frozen Sick adventure's Salsvault section. Tests multi-source retrieval and comparison.",
+		"sources": [
+			"SRD_CC_v5.2.1.pdf",
+			"Frozen Sick - Wildemount Adventure - Dungeons & Dragons - Sources - D&D Beyond.pdf"
+		]
+	},
+	{
+		"id": "q22_complex_attunement_scenario",
+		"question": "A character has already attuned to 3 magic items during a short rest. During the next adventuring day, they find Goggles of Night (which require attunement). What are the attunement rules — how many items can a character attune to, how does the process work, and what must this character do to attune to the Goggles?",
+		"expected_answer": "A character can attune to no more than 3 magic items at a time. Attunement requires spending a Short Rest focused on the item while in physical contact with it (this can't be the same Short Rest used to identify it). To attune to the Goggles of Night, the character must first end attunement with one of their current 3 items (which also requires a Short Rest, unless the item is cursed), then spend another Short Rest attuning to the Goggles. Attunement also ends if: the character no longer satisfies the prerequisites, the item is more than 100 feet away for 24+ hours, the character dies, or another creature attunes to the item. Without attunement, only nonmagical benefits of an item can be used.",
+		"difficulty": "complex",
+		"reasoning": "Requires finding attunement rules (item limit, process, ending conditions) and applying them to a specific scenario. Tests both retrieval and rule application.",
+		"sources": ["SRD_CC_v5.2.1.pdf"]
+	}
+]

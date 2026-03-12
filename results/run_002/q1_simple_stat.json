@@ -1,0 +1,99 @@
+{
+  "question_id": "q1_simple_stat",
+  "question": "What is the Armor Class of an Adult Red Dragon?",
+  "expected_answer": "19",
+  "difficulty": "simple",
+  "results": {
+    "bm25_simple": {
+      "answer": "Agent failed to provide a clear answer. Output: 'Let me read the full results to find the AC. The preview does not show the stat block details. Let me check the saved file for the Adult Red Dragon AC.'",
+      "search_queries": [],
+      "search_calls": 2,
+      "sources_cited": [],
+      "quality": {
+        "accuracy": 0,
+        "completeness": 0,
+        "faithfulness": 2,
+        "total": 2,
+        "notes": "Agent failed to produce an answer. It appears the search results were insufficient and the agent couldn't extract the AC value. No hallucination since no claim was made."
+      }
+    },
+    "bm25_2round": {
+      "answer": "The Armor Class of an Adult Red Dragon is 19. Source: SRD_CC_v5.2.1.pdf, page 318.",
+      "search_queries": ["Adult Red Dragon Armor Class", "Red Dragon stat block AC", "Adult Red Dragon natural armor hit points speed", "Red Dragon fire breath legendary actions challenge"],
+      "search_calls": 4,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.318"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. AC 19 is correct. Needed 2 rounds (4 queries) to get the full stat block, but the answer is accurate and sourced."
+      }
+    },
+    "bm25_free": {
+      "answer": "The Armor Class of an Adult Red Dragon is 19. Source: SRD_CC_v5.2.1.pdf, page 318.",
+      "search_queries": ["Adult Red Dragon Armor Class", "Adult Red Dragon stat block natural armor hit points speed", "Adult Red Dragon Huge Dragon Chaotic Evil fire immunity legendary actions"],
+      "search_calls": 3,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.318"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. AC 19 correct. Used 3 queries to find and confirm the stat block."
+      }
+    },
+    "vector_naive": {
+      "answer": "The Adult Red Dragon has an Armor Class (AC) of 19. HP 256 (19d12+133), Speed 40 ft., Climb 40 ft., Fly 80 ft., CR 17. Source: SRD 5.2.1, page 318.",
+      "search_queries": ["Adult Red Dragon armor class stats"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.318"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer in a single query. AC 19 correct, additional stats provided are also accurate. Very efficient."
+      }
+    },
+    "vector_2round": {
+      "answer": "The Adult Red Dragon has an Armor Class (AC) of 19. Source: SRD 5.2.1, page 318.",
+      "search_queries": ["Adult Red Dragon stat block", "Adult Red Dragon Armor Class AC", "red dragon statistics monster"],
+      "search_calls": 3,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.318"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. AC 19 correct. Used 3 queries in Round 1, no Round 2 needed. Efficient for a 2-round agent."
+      }
+    },
+    "vector_free": {
+      "answer": "The Armor Class of an Adult Red Dragon is 19. Source: SRD 5.2.1, page 318.",
+      "search_queries": ["Adult Red Dragon Armor Class"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.318"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer in a single query. Most efficient of all agents for this question."
+      }
+    },
+    "hybrid_free": {
+      "answer": "The Adult Red Dragon has an Armor Class of 19. Source: SRD_CC_v5.2.1.pdf, page 318.",
+      "search_queries": ["Adult Red Dragon Armor Class", "Adult Red Dragon Armor Class AC stats"],
+      "search_calls": 2,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.318"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. Used both BM25 and vector search. BM25 returned index entries, vector search returned the full stat block. Good complementarity."
+      }
+    }
+  }
+}

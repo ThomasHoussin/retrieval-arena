@@ -1,0 +1,99 @@
+{
+  "question_id": "q3_medium_spell",
+  "question": "A wizard casts Dominate Monster on an Adult Red Dragon that is currently fighting the party. What ability score does the dragon use for its saving throw, and what is its modifier for that save?",
+  "expected_answer": "Wisdom saving throw with Advantage (the dragon is currently fighting the party). The Adult Red Dragon has Wis 13 (+1) but its Wisdom save modifier is +7 (proficiency bonus +6).",
+  "difficulty": "medium",
+  "results": {
+    "bm25_simple": {
+      "answer": "Agent failed to provide an answer. Could not extract relevant information from search results.",
+      "search_queries": [],
+      "search_calls": 2,
+      "sources_cited": [],
+      "quality": {
+        "accuracy": 0,
+        "completeness": 0,
+        "faithfulness": 2,
+        "total": 2,
+        "notes": "Agent failed again — same pattern as Q1. Unable to parse search results and produce an answer. No hallucination since no claims were made."
+      }
+    },
+    "bm25_2round": {
+      "answer": "Wisdom saving throw with +7 modifier. Wis 13, base +1, proficient so +7 total. Dragon has Advantage on the save because party is fighting it. Also has Legendary Resistance (3/Day, 4/Day in Lair).",
+      "search_queries": ["Dominate Monster saving throw", "Adult Red Dragon ability scores wisdom saving throw"],
+      "search_calls": 2,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.125-126", "SRD_CC_v5.2.1.pdf p.318-319"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. All key elements: Wisdom save, +7 modifier, Advantage from fighting, Legendary Resistance bonus info. Found both spell and stat block in Round 1."
+      }
+    },
+    "bm25_free": {
+      "answer": "Wisdom saving throw with +7 modifier. Wis 13, mod +1, save +7. Dragon has Advantage because party is fighting it. Also has Legendary Resistance (3/Day, 4/Day in Lair).",
+      "search_queries": ["Dominate Monster saving throw spell", "Adult Red Dragon ability scores wisdom saving throw"],
+      "search_calls": 2,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.125-126", "SRD_CC_v5.2.1.pdf p.318-319"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. Same quality as bm25_2round, efficient with 2 queries. All elements correct and sourced."
+      }
+    },
+    "vector_naive": {
+      "answer": "Could not find the Adult Red Dragon's Wisdom saving throw modifier. Only found Ancient Red Dragon stats (Wis 15, +2 mod, +9 save). Knows Dominate Monster uses Wisdom save but couldn't cite the Adult's specific modifier.",
+      "search_queries": ["Adult Red Dragon saving throws Wisdom"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf"],
+      "quality": {
+        "accuracy": 1,
+        "completeness": 1,
+        "faithfulness": 2,
+        "total": 4,
+        "notes": "Partial failure. Correctly identified Wisdom save but couldn't retrieve the Adult Red Dragon's specific stat block — only got the Ancient variant. Honest about limitations (no hallucination). Did not mention Advantage. Single query was insufficient for this cross-reference question."
+      }
+    },
+    "vector_2round": {
+      "answer": "Wisdom saving throw with +7 modifier. Wis 13, mod +1, save +7. Dragon has Advantage because party is fighting it. Also has Legendary Resistance (3/Day, 4/Day in Lair).",
+      "search_queries": ["Dominate Monster spell saving throw ability score", "Adult Red Dragon ability scores Wisdom", "Adult Red Dragon saving throws stat block", "Dominate Monster spell Wisdom saving throw enchantment", "Dominate Monster level 8 spell description", "Dominate Monster Wisdom save charmed obey commands creature"],
+      "search_calls": 6,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.125", "SRD_CC_v5.2.1.pdf p.318"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer but very costly — 6 queries across 2 rounds. Round 1 found the dragon stats but not the spell text. Round 2 needed 3 attempts to find Dominate Monster. All elements correct."
+      }
+    },
+    "vector_free": {
+      "answer": "Wisdom saving throw with +7 modifier. Wis 13, mod +1, save +7. Dragon has Advantage because party is fighting it. Also has Legendary Resistance (3/Day, 4/Day in Lair).",
+      "search_queries": ["Dominate Monster saving throw ability score", "Adult Red Dragon saving throws Wisdom", "Adult Red Dragon stats ability scores chromatic", "Dominate Monster level 8 spell charmed control creature"],
+      "search_calls": 5,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.125", "SRD_CC_v5.2.1.pdf p.318"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. Needed 5 queries to find both pieces. All elements correct and well-synthesized."
+      }
+    },
+    "hybrid_free": {
+      "answer": "Wisdom saving throw with +7 modifier. Wis 13, base +1, proficiency +6 = +7 save. Dragon has Advantage because party is fighting it. Also has Legendary Resistance (3/Day, 4/Day in Lair).",
+      "search_queries": ["Dominate Monster saving throw Wisdom Charisma", "Adult Red Dragon saving throws Wisdom Charisma modifier", "Adult Red Dragon stat block Wisdom saving throw"],
+      "search_calls": 3,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.125-126", "SRD_CC_v5.2.1.pdf p.318"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. BM25 found spell text, vector initially missed the Adult Red Dragon, BM25 followup found it. Explicitly broke down proficiency bonus (+6). 3 queries total — good efficiency for a cross-reference question."
+      }
+    }
+  }
+}

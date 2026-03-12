@@ -1,0 +1,99 @@
+{
+  "question_id": "q6_simple_death_house_item",
+  "question": "In the Curse of Strahd introductory adventure (Death House), what object is found inside the small wooden coffer in the prison area (Area 36)?",
+  "expected_answer": "A dire wolf's withered tongue.",
+  "difficulty": "simple",
+  "results": {
+    "bm25_simple": {
+      "answer": "A dire wolf's withered tongue. Notes the coffer is technically in Area 35 (Reliquary), not Area 36.",
+      "search_queries": ["Death House prison Area 36 coffer"],
+      "search_calls": 1,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf p.11"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer in a single query. Correctly identified the item and provided useful clarification about the actual area number."
+      }
+    },
+    "bm25_2round": {
+      "answer": "A dire wolf's withered tongue. Detailed explanation that it's in Area 35 (Reliquary) list, not Area 36 (Prison).",
+      "search_queries": ["Death House prison area 36", "wooden coffer Death House Curse Strahd", "Death House dungeon cells basement"],
+      "search_calls": 3,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf p.11-12"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. 3 queries all returned the same relevant chunk. Thorough explanation of Area 35 vs 36 distinction."
+      }
+    },
+    "bm25_free": {
+      "answer": "A dire wolf's withered tongue. Clarifies it's in Area 35 (Reliquary), not Area 36 (Prison).",
+      "search_queries": ["Death House prison Area 36 wooden coffer"],
+      "search_calls": 1,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf p.11"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer in a single query. Precise and well-sourced."
+      }
+    },
+    "vector_naive": {
+      "answer": "A dire wolf's withered tongue.",
+      "search_queries": ["Death House prison area 36 wooden coffer object"],
+      "search_calls": 1,
+      "sources_cited": ["Death House document, Area 36 section"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer in a single query. Concise and correct."
+      }
+    },
+    "vector_2round": {
+      "answer": "A dire wolf's withered tongue. Found in Area 35 Reliquary list, immediately before Area 36 description.",
+      "search_queries": ["Death House prison area 36 wooden coffer", "Curse of Strahd Death House dungeon prison cell", "Death House area 36 treasure chest coffer contents"],
+      "search_calls": 3,
+      "sources_cited": ["Curse of Strahd Appendix B, Death House p.11"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. 3 queries in Round 1, no Round 2 needed. Good contextual detail."
+      }
+    },
+    "vector_free": {
+      "answer": "A dire wolf's withered tongue.",
+      "search_queries": ["Death House prison area 36 wooden coffer", "Curse of Strahd Death House area 36 prison"],
+      "search_calls": 2,
+      "sources_cited": ["Death House p.11"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. Concise and efficient with 2 queries."
+      }
+    },
+    "hybrid_free": {
+      "answer": "A dire wolf's withered tongue (in Area 35 Reliquary). Also distinguished from Area 34 coffer (4 potions of healing) and Area 36 treasure (gold ring on skeleton).",
+      "search_queries": ["Death House prison Area 36 wooden coffer", "Death House prison area wooden coffer object"],
+      "search_calls": 2,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf p.11-12"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer with excellent extra context — distinguished three different coffers/treasures across Areas 34, 35, and 36. Most thorough response of all agents."
+      }
+    }
+  }
+}

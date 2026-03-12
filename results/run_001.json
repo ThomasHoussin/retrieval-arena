@@ -1,0 +1,412 @@
+{
+  "run_id": "run_001",
+  "date": "2026-03-12",
+  "notes": "Premier run benchmark. Agent vector-2round non disponible (session reload nécessaire). 20/25 runs complétés. Expected answers corrigées après vérification manuelle.",
+  "missing": ["vector-2round (agent créé mais pas encore chargé — nécessite reload)"],
+  "results": [
+    {
+      "question_id": "q1_simple_stat",
+      "question": "What is the Armor Class of an Adult Red Dragon?",
+      "expected_answer": "19",
+      "difficulty": "simple",
+      "agents": {
+        "bm25_simple": {
+          "agent": "dnd-5e-researcher",
+          "answer": "The Armor Class of an Adult Red Dragon is 19 (natural armor).",
+          "quality": {
+            "accuracy": 5,
+            "completeness": 3,
+            "faithfulness": 2,
+            "total": 10
+          },
+          "sources_cited": "Monster Manual (docs/MM.pdf), page 98",
+          "search_queries": ["Adult Red Dragon AC"],
+          "search_calls": 1,
+          "tokens_total": 3009,
+          "duration_ms": 39430,
+          "notes": "Parfait. Stat trouvée directement."
+        },
+        "bm25_keyword_expansion": {
+          "agent": "dnd-5e-researcher-keyword-expansion",
+          "answer": "The Adult Red Dragon has an Armor Class of 19 (natural armor).",
+          "quality": {
+            "accuracy": 5,
+            "completeness": 3,
+            "faithfulness": 2,
+            "total": 10
+          },
+          "sources_cited": "Basic Rules, page 136",
+          "search_queries": ["Adult Red Dragon armor class", "red dragon statistics AC"],
+          "search_calls": 2,
+          "tokens_total": 3188,
+          "duration_ms": 30864,
+          "notes": "Correct mais 2 queries pour une question simple — overkill."
+        },
+        "bm25_2round": {
+          "agent": "dnd-5e-researcher-2round",
+          "answer": "The Armor Class of an Adult Red Dragon is 19 (natural armor).",
+          "quality": {
+            "accuracy": 5,
+            "completeness": 3,
+            "faithfulness": 2,
+            "total": 10
+          },
+          "sources_cited": "docs/mm.pdf, page 98",
+          "search_queries": ["Adult Red Dragon Armor Class"],
+          "search_calls": 1,
+          "tokens_total": 3244,
+          "duration_ms": 21676,
+          "notes": "Skipped Round 2 — correct."
+        },
+        "vector_naive": {
+          "agent": "dnd-5e-researcher-vector",
+          "answer": "The Armor Class of an Adult Red Dragon is 19.",
+          "quality": {
+            "accuracy": 5,
+            "completeness": 3,
+            "faithfulness": 2,
+            "total": 10
+          },
+          "sources_cited": "System Reference Document 5.2.1, page 318",
+          "search_queries": ["Adult Red Dragon armor class stats"],
+          "search_calls": 1,
+          "tokens_total": 16704,
+          "duration_ms": 16200,
+          "notes": "Correct, source SRD. Plus rapide mais 5x plus de tokens."
+        },
+        "vector_2round": null
+      }
+    },
+    {
+      "question_id": "q2_simple_ability",
+      "question": "What is the range and damage of a Young White Dragon's Cold Breath?",
+      "expected_answer": "30-foot Cone, 40 (9d8) Cold damage, DC 15 Constitution saving throw, half damage on success",
+      "difficulty": "simple",
+      "agents": {
+        "bm25_simple": {
+          "agent": "dnd-5e-researcher",
+          "answer": "30-foot cone, 10d8 cold damage, DC 15 Constitution saving throw, half damage on success.",
+          "quality": {
+            "accuracy": 3,
+            "completeness": 3,
+            "faithfulness": 1,
+            "total": 7
+          },
+          "sources_cited": "Monster stat block (unspecified)",
+          "search_queries": ["Young White Dragon Cold Breath"],
+          "search_calls": 1,
+          "tokens_total": 3020,
+          "duration_ms": 5800,
+          "notes": "Cone et DC corrects, mais dégâts faux (10d8 vs 9d8). Source non spécifiée. Faithfulness -1 car stats viennent possiblement du LLM (temps très court, 0 tool_uses reporté)."
+        },
+        "bm25_keyword_expansion": {
+          "agent": "dnd-5e-researcher-keyword-expansion",
+          "answer": "30-foot cone, 45 (10d8) cold damage, DC 13 Constitution saving throw.",
+          "quality": {
+            "accuracy": 2,
+            "completeness": 3,
+            "faithfulness": 2,
+            "total": 7
+          },
+          "sources_cited": "Bestiary of Frost and Flame.pdf, page 5",
+          "search_queries": ["Young White Dragon Cold Breath", "white dragon breath weapon cone damage", "Young White Dragon statistics abilities", "dragon cold breath range feet saving throw"],
+          "search_calls": 4,
+          "tokens_total": 3192,
+          "duration_ms": 49900,
+          "notes": "Cone correct, dégâts faux (10d8), DC faux (13 vs 15). Fidèle à sa source mais mauvaise source."
+        },
+        "bm25_2round": {
+          "agent": "dnd-5e-researcher-2round",
+          "answer": "30-foot cone, 45 (10d8) cold damage, DC 14 Constitution saving throw, half on success. Recharge 5-6.",
+          "quality": {
+            "accuracy": 2,
+            "completeness": 3,
+            "faithfulness": 2,
+            "total": 7
+          },
+          "sources_cited": "monsters_w.pdf, page 2",
+          "search_queries": ["Young White Dragon Cold Breath"],
+          "search_calls": 1,
+          "tokens_total": 3248,
+          "duration_ms": 27520,
+          "notes": "Cone correct, dégâts faux (10d8), DC faux (14). Encore une autre source variante."
+        },
+        "vector_naive": {
+          "agent": "dnd-5e-researcher-vector",
+          "answer": "30-foot Cone, DC 15 Constitution save, 40 (9d8) Cold damage on failed save, half on success.",
+          "quality": {
+            "accuracy": 5,
+            "completeness": 3,
+            "faithfulness": 2,
+            "total": 10
+          },
+          "sources_cited": "System Reference Document 5.2.1",
+          "search_queries": ["Young White Dragon Cold Breath range damage"],
+          "search_calls": 1,
+          "tokens_total": 15560,
+          "duration_ms": 17246,
+          "notes": "Seul agent à trouver les stats SRD correctes (9d8, DC 15)."
+        },
+        "vector_2round": null
+      }
+    },
+    {
+      "question_id": "q3_medium_spell",
+      "question": "A wizard casts Dominate Monster on an Adult Red Dragon that is currently fighting the party. What ability score does the dragon use for its saving throw, and what is its modifier for that save?",
+      "expected_answer": "Wisdom saving throw with Advantage (the dragon is currently fighting the party). The Adult Red Dragon has Wis 13 (+1) but its Wisdom save modifier is +7 (proficiency bonus +6).",
+      "difficulty": "medium",
+      "agents": {
+        "bm25_simple": {
+          "agent": "dnd-5e-researcher",
+          "answer": "Wisdom saving throw, modifier +7. Wis score 13 (+1 base). Also has Legendary Resistance (3/Day).",
+          "quality": {
+            "accuracy": 4,
+            "completeness": 2,
+            "faithfulness": 1,
+            "total": 7
+          },
+          "sources_cited": "Monster Manual, page 98",
+          "search_queries": ["Adult Red Dragon saving throws"],
+          "search_calls": 1,
+          "tokens_total": 3038,
+          "duration_ms": 13098,
+          "notes": "Wis +7 correct. Manque Advantage (fighting). N'a pas trouvé le spell text — Wis save inféré par le LLM (faithfulness -1). Legendary Resistance est un bonus utile."
+        },
+        "bm25_keyword_expansion": {
+          "agent": "dnd-5e-researcher-keyword-expansion",
+          "answer": "Wisdom saving throw, modifier +7. Wis 13 (+1 base), proficiency included. Also has Legendary Resistance (3/Day).",
+          "quality": {
+            "accuracy": 4,
+            "completeness": 2,
+            "faithfulness": 2,
+            "total": 8
+          },
+          "sources_cited": "PHB p. 278, MM p. 98",
+          "search_queries": ["Dominate Monster saving throw", "Adult Red Dragon ability scores wisdom", "Adult Red Dragon statistics saving throws"],
+          "search_calls": 3,
+          "tokens_total": 3216,
+          "duration_ms": 40717,
+          "notes": "Wis +7 correct. A trouvé les DEUX sources (spell + stat block). Manque Advantage malgré avoir le spell text — l'agent n'a pas fait le lien avec 'fighting'."
+        },
+        "bm25_2round": {
+          "agent": "dnd-5e-researcher-2round",
+          "answer": "Wisdom saving throw, modifier +7. Wis 13 (+1 base), proficiency bonus adds to save. Legendary Resistance (3/Day). Each time dragon takes damage, new Wis save.",
+          "quality": {
+            "accuracy": 4,
+            "completeness": 2,
+            "faithfulness": 2,
+            "total": 8
+          },
+          "sources_cited": "Player's Handbook p. 235, Monster Manual p. 98",
+          "search_queries": ["Dominate Monster saving throw", "Adult Red Dragon saving throws stat block", "Adult Red Dragon Wisdom modifier"],
+          "search_calls": 3,
+          "tokens_total": 3273,
+          "duration_ms": 30039,
+          "notes": "Wis +7 correct. Réponse la plus détaillée (re-save on damage). Manque Advantage. Skipped Round 2."
+        },
+        "vector_naive": {
+          "agent": "dnd-5e-researcher-vector",
+          "answer": "Wisdom saving throw. Could NOT find the Adult Red Dragon's Wisdom save modifier. Found Ancient Red Dragon (Wis +9) but not Adult.",
+          "quality": {
+            "accuracy": 1,
+            "completeness": 1,
+            "faithfulness": 2,
+            "total": 4
+          },
+          "sources_cited": "SRD 5.2.1 (partial)",
+          "search_queries": ["Adult Red Dragon saving throws Wisdom"],
+          "search_calls": 1,
+          "tokens_total": 14986,
+          "duration_ms": 22220,
+          "notes": "Échec. Mauvais dragon (Ancient au lieu d'Adult). Fidèle : a correctement signalé qu'il ne trouvait pas la réponse au lieu d'inventer."
+        },
+        "vector_2round": null
+      }
+    },
+    {
+      "question_id": "q4_medium_disease",
+      "question": "In the Frozen Sick adventure, what disease can characters catch in Croaker Cave, and what are its effects?",
+      "expected_answer": "Frigid woe. DC 11 Constitution save on contact with blue spores. Symptoms appear after 1d4 days: fatigue, chills, blue veins. Speed reduced by 5 feet. Every 10 days, a new DC 11 Con save or speed reduced by another 5 feet. At speed 0, the creature dies. Cannot be cured by magic, only manufactured antidote.",
+      "difficulty": "medium",
+      "agents": {
+        "bm25_simple": {
+          "agent": "dnd-5e-researcher",
+          "answer": "Frigid Woe. DC 15 Con save to contract. Symptoms over 1d4+1 days. DC 13 Con save every 24h; fail = HP max reduced by 1d6; at 0 HP max = death. Can't be cured by magic, only antidote.",
+          "quality": {
+            "accuracy": 2,
+            "completeness": 2,
+            "faithfulness": 2,
+            "total": 6
+          },
+          "sources_cited": "Frozen Sick.pdf, page 2 and page 1",
+          "search_queries": ["Frozen Sick Croaker Cave disease"],
+          "search_calls": 1,
+          "tokens_total": 3022,
+          "duration_ms": 22824,
+          "notes": "Bon nom de maladie mais mauvaise version du corpus (DC 15/13 + HP reduction au lieu de DC 11 + speed reduction). Fidèle à sa source mais source incorrecte."
+        },
+        "bm25_keyword_expansion": {
+          "agent": "dnd-5e-researcher-keyword-expansion",
+          "answer": "Bluerot. DC 12 Con save. Disadvantage on Charisma checks, vulnerability to cold damage, blue weeping sores. Cha permanently reduced by 1d4 on failed saves; Cha 0 = death.",
+          "quality": {
+            "accuracy": 0,
+            "completeness": 2,
+            "faithfulness": 0,
+            "total": 2
+          },
+          "sources_cited": "Frozen Sick.pdf, pages 10-11",
+          "search_queries": ["Frozen Sick Croaker Cave disease", "Croaker Cave illness effects", "Frozen Sick adventure bluerot frigid woe"],
+          "search_calls": 3,
+          "tokens_total": 3200,
+          "duration_ms": 94773,
+          "notes": "Mauvaise maladie. 'Bluerot' n'existe pas dans Frozen Sick (confirmé par l'utilisateur). Hallucination ou contenu parasite dans l'index. Faithfulness 0."
+        },
+        "bm25_2round": {
+          "agent": "dnd-5e-researcher-2round",
+          "answer": "Frigid Woe. In area C6: DC 12 Con save if taking damage. Symptoms over 1d4+1 days. DC 13 Con save every 24h; fail = HP max reduced by 1d6; at 0 = death. Can't be cured by magic, only antidote.",
+          "quality": {
+            "accuracy": 2,
+            "completeness": 3,
+            "faithfulness": 2,
+            "total": 7
+          },
+          "sources_cited": "Frozen Sick.pdf, page 5 and page 1",
+          "search_queries": ["Frozen Sick Croaker Cave disease", "frigid woe symptoms antidote cure effects"],
+          "search_calls": 2,
+          "tokens_total": 3257,
+          "duration_ms": 33847,
+          "notes": "Bon nom + détails Croaker Cave (C6). Même problème de version que BM25 simple. Round 2 utilisé pour confirmer les détails."
+        },
+        "vector_naive": {
+          "agent": "dnd-5e-researcher-vector",
+          "answer": "Frigid Woe. DC 11 Con save on contact with blue spores. Symptoms in 1d4 days. Speed reduced by 5 feet. Cannot be cured by magic. Only cure is manufactured antidote.",
+          "quality": {
+            "accuracy": 4,
+            "completeness": 2,
+            "faithfulness": 2,
+            "total": 8
+          },
+          "sources_cited": "Frozen Sick adventure text (D&D Beyond, Wildemount Adventure)",
+          "search_queries": ["Croaker Cave disease effects Frozen Sick"],
+          "search_calls": 1,
+          "tokens_total": 12531,
+          "duration_ms": 19222,
+          "notes": "Meilleure réponse. DC 11 et speed reduction corrects. Mentionne progression '30 days' au lieu de '10 days' (minor). Manque détails de progression (1d6 cold damage)."
+        },
+        "vector_2round": null
+      }
+    },
+    {
+      "question_id": "q5_complex_multistep",
+      "question": "I'm a level 9 Wizard with 20 Intelligence. I want to cast Fireball at a group of enemies 120 feet away. What is the spell save DC, what saving throw do the targets make, and how much damage do they take on a failed save?",
+      "expected_answer": "Spell save DC = 8 + proficiency bonus (+4 at level 9) + Intelligence modifier (+5) = 17. Targets make a Dexterity saving throw. On a failed save, they take 8d6 fire damage (average 28). On a success, half damage. Fireball has a range of 150 feet, so 120 feet is within range.",
+      "difficulty": "complex",
+      "agents": {
+        "bm25_simple": {
+          "agent": "dnd-5e-researcher",
+          "answer": "DC 17 (8+4+5). Dexterity saving throw. 8d6 fire damage on failed save, half on success. Range 150 ft (120 ft OK). Upcastable.",
+          "quality": {
+            "accuracy": 5,
+            "completeness": 3,
+            "faithfulness": 2,
+            "total": 10
+          },
+          "sources_cited": "docs/dnd-5e-players-handbook.pdf, pages 241, 205, 212, 213",
+          "search_queries": ["fireball spell"],
+          "search_calls": 1,
+          "tokens_total": 3057,
+          "duration_ms": 29942,
+          "notes": "Parfait. Une seule query a remonté spell + DC formula + wizard class + proficiency table. Chance ou bon ranking BM25."
+        },
+        "bm25_keyword_expansion": {
+          "agent": "dnd-5e-researcher-keyword-expansion",
+          "answer": "DC 17 (8+4+5). Dexterity saving throw. 8d6 fire damage (avg 28), half on success (avg 14). Range 150 ft, 20-ft radius sphere.",
+          "quality": {
+            "accuracy": 5,
+            "completeness": 3,
+            "faithfulness": 2,
+            "total": 10
+          },
+          "sources_cited": "PHB.pdf p. 12, 15, 114, 205",
+          "search_queries": ["Fireball spell", "spell save DC calculation wizard", "Fireball damage saving throw Dexterity", "wizard spellcasting ability proficiency bonus", "proficiency bonus level 9 character", "Fireball 3rd level spell fire damage", "spell save DC 8 proficiency spellcasting modifier", "Fireball range area effect", "Fireball half damage success saving throw"],
+          "search_calls": 9,
+          "tokens_total": 3236,
+          "duration_ms": 107980,
+          "notes": "Correct mais 9 queries (108s) pour un résultat identique au BM25 simple avec 1 query (30s). Efficacité catastrophique."
+        },
+        "bm25_2round": {
+          "agent": "dnd-5e-researcher-2round",
+          "answer": "DC 17 (8+4+5). Dexterity saving throw. 8d6 fire damage, half on success. Range 150 ft. Upcast table (4th=9d6, 5th=10d6).",
+          "quality": {
+            "accuracy": 5,
+            "completeness": 3,
+            "faithfulness": 2,
+            "total": 10
+          },
+          "sources_cited": "dnd_5e_free_rules.pdf, pages 206, 96, 15",
+          "search_queries": ["Fireball spell damage saving throw", "spell save DC calculation proficiency bonus", "proficiency bonus level 9 character"],
+          "search_calls": 3,
+          "tokens_total": 3292,
+          "duration_ms": 38612,
+          "notes": "Correct. 3 queries bien ciblées, bon équilibre qualité/efficacité. Skipped Round 2."
+        },
+        "vector_naive": {
+          "agent": "dnd-5e-researcher-vector",
+          "answer": "Dexterity saving throw. 8d6 fire damage, half on success. Range 150 ft. DC non confirmé par les sources (formule reconnue mais pas la table de proficiency).",
+          "quality": {
+            "accuracy": 3,
+            "completeness": 2,
+            "faithfulness": 2,
+            "total": 7
+          },
+          "sources_cited": "System Reference Document 5.2.1",
+          "search_queries": ["Fireball spell description damage saving throw"],
+          "search_calls": 1,
+          "tokens_total": 13315,
+          "duration_ms": 18554,
+          "notes": "Spell mechanics corrects mais DC incomplet. Une seule query ne suffit pas pour une question multi-sources. Fidèle : a signalé ses limites."
+        },
+        "vector_2round": null
+      }
+    }
+  ],
+  "summary": {
+    "agents_tested": ["bm25_simple", "bm25_keyword_expansion", "bm25_2round", "vector_naive"],
+    "agents_missing": ["vector_2round"],
+    "total_runs": 20,
+    "quality_scores": {
+      "bm25_simple":            {"q1": 10, "q2": 7, "q3": 7, "q4": 6, "q5": 10, "mean": 8.0},
+      "bm25_keyword_expansion": {"q1": 10, "q2": 7, "q3": 8, "q4": 2, "q5": 10, "mean": 7.4},
+      "bm25_2round":            {"q1": 10, "q2": 7, "q3": 8, "q4": 7, "q5": 10, "mean": 8.4},
+      "vector_naive":           {"q1": 10, "q2": 10, "q3": 4, "q4": 8, "q5": 7, "mean": 7.8}
+    },
+    "token_totals": {
+      "bm25_simple": 15146,
+      "bm25_keyword_expansion": 16032,
+      "bm25_2round": 16264,
+      "vector_naive": 73096
+    },
+    "duration_totals_ms": {
+      "bm25_simple": 111094,
+      "bm25_keyword_expansion": 246524,
+      "bm25_2round": 132722,
+      "vector_naive": 93442
+    },
+    "ranking_by_quality": [
+      {"rank": 1, "agent": "bm25_2round", "mean_quality": 8.4},
+      {"rank": 2, "agent": "bm25_simple", "mean_quality": 8.0},
+      {"rank": 3, "agent": "vector_naive", "mean_quality": 7.8},
+      {"rank": 4, "agent": "bm25_keyword_expansion", "mean_quality": 7.4}
+    ],
+    "observations": [
+      "BM25 2-round est le meilleur en qualité moyenne (8.4/10) grâce à sa régularité.",
+      "BM25 simple est remarquablement bon (8.0) malgré une seule query par question — meilleur ratio qualité/coût.",
+      "BM25 keyword-expansion est le PIRE en qualité (7.4) à cause de l'hallucination Bluerot sur Q4. Son coût (247s, 9 queries sur Q5) n'est pas justifié.",
+      "Vector naive a le profil le plus polarisé : 10/10 sur Q1-Q2 (lookups simples) mais 4/10 sur Q3 (multi-sources). Excellent sur mono-source, mauvais sur synthèse.",
+      "Q3 (Advantage) : AUCUN agent n'a mentionné l'Advantage. C'est le point le plus discriminant du benchmark — même les agents 2-round n'ont pas fait ce lien contextuel.",
+      "Q2 et Q4 : le corpus contient plusieurs versions des mêmes contenus. BM25 tend à remonter les mauvaises versions, Vector tend à trouver les bonnes (SRD/D&D Beyond).",
+      "Vector naive consomme 5x plus de tokens que BM25 pour un résultat comparable en qualité.",
+      "Le maxTurns des agents 2-round a été augmenté à 4 pour le prochain run."
+    ]
+  }
+}
