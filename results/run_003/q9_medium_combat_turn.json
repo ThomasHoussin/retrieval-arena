@@ -1,0 +1,99 @@
+{
+  "question_id": "q9_medium_combat_turn",
+  "question": "In D&D 5e, describe what a character can do on their turn during combat. What types of activities are available?",
+  "expected_answer": "On their turn, a character can: (1) Move up to their Speed, (2) Take one Action (options include Attack, Cast a Spell, Dash, Disengage, Dodge, Help, Hide, Ready, Search, Use an Object), (3) Take a Bonus Action if a class feature, spell, or ability grants one, (4) Interact with one object for free (e.g., draw a sword, open a door). Additionally, each creature gets one Reaction per round, which can be used on their turn or on someone else's turn (e.g., Opportunity Attack). A round represents about 10 seconds in the game world.",
+  "difficulty": "medium",
+  "results": {
+    "bm25_simple": {
+      "answer": "Move up to Speed. One Action: Attack, Magic, Dodge, Ready, Help, Hide, Influence, Search, Study, Utilize, Doing Nothing. Bonus Action if granted. Reaction (Opportunity Attack). Free object interaction. Brief communication free. Source: SRD p.12-14.",
+      "search_queries": ["turn combat actions activities"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.12-14"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Comprehensive answer in single query. Covers all activity types. Uses SRD 5.2.1 action names (Magic, Influence, Study, Utilize). Missing round duration."
+      }
+    },
+    "bm25_2round": {
+      "answer": "Move up to Speed. One Action from 12 options: Attack, Dash, Disengage, Dodge, Help, Hide, Influence, Magic, Ready, Search, Study, Utilize. Bonus Action if granted. One free object interaction. Brief communication free. Reaction (once per round, e.g. Opportunity Attack). Can do nothing. Source: SRD p.9-10, 12-15.",
+      "search_queries": ["character turn combat actions", "combat turn activities movement bonus action", "action types attack spell reaction free action", "free object interaction communicate brief utterance turn"],
+      "search_calls": 4,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.9-10", "SRD_CC_v5.2.1.pdf p.12-15"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Most comprehensive answer. Full action table with descriptions. Covers all categories including free interactions and communication. Missing round duration."
+      }
+    },
+    "bm25_free": {
+      "answer": "Move up to Speed. One Action: Attack, Dash, Disengage, Dodge, Help, Hide, Influence, Magic, Ready, Search, Study, Utilize. Bonus Action if granted. One free object interaction. Communication free. Reaction (Opportunity Attack). Can do nothing. Source: SRD p.9-10, 13-15.",
+      "search_queries": ["combat turn actions available character", "what can you do on your turn during combat", "bonus action reaction free object interaction turn"],
+      "search_calls": 3,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.9-10", "SRD_CC_v5.2.1.pdf p.13-15"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer with full action table and all activity categories."
+      }
+    },
+    "vector_naive": {
+      "answer": "Move up to Speed. One Action: Attack, Dash, Disengage, Dodge, Help, Hide, Influence, Magic, Ready, Search, Study, Utilize. Bonus Action if granted. Free object interaction. Communication free. Reaction (Opportunity Attack). Can do nothing. Source: SRD p.13, 176-177, 186.",
+      "search_queries": ["character turn actions combat activities"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.13, 176-177, 186"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Comprehensive answer in single query. All activity types covered."
+      }
+    },
+    "vector_2round": {
+      "answer": "Move up to Speed. One Action from 12 standard actions (full table with descriptions). Bonus Action if granted (examples: Rogue Cunning Action, Monk abilities). Free object interaction. Communication free. Reaction (Opportunity Attack). Can do nothing. Source: SRD p.9-10, 12-13, 176.",
+      "search_queries": ["what can a character do on their turn in combat", "combat turn actions movement bonus action", "types of actions available during combat", "Dash Disengage Dodge Hide action definitions rules", "Help Influence Magic Search Utilize action description"],
+      "search_calls": 5,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.9-10", "SRD_CC_v5.2.1.pdf p.12-13", "SRD_CC_v5.2.1.pdf p.176"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Very detailed with full action table and class feature examples. Used 2 rounds to verify all action definitions."
+      }
+    },
+    "vector_free": {
+      "answer": "Move up to Speed. One Action: Attack, Dash, Disengage, Dodge, Help, Hide, Influence, Magic, Ready, Search, Study, Utilize. Bonus Action if granted. Free object interaction. Communication free. Reaction (Opportunity Attack). Can do nothing. Source: SRD p.9-10, 12-13.",
+      "search_queries": ["what can a character do on their turn during combat", "combat turn actions bonus action movement"],
+      "search_calls": 2,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.9-10", "SRD_CC_v5.2.1.pdf p.12-13"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer with all activity categories."
+      }
+    },
+    "hybrid_free": {
+      "answer": "Move up to Speed. One Action from 12 options with full descriptions (Attack, Dash, Disengage, Dodge, Help, Hide, Influence, Magic, Ready, Search, Study, Utilize). Bonus Action if granted (Monk, Rogue examples). Free object interaction. Communication free. Reaction (Opportunity Attack). Can do nothing. Source: SRD p.9-10, 12-13.",
+      "search_queries": ["combat turn actions activities", "what can a character do on their turn during combat", "actions list Attack Dash Disengage Dodge Help Hide Magic Ready Search Study Utilize bonus action reaction"],
+      "search_calls": 3,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.9-10", "SRD_CC_v5.2.1.pdf p.12-13"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Comprehensive answer using both BM25 and vector to build complete picture. Full action table with examples."
+      }
+    }
+  }
+}

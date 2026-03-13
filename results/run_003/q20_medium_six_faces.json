@@ -1,0 +1,99 @@
+{
+  "question_id": "q20_medium_six_faces",
+  "question": "In the Six Faces of Death adventure, what is Cube 1717, who controls it, and why can't creatures escape the island by teleportation?",
+  "expected_answer": "Cube 1717 is an Acheronian cube (from the plane of Acheron). It is controlled by Vargo, a skull lord who took power from the rightful ruler, Earl Andromalius. The cube's infernal magic prevents creatures from leaving the island by teleportation without the permission of the cube's ruler, Earl Andromalius — but this permission cannot be granted because Andromalius is dead.",
+  "difficulty": "medium",
+  "results": {
+    "bm25_simple": {
+      "answer": "Cube 1717: massive iron battle station from Acheron, 600 ft, designed by derro Avnas, originally ruled by Earl Andromalius. Controlled by skull lord Vargo via Six-Face Throne (created from Archquadrone's brain). Teleportation blocked by infernal magic: requires Andromalius's permission, but he's dead. Effect ends only if Heart Engine (area 6.28) destroyed. Source: Six Faces of Death p.1-3, 8-9.",
+      "search_queries": ["Cube 1717 Six Faces Death teleportation"],
+      "search_calls": 1,
+      "sources_cited": ["DRA21_sixfacesdeath.pdf p.1-3, 8-9"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Excellent single-query result. All three aspects fully covered: cube nature, Vargo's control, and teleportation restriction with Heart Engine detail."
+      }
+    },
+    "bm25_2round": {
+      "answer": "Cube 1717: Acheronian iron battle station 600 ft, designed by Avnas, originally Earl Andromalius's. Control history: Andromalius → Archquadrone → Vargo (skull lord, 3 fused adventurers). Six-Face Throne: 3 of 6 faces controlled (Vargo's 2 heads + Sladek). Teleportation: infernal magic, Andromalius's permission required but dead. Within cube or 30 ft of exterior. Heart Engine destruction ends it. Source: Six Faces of Death p.1-3, 8-9.",
+      "search_queries": ["Six Faces of Death adventure", "Cube 1717", "teleportation escape island restriction", "Cube 1717 battle station Acheron purpose design", "teleportation plane shift Heart Engine permission Andromalius"],
+      "search_calls": 5,
+      "sources_cited": ["DRA21_sixfacesdeath.pdf p.1-3, 8-9"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Most detailed. Full control chain history, Six-Face Throne mechanics, exact teleportation rule with 30 ft range and Heart Engine escape clause."
+      }
+    },
+    "bm25_free": {
+      "answer": "Cube 1717: 600 ft iron battle station from Acheron, designed by Avnas. Controlled by Vargo (skull lord) via Six-Face Throne. Teleportation: infernal magic requires dead Andromalius's permission. Persisting wastes spell slot. Ends with Heart Engine destruction. Source: Six Faces of Death p.1-3, 8-9.",
+      "search_queries": ["Six Faces of Death Cube 1717", "teleportation escape island Six Faces of Death"],
+      "search_calls": 2,
+      "sources_cited": ["DRA21_sixfacesdeath.pdf p.1-3, 8-9"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer with all three aspects. Efficient 2-query approach."
+      }
+    },
+    "vector_naive": {
+      "answer": "Cube 1717: Acheronian iron battle station, 600 ft, designed by Avnas, ruled by Earl Andromalius. Controller identified as Archquadrone (NOT Vargo). Teleportation: infernal magic, Andromalius's permission required but dead. Heart Engine destruction ends restriction. Source: Six Faces of Death.",
+      "search_queries": ["Cube 1717 Six Faces of Death island teleportation escape"],
+      "search_calls": 1,
+      "sources_cited": ["DRA21_sixfacesdeath.pdf"],
+      "quality": {
+        "accuracy": 3,
+        "completeness": 2,
+        "faithfulness": 2,
+        "total": 7,
+        "notes": "Cube description and teleportation rule correct. However, incorrectly identifies the Archquadrone as current controller — missed that Vargo (skull lord) took over after the Archquadrone's defeat. Single query insufficient to retrieve the full power chain."
+      }
+    },
+    "vector_2round": {
+      "answer": "Cube 1717: Acheronian battle station 600 ft, Avnas design, Andromalius original ruler. Full control chain: Andromalius → Archquadrone → Vargo. Six-Face Throne: 3 faces (Vargo's 2 heads + Sladek). Teleportation: infernal magic, Andromalius dead, rule quoted verbatim. Only leaving restricted, not arrival. Heart Engine destroys restriction. Source: Six Faces of Death p.1-2, 8-9, 15-16.",
+      "search_queries": ["Six Faces of Death adventure overview", "Cube 1717 description", "teleportation escape island restriction magic"],
+      "search_calls": 3,
+      "sources_cited": ["DRA21_sixfacesdeath.pdf p.1-2, 8-9, 15-16"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete with full power chain history and one-way teleportation restriction noted. Round 2 not needed."
+      }
+    },
+    "vector_free": {
+      "answer": "Cube 1717: iron battle station from Acheron, 600 ft. Controlled by Vargo (skull lord, 3 fused adventurers) via Six-Face Throne. Sladek controls third face. Teleportation: infernal magic, Andromalius dead, exact quote provided. Heart Engine destruction ends restriction. Source: Six Faces of Death.",
+      "search_queries": ["Cube 1717 Six Faces of Death", "teleportation escape island Six Faces of Death", "Vargo skull lord Six-Face Throne controls cube ruler"],
+      "search_calls": 3,
+      "sources_cited": ["DRA21_sixfacesdeath.pdf"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete. Exact teleportation rule quoted. Vargo's control mechanism detailed."
+      }
+    },
+    "hybrid_free": {
+      "answer": "Cube 1717: 600 ft iron Acheronian battle station, Avnas/Andromalius origin. Controlled by Vargo (skull lord) via Six-Face Throne from Archquadrone's brain. Sladek assists. Teleportation: infernal magic requires dead Andromalius's permission. Heart Engine destruction ends it. BM25 + vector both returned relevant results. Source: Six Faces of Death p.1-3.",
+      "search_queries": ["Six Faces of Death Cube 1717", "Six Faces of Death Cube 1717 teleportation escape island"],
+      "search_calls": 2,
+      "sources_cited": ["DRA21_sixfacesdeath.pdf p.1-3"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete hybrid answer. Full history, Vargo's control, teleportation rule. Efficient 2-query approach."
+      }
+    }
+  }
+}

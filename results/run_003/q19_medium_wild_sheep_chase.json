@@ -1,0 +1,99 @@
+{
+  "question_id": "q19_medium_wild_sheep_chase",
+  "question": "In The Wild Sheep Chase adventure, who is the sheep the party encounters, what happened to it, and what danger is associated with the Wand of True Polymorph?",
+  "expected_answer": "Finethir Shinebright is a wizard who was polymorphed into a sheep by his former apprentice, Ahmed Noke, using the stolen Wand of True Polymorph. In sheep form, Shinebright communicates by nodding and bleating; a scroll allows the party to hear his actual voice. Noke is the antagonist found in his tower. The Wand of True Polymorph is dangerous: characters attempting to use it must make a saving throw as if against a regular casting of True Polymorph, and if they fail by more than 5, the wand explodes violently.",
+  "difficulty": "medium",
+  "results": {
+    "bm25_simple": {
+      "answer": "Finethir Shinebright, high elf transmutation wizard, polymorphed into sheep by apprentice Ahmed Noke using Wand of True Polymorph. Trapped 2 years. Escaped with Scroll of Speak with Animals. Wand (Modified): DC 17 Arcana check per use. Success: spell works, DC increases by 1. Fail ≤5: target becomes Gibbering Mouther (irreversible below 9th level). Fail >5: Gibbering Mouther + wand explodes (1d12 force per charge, 10 ft). If used on Shinebright and fails, he dies permanently. Source: Wild Sheep Chase p.1-6.",
+      "search_queries": ["Wild Sheep Chase sheep Wand True Polymorph"],
+      "search_calls": 1,
+      "sources_cited": ["892902-The_Wild_Sheep_Chase_V2.pdf p.1-6"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Excellent single-query result. All three aspects fully covered: identity, backstory, and full wand mechanics with all failure modes."
+      }
+    },
+    "bm25_2round": {
+      "answer": "Same complete answer: Shinebright (high elf, willow-thin, long nose), Noke, 2 years, Scroll of Speak with Animals. Full wand mechanics: DC 17 Arcana, Gibbering Mouther on fail ≤5, explosion on fail >5 (1d12 force/charge), Shinebright dies on failure. Round 2 not needed. Source: Wild Sheep Chase p.1-6.",
+      "search_queries": ["Wild Sheep Chase adventure", "sheep polymorph wizard", "Wand of True Polymorph danger"],
+      "search_calls": 3,
+      "sources_cited": ["892902-The_Wild_Sheep_Chase_V2.pdf p.1-6"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete with physical description details. Round 2 skipped as Round 1 was comprehensive."
+      }
+    },
+    "bm25_free": {
+      "answer": "Shinebright, elf transmutation wizard, polymorphed by Noke, 2 years. Scroll of Speak with Animals. Modified Wand: DC 17 Arcana, Gibbering Mouther on fail ≤5, explosion on fail >5 (1d12 force/charge), Shinebright dies permanently on failure. Source: Wild Sheep Chase p.1-6.",
+      "search_queries": ["Wild Sheep Chase sheep adventure", "Wand of True Polymorph danger"],
+      "search_calls": 2,
+      "sources_cited": ["892902-The_Wild_Sheep_Chase_V2.pdf p.1-6"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer with all wand mechanics. Efficient 2-query approach."
+      }
+    },
+    "vector_naive": {
+      "answer": "Shinebright, wizard polymorphed by Noke. Scroll of Speak with Animals. Wand danger: target makes saving throw, fail >5 = wand explodes (1d12 force/charge, 10 ft). Shinebright dies permanently on failure. Source: Wild Sheep Chase.",
+      "search_queries": ["Wild Sheep Chase sheep wand true polymorph adventure"],
+      "search_calls": 1,
+      "sources_cited": ["892902-The_Wild_Sheep_Chase_V2.pdf"],
+      "quality": {
+        "accuracy": 4,
+        "completeness": 2,
+        "faithfulness": 2,
+        "total": 8,
+        "notes": "Found identity and explosion danger. Missing DC 17 Arcana check mechanic for user and Gibbering Mouther middle failure mode. Described wand as 'saving throw' (target's save) rather than user's Arcana check."
+      }
+    },
+    "vector_2round": {
+      "answer": "Shinebright, high elf wizard, polymorphed by Noke, 2 years. Scroll of Speak with Animals. Modified Wand: DC 17 Arcana (DC increases +1 per use). Fail ≤5: Gibbering Mouther. Fail >5: Gibbering Mouther + explosion (1d12 force/charge). Shinebright dies on failure. Source: Wild Sheep Chase.",
+      "search_queries": ["Wild Sheep Chase adventure sheep", "Wild Sheep Chase Wand of True Polymorph", "sheep wizard transformed polymorph adventure", "Shinebright wand damaged unreliable saving throw explodes"],
+      "search_calls": 4,
+      "sources_cited": ["892902-The_Wild_Sheep_Chase_V2.pdf p.1-6"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete. Round 2 confirmed full wand mechanics including DC 17 and Gibbering Mouther."
+      }
+    },
+    "vector_free": {
+      "answer": "Shinebright, elf wizard, polymorphed by Noke. Modified Wand: DC 17 Arcana, DC 15 to identify danger. Fail ≤5: Gibbering Mouther. Fail >5: explosion (1d12/charge). DC increases per use. Shinebright dies on failure. Source: Wild Sheep Chase p.1-6.",
+      "search_queries": ["Wild Sheep Chase sheep adventure", "Wand of True Polymorph danger", "Wand True Polymorph modified charges explodes Finethir Shinebright restoring"],
+      "search_calls": 3,
+      "sources_cited": ["892902-The_Wild_Sheep_Chase_V2.pdf p.1-6"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete with DC 15 identification check detail. All failure modes found."
+      }
+    },
+    "hybrid_free": {
+      "answer": "Shinebright, high elf transmutation wizard (willow-thin, straw hair, long nose), polymorphed by Noke, 2 years. Scroll of Speak with Animals. Modified Wand: DC 17 Arcana, DC 15 to identify. Fail ≤5: Gibbering Mouther (irreversible below 9th). Fail >5: explosion (1d12 force/charge). DC increases per use. Shinebright dies permanently on failure. Source: Wild Sheep Chase p.1-6.",
+      "search_queries": ["Wild Sheep Chase sheep adventure", "Wild Sheep Chase adventure sheep wand polymorph"],
+      "search_calls": 2,
+      "sources_cited": ["892902-The_Wild_Sheep_Chase_V2.pdf p.1-6"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Most complete. Physical description, both DC checks, all failure modes, 2-year duration. Efficient hybrid search."
+      }
+    }
+  }
+}

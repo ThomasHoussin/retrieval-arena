@@ -1,0 +1,99 @@
+{
+  "question_id": "q12_medium_valturnax",
+  "question": "In the adventure 'A Dungeon and a Dragon', what is the name and type of the main dragon antagonist, and how has it been monitoring the adventurers throughout the dungeon?",
+  "expected_answer": "Valturnax, an adult green dragon. He has been spying on the party's progress through the dungeon via the eyes of rodents and birds throughout the complex. When the party reaches his lair, he has pre-cast Mislead and sits invisibly on the walkways. He announces himself and monologues before initiating combat, so no creature is surprised.",
+  "difficulty": "medium",
+  "results": {
+    "bm25_simple": {
+      "answer": "Valturnax, Adult Green Dragon. Monitors via forest animals (birds, rabbits, mice that watch unblinking). Forest surveillance described but in-dungeon 'eyes of rodents and birds' mechanism not fully surfaced. Source: A Dungeon and a Dragon PDF p.1-5.",
+      "search_queries": ["A Dungeon and a Dragon main dragon antagonist"],
+      "search_calls": 1,
+      "sources_cited": ["A_Dungeon_and_A_Dragon.pdf p.1-5"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 2,
+        "faithfulness": 2,
+        "total": 9,
+        "notes": "Name and type correct. Forest surveillance found but didn't surface the explicit 'through the eyes of rodents and birds' in-dungeon mechanism or Mislead pre-cast."
+      }
+    },
+    "bm25_2round": {
+      "answer": "Valturnax, Adult Green Dragon. Monitors via eyes of rodents and birds throughout entire dungeon. Pre-cast Mislead. Directs kobold ambushes based on real-time tracking. Deflects blame to half-sister Verslexia. Source: A Dungeon and a Dragon PDF p.1-2, 4-7, 14-18.",
+      "search_queries": ["Dungeon Dragon adventure antagonist", "dragon monitoring adventurers dungeon", "A Dungeon and a Dragon main villain", "Valturnax scrying crystal ball watching party", "Valturnax following progress spy observe dungeon"],
+      "search_calls": 5,
+      "sources_cited": ["A_Dungeon_and_A_Dragon.pdf p.1-2, 4-7, 14-18"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer. Found the explicit surveillance quote, Mislead pre-cast, kobold coordination, and Verslexia deflection."
+      }
+    },
+    "bm25_free": {
+      "answer": "Valturnax, Adult Green Dragon. 'He has been following the party's progress the entire time through the eyes of rodents and birds.' Pre-cast Mislead. Directs kobold ambushes. Source: A Dungeon and a Dragon PDF p.1-2, 4-5, 7, 15-17.",
+      "search_queries": ["A Dungeon and a Dragon adventure main dragon antagonist", "dragon monitoring adventurers dungeon scrying", "Valturnax following progress party animals watching birds"],
+      "search_calls": 3,
+      "sources_cited": ["A_Dungeon_and_A_Dragon.pdf p.1-2, 4-5, 7, 15-17"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete with exact quote from adventure text. Mislead noted."
+      }
+    },
+    "vector_naive": {
+      "answer": "Valturnax, Adult Green Dragon. Monitors via forest animals (birds, rodents watch unblinkingly). 'The dragon has taken control of the forest and its denizens.' In-dungeon tracking not fully detailed. Source: A Dungeon and a Dragon PDF p.1, 4-5.",
+      "search_queries": ["main dragon antagonist monitoring adventurers dungeon"],
+      "search_calls": 1,
+      "sources_cited": ["A_Dungeon_and_A_Dragon.pdf p.1, 4-5"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 2,
+        "faithfulness": 2,
+        "total": 9,
+        "notes": "Name and type correct. Forest surveillance found but didn't surface in-dungeon mechanism or Mislead."
+      }
+    },
+    "vector_2round": {
+      "answer": "Valturnax, Adult Green Dragon. Two methods: (1) eyes of animals in forest and (2) 'through the eyes of rodents and birds' inside dungeon, with pre-cast Mislead. Kobold ambush coordination confirmed. Verslexia deflection noted. Source: A Dungeon and a Dragon PDF p.1, 5, 7, 16, 18.",
+      "search_queries": ["A Dungeon and a Dragon adventure main dragon antagonist", "dragon monitoring adventurers dungeon scrying", "dragon villain dungeon adventure name type", "Valturnax watching spying minions prepared adventurers dungeon", "Valturnax animals forest birds watching spying adventurers travel"],
+      "search_calls": 5,
+      "sources_cited": ["A_Dungeon_and_A_Dragon.pdf p.1, 5, 7, 16, 18"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Thorough answer with both surveillance methods, Mislead, and minion coordination."
+      }
+    },
+    "vector_free": {
+      "answer": "Valturnax, Adult Green Dragon (Huge, Lawful Evil). 'He has been following the party's progress the entire time through the eyes of rodents and birds.' Pre-cast Mislead. Kobold ambush coordination. Cynically deflects to Verslexia during parlay. Source: A Dungeon and a Dragon PDF p.1, 5, 7, 16.",
+      "search_queries": ["A Dungeon and a Dragon main dragon antagonist", "dragon monitoring adventurers dungeon scrying", "Valturnax watches observes adventurers animals forest birds", "Valturnax prepared minions knows adventurers coming dungeon"],
+      "search_calls": 4,
+      "sources_cited": ["A_Dungeon_and_A_Dragon.pdf p.1, 5, 7, 16"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete with exact quote, Mislead, minion coordination, and Verslexia deflection."
+      }
+    },
+    "hybrid_free": {
+      "answer": "Valturnax, Adult Green Dragon. Monitors via eyes of rodents/birds (forest + dungeon). Pre-cast Mislead (invisible on walkways, illusory duplicate for parlay). Deflects blame to half-sister Verslexia ('technical truth'). Source: A Dungeon and a Dragon PDF p.1-2, 4-7, 15-18.",
+      "search_queries": ["A Dungeon and a Dragon adventure dragon antagonist", "main dragon antagonist monitoring adventurers dungeon", "Valturnax watching monitoring scrying animals following progress"],
+      "search_calls": 3,
+      "sources_cited": ["A_Dungeon_and_A_Dragon.pdf p.1-2, 4-7, 15-18"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Most complete answer. Surveillance mechanism, Mislead mechanics, Verslexia deflection all present."
+      }
+    }
+  }
+}

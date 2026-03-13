@@ -1,0 +1,99 @@
+{
+  "question_id": "q5_complex_multistep",
+  "question": "I'm a level 9 Wizard with 20 Intelligence. I want to cast Fireball at a group of enemies 120 feet away. What is the spell save DC, what saving throw do the targets make, and how much damage do they take on a failed save?",
+  "expected_answer": "Spell save DC = 8 + proficiency bonus (+4 at level 9) + Intelligence modifier (+5) = 17. Targets make a Dexterity saving throw. On a failed save, they take 6d8 fire damage. On a success, half damage. Fireball has a range of 150 feet, so 120 feet is within range.",
+  "difficulty": "complex",
+  "results": {
+    "bm25_simple": {
+      "answer": "Could not find complete Fireball spell entry. Only partial text from Uni PDF found (range 150 ft confirmed but damage/save text cut off). Could not find DC formula or proficiency bonus table. Refused to use training knowledge.",
+      "search_queries": ["Fireball spell damage save DC"],
+      "search_calls": 1,
+      "sources_cited": ["Uni and the Hunt for the Lost Horn.pdf p.40-41"],
+      "quality": {
+        "accuracy": 1,
+        "completeness": 0,
+        "faithfulness": 2,
+        "total": 3,
+        "notes": "BM25 simple failed to retrieve the SRD Fireball entry. Only got a partial reference from a different PDF. Faithfully refused to guess missing values."
+      }
+    },
+    "bm25_2round": {
+      "answer": "DC 17 (8+5+4). Dexterity saving throw. 6d8 Fire damage on failed save, half on success. Range 150 ft, 120 ft within range. Upcast: +1d6 per slot above 3rd. Sources: SRD p.22, p.131.",
+      "search_queries": ["Fireball spell damage", "spell save DC Intelligence wizard", "Fireball saving throw Dexterity", "spell save DC formula 8 proficiency bonus", "wizard proficiency bonus level 9"],
+      "search_calls": 5,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.22", "SRD_CC_v5.2.1.pdf p.131"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. 6d8 matches poisoned corpus. All components verified across 2 rounds. Thorough sourcing."
+      }
+    },
+    "bm25_free": {
+      "answer": "DC 17 (8+5+4). Dexterity saving throw. 6d8 Fire damage on failed save, half on success. Range 150 ft, 120 ft within range. Noted 'This corpus uses 6d8 (not 8d6 as seen in some other printings)'. Sources: SRD p.22, 76-77, 131.",
+      "search_queries": ["Fireball spell damage saving throw DC", "Wizard spell save DC Intelligence modifier", "Fireball 8d6 fire damage Dexterity saving throw 20-foot radius sphere", "Wizard proficiency bonus level 9 spell save DC formula"],
+      "search_calls": 4,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.22", "SRD_CC_v5.2.1.pdf p.76-77", "SRD_CC_v5.2.1.pdf p.131"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. Notably flagged the corpus uses 6d8 instead of 8d6 — shows awareness of the difference while staying faithful to corpus."
+      }
+    },
+    "vector_naive": {
+      "answer": "Dexterity saving throw. 6d8 Fire damage on failed save, half on success. Range 150 ft, 120 ft in range. Could NOT find DC formula in search results. Refused to calculate DC from training knowledge.",
+      "search_queries": ["Fireball spell description damage save DC"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.131"],
+      "quality": {
+        "accuracy": 3,
+        "completeness": 2,
+        "faithfulness": 2,
+        "total": 7,
+        "notes": "Found Fireball entry (6d8 poisoned, Dex save) but failed to find DC formula in single query. Faithful in refusing to guess DC."
+      }
+    },
+    "vector_2round": {
+      "answer": "DC 17 (8+5+4). Dexterity saving throw. 6d8 Fire damage on failed save, half on success. Range 150 ft, 120 ft in range. Upcast table provided. Sources: SRD p.22, Fireball entry.",
+      "search_queries": ["Fireball spell damage saving throw", "Wizard spell save DC Intelligence modifier", "Fireball range area of effect level 3", "spell save DC formula proficiency bonus spellcasting ability", "Wizard proficiency bonus level 9"],
+      "search_calls": 5,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.22", "SRD_CC_v5.2.1.pdf p.131"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. Used both rounds to verify all components. Complete with upcast table."
+      }
+    },
+    "vector_free": {
+      "answer": "DC 17 (8+5+4). Dexterity saving throw. 6d8 Fire damage on failed save, half on success. Range 150 ft, 120 ft in range. Upcast: +1d6 per slot above 3rd. Sources: SRD p.22, p.106, Fireball entry.",
+      "search_queries": ["Fireball spell damage saving throw", "spell save DC calculation wizard Intelligence", "spell save DC formula proficiency bonus spellcasting ability modifier", "proficiency bonus level 9"],
+      "search_calls": 4,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.22", "SRD_CC_v5.2.1.pdf p.106", "SRD_CC_v5.2.1.pdf p.131"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. All components verified from corpus sources."
+      }
+    },
+    "hybrid_free": {
+      "answer": "DC 17 (8+5+4). Dexterity saving throw. 6d8 Fire damage on failed save, half on success. Range 150 ft, 120 ft in range. Upcast: +1d6 per slot above 3rd. Sources: SRD p.22, p.131-132.",
+      "search_queries": ["Fireball spell damage save DC", "Fireball spell damage saving throw DC wizard", "spell save DC formula proficiency bonus spellcasting ability wizard", "Fireball 8 9 level damage higher spell slot"],
+      "search_calls": 4,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.22", "SRD_CC_v5.2.1.pdf p.131-132"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. BM25 found spell text, vector confirmed. Efficient hybrid usage."
+      }
+    }
+  }
+}

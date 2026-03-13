@@ -1,0 +1,99 @@
+{
+  "question_id": "q21_complex_cross_doc_golem",
+  "question": "In the Frozen Sick adventure, the characters encounter a flesh golem in Salsvault. How does this golem differ from a standard flesh golem as described in the SRD? What are the standard flesh golem's full stats?",
+  "expected_answer": "Standard Flesh Golem (SRD): Medium Construct, AC 9, HP 93 (11d8+44), Speed 30 ft., STR 19 (+4), DEX 9 (-1), CON 18 (+4), INT 6 (-2), WIS 10 (+0), CHA 5 (-3). Immunities: Lightning and Poison damage; Charmed, Exhaustion, Frightened, Paralyzed, Petrified, Poisoned conditions. Traits: Aversion to Fire, Berserk, Immutable Form, Lightning Absorption, Magic Resistance. CR 5 (1,800 XP). Actions: Multiattack (two Slam), Slam +7 to hit, 13 (2d8+4) Bludgeoning + 4 (1d8) Lightning. | Salsvault version differences: only 5 HP remaining, Berserk trait is already activated, has only one arm so it cannot use Multiattack, reduced to CR 1 (200 XP).",
+  "difficulty": "complex",
+  "results": {
+    "bm25_simple": {
+      "answer": "Salsvault golem (S16): 5 HP, Berserk active, one arm (no Multiattack), CR 1 (200 XP). Standard flesh golem stat block NOT found in corpus — refused to provide from memory. Source: Frozen Sick p.19-20.",
+      "search_queries": ["flesh golem Salsvault Frozen Sick"],
+      "search_calls": 1,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf p.19-20"],
+      "quality": {
+        "accuracy": 3,
+        "completeness": 1,
+        "faithfulness": 2,
+        "total": 6,
+        "notes": "Found Salsvault modifications correctly but single query failed to retrieve SRD flesh golem stat block. Correctly refused to guess missing data."
+      }
+    },
+    "bm25_2round": {
+      "answer": "Salsvault: 5 HP, Berserk active, one arm, CR 1 (200 XP). Standard: AC 9, HP 93 (11d8+44), Speed 30, CR 5 (1800 XP, PB +3). Immunities: Lightning, Poison; Charmed, Exhaustion, Frightened, Paralyzed, Petrified, Poisoned. Traits: Aversion to Fire, Berserk (d6 on 6 when Bloodied), Immutable Form, Lightning Absorption, Magic Resistance. Actions: Multiattack (2 Slams), Slam +7/2d8+4 Bludgeoning + 1d8 Lightning. Ability scores: image in PDF, not text-recoverable. Comparison table provided. Source: Frozen Sick p.19-20, SRD p.285.",
+      "search_queries": ["flesh golem Salsvault Frozen Sick", "flesh golem stats SRD", "golem construct monster statblock"],
+      "search_calls": 3,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf p.19-20", "SRD_CC_v5.2.1.pdf p.285"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Found both documents. Full SRD stat block (minus ability scores which were images in PDF). All traits, actions, immunities. Complete comparison table."
+      }
+    },
+    "bm25_free": {
+      "answer": "Salsvault: 5 HP, Berserk active, one arm, CR 1 (200 XP). Standard: AC 9, HP 93, Speed 30, CR 5 (1800 XP). Full immunities, all 5 traits (Aversion to Fire, Berserk, Immutable Form, Lightning Absorption, Magic Resistance), Multiattack (2 Slams), Slam +7/2d8+4 Bludgeoning + 1d8 Lightning. Ability scores noted as image. Source: Frozen Sick p.19-20, SRD p.285.",
+      "search_queries": ["flesh golem Salsvault Frozen Sick", "flesh golem stats AC hit points abilities", "flesh golem ability scores strength dexterity constitution intelligence wisdom charisma"],
+      "search_calls": 4,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf p.19-20", "SRD_CC_v5.2.1.pdf p.285"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete cross-doc answer. Attempted 3rd query for ability scores but correctly noted they were PDF images. All other stats found."
+      }
+    },
+    "vector_naive": {
+      "answer": "Salsvault: 5 HP, Berserk active, one arm, CR 1 (200 XP). Standard flesh golem stat block NOT found in corpus. Source: Frozen Sick.",
+      "search_queries": ["flesh golem Salsvault Frozen Sick stats"],
+      "search_calls": 1,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf"],
+      "quality": {
+        "accuracy": 3,
+        "completeness": 1,
+        "faithfulness": 2,
+        "total": 6,
+        "notes": "Found Salsvault modifications but failed to retrieve SRD stat block. Single vector query insufficient for cross-document question."
+      }
+    },
+    "vector_2round": {
+      "answer": "Salsvault: 5 HP, Berserk active, one arm, CR 1 (200 XP). Standard golem: found traits (Berserk, Immutable Form, Magic Resistance) and actions but WRONG stat block retrieved — reports Slam +9/1d10+5 Bludgeoning + 1d12 Acid with Hasten bonus action, which belongs to a different golem. Top-line stats (AC, HP, Speed) not found. Source: Frozen Sick, SRD 5.2.1.",
+      "search_queries": ["Frozen Sick Salsvault flesh golem", "flesh golem standard stats SRD", "flesh golem AC hit points abilities", "flesh golem Medium Construct Neutral alignment immunities speed", "Salsvault area S16 golem lab description"],
+      "search_calls": 5,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf", "SRD_CC_v5.2.1.pdf"],
+      "quality": {
+        "accuracy": 2,
+        "completeness": 1,
+        "faithfulness": 2,
+        "total": 5,
+        "notes": "Salsvault mods correct. SRD retrieval failed — retrieved a different golem's stat block (Acid damage, +9, Hasten) instead of flesh golem (Lightning, +7). Missing AC/HP/CR for standard golem."
+      }
+    },
+    "vector_free": {
+      "answer": "Salsvault: 5 HP, Berserk active, one arm, CR 1 (200 XP). Standard: found traits (Berserk, Immutable Form, Lightning Absorption, Magic Resistance) and actions (Multiattack 2 Slams, Slam +7/2d8+4 Bludgeoning + 1d8 Lightning) correctly. But top-line stats (AC, HP, Speed, CR, immunities) not found in retrieved chunks. Source: Frozen Sick, SRD 5.2.1.",
+      "search_queries": ["flesh golem Salsvault Frozen Sick", "flesh golem stats standard SRD", "flesh golem stat block AC HP speed strength dexterity", "S16 golem lab Salsvault damaged one arm", "golem lightning absorption slam bludgeoning CR 5 SRD", "Flesh Golem AC 9 HP 93 Medium Large Construct Neutral speed 30", "Flesh Golem Str 19 Dex 9 Con 18 Int 6 Wis 10 Cha 5 construct", "Salsvault S16 flesh golem description setup encounter berserk"],
+      "search_calls": 10,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf", "SRD_CC_v5.2.1.pdf"],
+      "quality": {
+        "accuracy": 4,
+        "completeness": 2,
+        "faithfulness": 2,
+        "total": 8,
+        "notes": "Salsvault correct. SRD traits and actions correct (Lightning damage, +7) but header stats never retrieved despite 10 queries. Transparent about gaps."
+      }
+    },
+    "hybrid_free": {
+      "answer": "Salsvault: 5 HP, Berserk active, one arm, CR 1 (200 XP). Standard: AC 9, HP 93 (11d8+44), Speed 30, CR 5 (1800 XP, PB +3). Immunities: Lightning, Poison; Charmed, Exhaustion, Frightened, Paralyzed, Petrified, Poisoned. All 5 traits including Aversion to Fire and Lightning Absorption. Slam +7/2d8+4 Bludgeoning + 1d8 Lightning. Ability scores noted as image. Source: Frozen Sick p.19-20, SRD p.285.",
+      "search_queries": ["flesh golem Salsvault Frozen Sick", "flesh golem Salsvault Frozen Sick adventure", "flesh golem stat block AC hit points Multiattack Berserk", "flesh golem full stat block abilities traits actions", "flesh golem Str 19 Dex 9 Con 18 Int 6 Wis 10 Cha 1"],
+      "search_calls": 6,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf p.19-20", "SRD_CC_v5.2.1.pdf p.285"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Best cross-doc result. BM25 retrieved header stats that vector alone couldn't find. Both documents fully covered. Comparison table provided."
+      }
+    }
+  }
+}

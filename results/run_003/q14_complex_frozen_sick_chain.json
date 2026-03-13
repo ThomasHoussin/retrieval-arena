@@ -1,0 +1,99 @@
+{
+  "question_id": "q14_complex_frozen_sick_chain",
+  "question": "In the Frozen Sick adventure, describe the full quest chain: what is the initial hook, what key locations do the characters visit, what is the main antagonist's plan, and what reward do the characters receive upon success?",
+  "expected_answer": "Hook: People are dying of a mysterious disease in Palebank Village. Elro Aldataur hires the party to investigate. They discover frigid woe, a magical disease from the ancient Aeoran mages, with blue spores (DC 11 Constitution save). Investigation leads to Salsvault, a crashed Aeoran laboratory embedded in the ice of Foren. Inside Salsvault, constructs and undead guard the remaining diseases and treasures. The antidote vials are in the Alchemist's Lab area, stored in trapped, locked floor-chests packed with fine sand. Key antagonist: Hulil, a bandit leader who is also sick with frigid woe and plans to weaponize it. Upon returning the antidote, Elro pays 200 gp. If the characters fail to recover the antidote in time, Irven and his family cannot be saved.",
+  "difficulty": "complex",
+  "results": {
+    "bm25_simple": {
+      "answer": "Hook: Urgon Wenth dies of frigid woe in Palebank Village, Elro Aldataur hires party (100 gp) to investigate. Locations: Palebank Village (Urgon's cabin, Tulgi's cabin, Pelc's Curiosities), Croaker Cave (Uttolot bandits + Hulil Lutan), Syrinlya (outpost on Foren, meet Morgo Delwur/Buyer/Orvo Mustave), Salsvault (Aeorian lab, antidote in area S18). Antagonists: Hulil Lutan (Uttolot criminal, infected, desperate for cure) + Ferol Sal (undead necromancer/wight seeking to create god-killing disease). Reward: 200 gp from Elro via the Buyer. Advance to 3rd level. Source: Frozen Sick PDF p.1-2, 9-12, 20-21.",
+      "search_queries": ["Frozen Sick adventure quest"],
+      "search_calls": 1,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf p.1-2, 9-12, 20-21"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Remarkably comprehensive for a single query. Found all key locations, both antagonists (Hulil and Ferol Sal), the Uttolot connection, and the full reward chain."
+      }
+    },
+    "bm25_2round": {
+      "answer": "Hook: Urgon Wenth funeral, Elro Aldataur hires party (100 gp). Full chain: Urgon's cabin → Tulgi's cabin → Pelc's Curiosities (Verla dead) → Croaker Cave (Hulil Lutan, Uttolot bandits, giant ice frogs) → Jolly Dwarf Inn (Irven Liel family infected) → Syrinlya via Remorhaz (9 days) → Salsvault (Aeorian lab). Antagonists: Hulil Lutan (cult fanatic, priestess of Tiamat, desperate for cure) + Ferol Sal (wight, Int 16, obsessed with god-killing disease). Ferol's note quoted. Antidote: 20 doses in S18, Drowned Curative Lab + ersatz eye. Reward: 200 gp via Buyer. Advance 2nd→3rd level. Source: Frozen Sick PDF p.1-21.",
+      "search_queries": ["Frozen Sick adventure", "Frozen Sick quest hook locations", "Frozen Sick antagonist villain plan reward", "Ferol Sal undead necromancer Salsvault boss", "Elro Aldataur Urgon Wenth ice statue initial hook"],
+      "search_calls": 5,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf p.1-21"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Most detailed answer. Full quest chain with every location, both antagonists with characterization, Ferol's note quoted verbatim, ersatz eye noted, level progression tracked."
+      }
+    },
+    "bm25_free": {
+      "answer": "Hook: Urgon Wenth funeral, Elro hires party (100 gp). Chain: Urgon's cabin → Tulgi (reveals Hulil/Uttolot connection) → Pelc's Curiosities (ransacked, Verla dead) → Croaker Cave (Hulil + Raegrin Mau + giant ice frogs) → Jolly Dwarf Inn (Irven family infected) → 2nd quest (200 gp) → Remorhaz to Syrinlya → Salsvault. Antagonists: Hulil (desperate for cure, not weaponizing) + Ferol Sal (wight necromancer, god-killing disease obsession). Ferol's note quoted. Antidote: 20 doses + ersatz eye in S18. Reward: 200 gp via Buyer, advance to 3rd level. Source: Frozen Sick PDF p.1-21.",
+      "search_queries": ["Frozen Sick adventure quest hook", "Frozen Sick antagonist plan locations", "Ferol Sal undead necromancer Salsvault boss final reward", "Frozen Sick conclusion ending characters reward antidote Elro"],
+      "search_calls": 4,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf p.1-21"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer with full quest chain, both antagonists, Ferol's note, and reward details. Correctly notes Hulil is seeking a cure, not weaponizing."
+      }
+    },
+    "vector_naive": {
+      "answer": "Hook: Urgon Wenth dies of frigid woe, Elro hires party (200 gp mentioned as final reward). Locations: Palebank Village (Pelc's Curiosities, Tulgi), Croaker Cave (Hulil Lutan + Uttolot bandits + giant ice frogs), Remorhaz voyage to Syrinlya, Salsvault (Aeorian lab, antidote in gold vials). Antagonist: Hulil Lutan (priestess of Tiamat, Uttolot family, infected, seeking cure). Deeper threat is frigid woe disease itself. Reward: 200 gp, advance to 3rd level. Source: Frozen Sick PDF.",
+      "search_queries": ["Frozen Sick adventure quest chain locations antagonist reward"],
+      "search_calls": 1,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 2,
+        "faithfulness": 2,
+        "total": 9,
+        "notes": "Good coverage for single query. All main locations and Hulil found. Missing Ferol Sal as Salsvault's undead antagonist — only mentions 'the disease itself' as deeper threat."
+      }
+    },
+    "vector_2round": {
+      "answer": "Hook: Funeral of Urgon Wenth, Elro Aldataur hires party (100 gp). Full chain with every sub-location: cabins → Pelc's → Croaker Cave (Hulil + Raegrin Mau) → Jolly Dwarf (Irven family) → 2nd quest (200 gp) → Remorhaz → Syrinlya (Morgo, Buyer, Orvo) → 200 miles to Salsvault. Antagonists: Hulil (cult fanatic, self-serving criminal) + Ferol Sal (wight, centuries-old obsession, god-killing disease, exact note quoted). Antidote: 20 doses + ersatz eye in S18. Reward: 200 gp via Buyer, advance to 3rd level. Source: Frozen Sick PDF p.2-21.",
+      "search_queries": ["Frozen Sick adventure overview", "Frozen Sick quest hook initial encounter", "Frozen Sick antagonist plan villain", "Frozen Sick reward completion success", "Hulil Lutan Croaker Cave frigid woe antidote plan", "Frozen Sick Salsvault antidote gold vials adventure conclusion", "Elro Aldataur reward 200 gp Palebank Village quest complete"],
+      "search_calls": 7,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf p.2-21"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Extremely thorough. Every location, both antagonists with detailed characterization, Ferol's note quoted, Irven family details, full reward chain."
+      }
+    },
+    "vector_free": {
+      "answer": "Hook: Urgon funeral, Elro hires party (100 gp then 200 gp). Full chain: Urgon's cabin → Tulgi (DC 12 check) → Pelc's Curiosities → Croaker Cave (Hulil + Raegrin + Old Croaker) → Jolly Dwarf (Irven family) → Remorhaz → Syrinlya (Morgo/Buyer/Orvo) → Salsvault (200 miles). Antagonists: Hulil (cult fanatic, Uttolot family, desperate not weaponizing) + Ferol Sal (wight, god-killing disease, note quoted). Antidote: 20 doses + ersatz eye in S18. Reward: 200 gp via Buyer, advance to 3rd level. Source: Frozen Sick PDF p.2-21.",
+      "search_queries": ["Frozen Sick adventure hook introduction", "Frozen Sick quest locations key areas", "Frozen Sick antagonist plan villain", "Hulil Lutan priestess Tiamat Croaker Cave confrontation", "Frozen Sick reward gold payment Elro characters success", "Salsvault antidote gold vials frigid woe cure Buyer", "Ferol Sal Salsvault necromancer undead boss"],
+      "search_calls": 7,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf p.2-21"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Very detailed with DC checks, room names, both antagonists. Correctly distinguishes Hulil as desperate criminal, not a weaponizer."
+      }
+    },
+    "hybrid_free": {
+      "answer": "Hook: Urgon funeral, Elro hires party (100 gp). Full chain: Urgon's cabin → Tulgi → Pelc's Curiosities → Croaker Cave (Hulil + Uttolot bandits + giant frogs) → Jolly Dwarf (Irven family) → Remorhaz → Syrinlya (Morgo/Buyer/Orvo) → Salsvault (200 miles). Antagonists: Hulil Lutan (NE dwarf cult fanatic, priestess of Tiamat, Uttolot family, desperately seeking cure) + Ferol Sal (wight, master key holder, god-killing disease obsession, note quoted). Antidote: 20 doses + ersatz eye in S18, guarded by 4 giant crabs. Reward: 200 gp via Buyer, advance to 3rd level. Source: Frozen Sick PDF p.2-21.",
+      "search_queries": ["Frozen Sick adventure quest hook", "Frozen Sick adventure quest chain locations antagonist reward", "Hulil Lutan Croaker Cave antagonist Tiamat Uttolot", "Frozen Sick reward gp antidote Salsvault Elro Irven", "Ferol Sal necromancer undead Salsvault gods Aeor destruction"],
+      "search_calls": 5,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf p.2-21"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Comprehensive hybrid search. Both BM25 and vector used effectively. Both antagonists, all locations, Ferol's note, crab guards, and full reward chain."
+      }
+    }
+  }
+}

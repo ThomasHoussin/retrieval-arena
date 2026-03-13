@@ -1,0 +1,99 @@
+{
+  "question_id": "q11_medium_death_house_outcomes",
+  "question": "In the Curse of Strahd introductory adventure (Death House), what are the possible outcomes when the characters reach the ritual altar in the basement?",
+  "expected_answer": "Two main outcomes: (1) If the characters sacrifice a creature at the altar, the cult is appeased, Death House harbors no ill will, the mists recede, and the characters can leave freely. (2) If the characters refuse to sacrifice, the shambling mound attacks and the house itself turns hostile — animated furniture and objects attack as the characters try to flee through the now-hostile haunted house. Strahd is satisfied either way.",
+  "difficulty": "medium",
+  "results": {
+    "bm25_simple": {
+      "answer": "Two outcomes: (1) Sacrifice → cult appeased, Strahd aware, chant 'He is the Ancient. He is the Land', free to leave, advance to 3rd level. (2) Refuse → shambling mound (Lorghoth the Decayer) attacks, then house turns hostile: bricked windows, scytheblades (DC 15, 2d10 slashing), poisonous smoke (DC 10, 1d10 poison), rotted walls with rat swarms. Advance to 3rd level either way. Source: Curse of Strahd PDF p.11-12.",
+      "search_queries": ["Death House ritual altar basement outcomes"],
+      "search_calls": 1,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf p.11-12"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Excellent single-query answer with full mechanical details for both outcomes including DCs and damage."
+      }
+    },
+    "bm25_2round": {
+      "answer": "Two outcomes with full detail: (1) Sacrifice → cult appeased, Strahd aware, mists recede. (2) Refuse → shambling mound, then hostile house (scytheblades, smoke, rotted walls, rats). Mists recede either way. Strahd satisfied either way. Advance to 3rd level either way. Source: Curse of Strahd PDF p.11-12.",
+      "search_queries": ["Death House ritual altar basement", "Death House sacrifice altar outcomes", "Death House basement dungeon cult"],
+      "search_calls": 3,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf p.11-12"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Most comprehensive answer. Full mechanical details, mist mechanics, and the key 'Strahd is satisfied either way' note."
+      }
+    },
+    "bm25_free": {
+      "answer": "Two outcomes: (1) Sacrifice → cult appeased, Strahd aware, free to leave. (2) Refuse → shambling mound attacks, then hostile house (scytheblades, smoke, rotted walls, rats). Both lead to 3rd level. Strahd satisfied either way, mists recede. Source: Curse of Strahd PDF p.12.",
+      "search_queries": ["Death House ritual altar basement outcomes", "Death House basement ritual sacrifice"],
+      "search_calls": 2,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf p.12"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer with both outcomes and mechanical details."
+      }
+    },
+    "vector_naive": {
+      "answer": "Two outcomes: (1) Sacrifice → cult appeased, Strahd aware, free to leave, 3rd level. (2) Refuse → shambling mound, then hostile house (bricked windows, scytheblades DC 15/2d10, smoke DC 10/1d10, rotted walls/rats). Source: Death House PDF p.11-12.",
+      "search_queries": ["Death House ritual altar basement outcomes"],
+      "search_calls": 1,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf p.11-12"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer in single query with full mechanical details."
+      }
+    },
+    "vector_2round": {
+      "answer": "Two outcomes: (1) Sacrifice → cult appeased, 'He is the Ancient. He is the Land', Strahd aware, mists recede. (2) Refuse → shambling mound, then hostile house with full architectural changes. Both lead to 3rd level. Strahd satisfied either way. Source: Death House PDF.",
+      "search_queries": ["Death House ritual altar basement outcomes", "Death House basement sacrifice cultists", "Curse of Strahd introductory dungeon characters choices"],
+      "search_calls": 3,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Comprehensive answer with mist mechanics and 'Strahd satisfied either way'."
+      }
+    },
+    "vector_free": {
+      "answer": "Two outcomes: (1) Sacrifice → cult appeased, Strahd aware, free to leave. (2) Refuse → shambling mound, then hostile house (scytheblades, smoke, rotted walls, rats). Both lead to 3rd level. Strahd satisfied either way, mists recede. Source: Curse of Strahd PDF p.11-12.",
+      "search_queries": ["Death House ritual altar basement outcomes", "Death House sacrifice ritual basement Curse of Strahd"],
+      "search_calls": 2,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf p.11-12"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer."
+      }
+    },
+    "hybrid_free": {
+      "answer": "Two outcomes: (1) Sacrifice → cult appeased, Strahd aware, mists recede, advance 3rd level. (2) Refuse → shambling mound (Lorghoth), then hostile house (scytheblades DC 15/2d10, smoke DC 10/1d10, rotted walls/rats). Strahd satisfied either way. Source: Curse of Strahd PDF p.11-12.",
+      "search_queries": ["Death House ritual altar basement outcomes", "Death House ritual altar basement possible outcomes sacrifice"],
+      "search_calls": 2,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf p.11-12"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer. Both search engines returned same source material."
+      }
+    }
+  }
+}

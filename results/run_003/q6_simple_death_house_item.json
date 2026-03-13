@@ -1,0 +1,99 @@
+{
+  "question_id": "q6_simple_death_house_item",
+  "question": "In the Curse of Strahd introductory adventure (Death House), what object is found inside the small wooden coffer in the prison area (Area 36)?",
+  "expected_answer": "A dire wolf's withered tongue.",
+  "difficulty": "simple",
+  "results": {
+    "bm25_simple": {
+      "answer": "A dire wolf's withered tongue. Note: the coffer is technically in Area 35 (Reliquary), not Area 36 (Prison). Source: Curse of Strahd Introductory Adventure.pdf p.11.",
+      "search_queries": ["Death House Area 36 prison coffer"],
+      "search_calls": 1,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf p.11"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Correct answer. Helpfully noted the area number discrepancy (Area 35 vs 36)."
+      }
+    },
+    "bm25_2round": {
+      "answer": "A dire wolf's withered tongue. Coffer is in Area 35 (Reliquary), listed among cult relics, just before Area 36 description. Source: Curse of Strahd Introductory Adventure.pdf p.11-12.",
+      "search_queries": ["Death House prison area 36", "wooden coffer Death House Curse Strahd"],
+      "search_calls": 2,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf p.11-12"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Correct answer with area clarification. Round 2 not needed."
+      }
+    },
+    "bm25_free": {
+      "answer": "A dire wolf's withered tongue, found in Area 35 (Reliquary). Area 36 (Prison) itself contains a gold ring (25 gp) on a skeleton's finger. Source: Curse of Strahd Introductory Adventure.pdf p.11.",
+      "search_queries": ["Death House prison area 36 wooden coffer", "small wooden coffer prison Death House Curse of Strahd"],
+      "search_calls": 2,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf p.11"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Correct answer. Also provided Area 36's actual treasure (gold ring) for completeness."
+      }
+    },
+    "vector_naive": {
+      "answer": "A dire wolf's withered tongue. Source: Death House appendix of Curse of Strahd.",
+      "search_queries": ["Death House prison area 36 wooden coffer contents"],
+      "search_calls": 1,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Correct answer in single query."
+      }
+    },
+    "vector_2round": {
+      "answer": "A dire wolf's withered tongue. Source: Death House (Appendix B), Area 36 section.",
+      "search_queries": ["Death House prison area 36 wooden coffer", "Death House dungeon prison cell contents", "Curse of Strahd Death House Area 36 treasure"],
+      "search_calls": 3,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Correct answer. Round 2 not needed."
+      }
+    },
+    "vector_free": {
+      "answer": "A dire wolf's withered tongue. Source: Death House (Appendix B), Area 36 Prison section.",
+      "search_queries": ["Death House prison area 36 wooden coffer", "Death House Area 36 prison cell object"],
+      "search_calls": 2,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Correct answer in 2 queries."
+      }
+    },
+    "hybrid_free": {
+      "answer": "A dire wolf's withered tongue, found in Area 35 (Reliquary). Area 36 (Prison) treasure is a gold ring (25 gp) on a skeleton. Source: Curse of Strahd Introductory Adventure.pdf p.11.",
+      "search_queries": ["Death House Area 36 prison wooden coffer", "Death House Area 36 prison wooden coffer object"],
+      "search_calls": 2,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf p.11"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Correct answer with helpful area correction and Area 36's actual content."
+      }
+    }
+  }
+}

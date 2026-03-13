@@ -1,0 +1,99 @@
+{
+  "question_id": "q22_complex_attunement_scenario",
+  "question": "A character has already attuned to 3 magic items during a short rest. During the next adventuring day, they find Goggles of Night (which require attunement). What are the attunement rules — how many items can a character attune to, how does the process work, and what must this character do to attune to the Goggles?",
+  "expected_answer": "A character can attune to no more than 4 magic items at a time. Attunement requires spending a Short Rest focused on the item while in physical contact with it (this can't be the same Short Rest used to identify it). Since the character already has 3 attuned items and the limit is 4, they can attune to the Goggles of Night by spending a Short Rest focused on them. Attunement ends if: the character no longer satisfies the prerequisites, the item is more than 100 feet away for 24+ hours, the character dies, or another creature attunes to the item. Without attunement, only nonmagical benefits of an item can be used.",
+  "difficulty": "complex",
+  "results": {
+    "bm25_simple": {
+      "answer": "Limit: 4 items (confirmed in body text p.102 AND Rules Glossary p.177-178). Process: Short Rest focused on item, physical contact, can't be same rest as identification. Since character has 3 and limit is 4, one slot remains — attune directly with a Short Rest. Ending conditions: prerequisites lost, 100+ ft for 24h, death, another creature attunes. Cursed items can't be voluntarily ended. Source: SRD p.102, 177-178.",
+      "search_queries": ["attunement magic items rules"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.102, 177-178"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Found poisoned value (4) in both body text and glossary. Applied correctly to scenario. Full attunement rules covered in single query."
+      }
+    },
+    "bm25_2round": {
+      "answer": "Found heading/body discrepancy: heading says 'No More Than Three Items' but body text says 'no more than four.' Rules Glossary confirms 'four.' Applied body text value. Also discovered Goggles of Night do NOT require attunement in SRD 5.2.1 corpus (Wondrous Item, Uncommon, no attunement tag). Practical answer: character can simply don the goggles. Full process rules quoted. Source: SRD p.102, 177-178, 224.",
+      "search_queries": ["attunement magic items maximum limit", "attuning magic item short rest process", "Goggles of Night attunement", "attunement four items no more than", "Goggles of Night darkvision requires attunement wondrous"],
+      "search_calls": 5,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.102, 177-178, 224"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Most thorough. Found poisoned limit (4), flagged heading/body discrepancy, AND discovered Goggles don't need attunement in this corpus. Exceptional corpus awareness."
+      }
+    },
+    "bm25_free": {
+      "answer": "Found same heading/body discrepancy (heading: 'Three', body: 'four'). Rules Glossary confirms 'four.' Goggles of Night do NOT require attunement in corpus (Uncommon, no attunement tag, SRD p.224). Character can simply don the goggles. Full rules quoted verbatim. Source: SRD p.102, 177-178, 224.",
+      "search_queries": ["attunement magic items rules", "Goggles of Night attunement", "attuned no more than four magic items short rest end attunement"],
+      "search_calls": 3,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.102, 177-178, 224"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete. Found poisoned limit, flagged discrepancy, found Goggles don't need attunement. Practical scenario well addressed."
+      }
+    },
+    "vector_naive": {
+      "answer": "Limit: 3 items. Character at cap, must drop one existing attunement first (Short Rest), then attune to Goggles in separate Short Rest. Process and ending conditions covered. Source: SRD p.102.",
+      "search_queries": ["attunement rules magic items maximum short rest process"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.102"],
+      "quality": {
+        "accuracy": 3,
+        "completeness": 2,
+        "faithfulness": 2,
+        "total": 7,
+        "notes": "Used heading value 'Three' or the contradictory sentence 'attempt to attune to a fourth fails' rather than the main body text 'no more than four.' Rules process correct but wrong limit applied to scenario. The poisoning created a genuine internal inconsistency that misled this single-pass agent."
+      }
+    },
+    "vector_2round": {
+      "answer": "Found heading/body discrepancy explicitly. Heading: 'No More Than Three Items.' Body: 'no more than four.' Presented both interpretations for the scenario. If 3: must drop one first. If 4: can attune directly. Goggles of Night: only found in loot table, no full entry. Full attunement process and ending conditions covered. Source: SRD p.102.",
+      "search_queries": ["attunement rules magic items maximum limit", "how to attune to magic item process short rest", "Goggles of Night attunement", "Goggles of Night darkvision wondrous item description", "attuned no more than three four magic items simultaneously"],
+      "search_calls": 5,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.102"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Flagged the heading/body contradiction precisely. Presented both interpretations rather than picking one. Full rules coverage. Honest about Goggles entry not found."
+      }
+    },
+    "vector_free": {
+      "answer": "Found heading/body discrepancy. Both values reported. Full process rules covered. Goggles not found beyond loot table. Both scenario interpretations presented. Source: SRD p.102.",
+      "search_queries": ["attunement rules magic items maximum number", "Goggles of Night attunement", "attunement short rest process how to attune prerequisites", "Goggles of Night darkvision wondrous item properties", "attunement three magic items maximum limit beginning Short Rest", "Goggles of Night uncommon wondrous item", "attuning to a magic item creature spends Short Rest with item handling it"],
+      "search_calls": 7,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.102"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Flagged contradiction. Both interpretations. Full rules. 7 queries shows thorough effort. Goggles stat block not found despite dedicated searches."
+      }
+    },
+    "hybrid_free": {
+      "answer": "Limit: 4 (body text and Rules Glossary confirm). Heading/body discrepancy flagged. Goggles of Night: Wondrous Item, Uncommon, Darkvision 60 ft, do NOT require attunement (SRD p.224). Character can simply don the goggles. Full process rules. Ending conditions. Source: SRD p.102, 177, 224.",
+      "search_queries": ["attunement magic items rules", "attunement magic items how many limit process", "Goggles of Night", "ending attunement voluntarily short rest end bond"],
+      "search_calls": 4,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.102, 177, 224"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete. Found poisoned limit (4), Goggles entry (no attunement needed), heading/body discrepancy. BM25 found Goggles entry that vector missed."
+      }
+    }
+  }
+}

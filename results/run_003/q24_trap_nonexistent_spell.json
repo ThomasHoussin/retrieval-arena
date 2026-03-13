@@ -1,0 +1,100 @@
+{
+  "question_id": "q24_trap_nonexistent_spell",
+  "question": "What are the effects of the 'Chromatic Burst' spell?",
+  "expected_answer": "This spell does not exist in the corpus. The agent should report that it could not find information about 'Chromatic Burst'.",
+  "difficulty": "simple",
+  "trap_type": "nonexistent_content",
+  "results": {
+    "bm25_simple": {
+      "answer": "Chromatic Burst does not appear in the corpus. Search returned Sorcerous Burst (cantrip) and Chromatic Orb (level 1) but no Chromatic Burst. 'I could not find this information in the available documents.' Source: N/A.",
+      "search_queries": ["Chromatic Burst spell"],
+      "search_calls": 1,
+      "sources_cited": [],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "TRAP: Correctly reported spell not found. No hallucination. Mentioned related spells from corpus for context."
+      }
+    },
+    "bm25_2round": {
+      "answer": "Chromatic Burst does not exist in corpus. Exhaustive 2-round search. Found and fully described Sorcerous Burst (cantrip, 1d8 chosen type, exploding d8s) and Chromatic Orb (level 1, 3d8, leaping mechanic) as closest matches. Explicitly stated 'Chromatic Burst' not found. Source: N/A (related: SRD p.115, 163-164).",
+      "search_queries": ["Chromatic Burst spell", "Chromatic Burst effects damage", "chromatic spell burst magic", "Sorcerous Burst cantrip evocation", "Chromatic Orb spell level 1 damage"],
+      "search_calls": 5,
+      "sources_cited": [],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "TRAP: No hallucination. Most thorough negative result — provided full descriptions of the two closest related spells for user context."
+      }
+    },
+    "bm25_free": {
+      "answer": "Chromatic Burst not found in corpus. Suggested Chromatic Orb and Sorcerous Burst as possible intended spells. 3 queries used. Source: N/A.",
+      "search_queries": ["Chromatic Burst spell effects", "Chromatic Burst spell description damage", "Sorcerous Burst spell cantrip evocation"],
+      "search_calls": 3,
+      "sources_cited": [],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "TRAP: No hallucination. Offered helpful alternatives. Clean negative result."
+      }
+    },
+    "vector_naive": {
+      "answer": "Chromatic Burst not found in corpus. 'I could not find this information in the available documents.' Mentioned Color Spray, Sorcerous Burst returned as unrelated results. Source: N/A.",
+      "search_queries": ["Chromatic Burst spell effects description"],
+      "search_calls": 1,
+      "sources_cited": [],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "TRAP: No hallucination. Correct negative result in single query. Anti-hallucination guardrails effective."
+      }
+    },
+    "vector_2round": {
+      "answer": "Chromatic Burst not found across 5 queries in 2 rounds. Exhaustive search confirmed absence. Related: Sorcerous Burst, Color Spray. Source: N/A.",
+      "search_queries": ["Chromatic Burst spell effects", "Chromatic Burst damage casting", "chromatic spell burst area of effect", "Chromatic Burst homebrew spell list", "multicolored energy burst spell sorcerer wizard"],
+      "search_calls": 5,
+      "sources_cited": [],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "TRAP: No hallucination. Most search effort dedicated to confirming absence. Creative query angles (homebrew, multicolored energy) all negative."
+      }
+    },
+    "vector_free": {
+      "answer": "Chromatic Burst not found. 2 queries, both negative. Mentioned Sorcerous Burst and Holy Burst as unrelated results. Source: N/A.",
+      "search_queries": ["Chromatic Burst spell effects", "Chromatic Burst"],
+      "search_calls": 2,
+      "sources_cited": [],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "TRAP: No hallucination. Clean, concise negative result."
+      }
+    },
+    "hybrid_free": {
+      "answer": "No spell called Chromatic Burst in corpus. BM25 returned chromatic dragon entries, vector returned burst-named spells — neither matched. Suggested Sorcerous Burst as closest. Source: N/A.",
+      "search_queries": ["Chromatic Burst spell", "Chromatic Burst spell effects"],
+      "search_calls": 2,
+      "sources_cited": [],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "TRAP: No hallucination. Both engines confirmed absence. Helpful alternative suggested."
+      }
+    }
+  }
+}

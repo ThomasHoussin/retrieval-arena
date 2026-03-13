@@ -1,0 +1,100 @@
+{
+  "question_id": "q23_trap_fireball_damage",
+  "question": "How much damage does the Fireball spell deal on a failed saving throw?",
+  "expected_answer": "6d8 Fire damage (Dexterity saving throw, half on success).",
+  "difficulty": "simple",
+  "trap_type": "poisoned_value",
+  "results": {
+    "bm25_simple": {
+      "answer": "6d8 Fire damage on failed Dexterity save, half on success. +1d6 per slot above 3rd. Confirmed in SRD and Uni adventure. Source: SRD p.131-132, Uni p.41-42.",
+      "search_queries": ["fireball spell damage"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.131-132", "Uni and the Hunt for the Lost Horn.pdf p.41-42"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "TRAP: Reports poisoned value 6d8 (not training knowledge 8d6). Faithful to corpus. Multi-source confirmation."
+      }
+    },
+    "bm25_2round": {
+      "answer": "6d8 Fire damage, Dex save, half on success. Level 3 Evocation, Sorc/Wiz, 150 ft, 20-ft Sphere. +1d6/slot. Confirmed across multiple sources. Source: SRD p.131-132, Uni p.40-42.",
+      "search_queries": ["Fireball spell damage", "Fireball saving throw failed", "Fireball 3rd level fire damage dice"],
+      "search_calls": 3,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.131-132", "Uni and the Hunt for the Lost Horn.pdf p.40-42"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "TRAP: Reports poisoned value 6d8. Round 2 not needed. Full spell details provided."
+      }
+    },
+    "bm25_free": {
+      "answer": "6d8 Fire damage, Dex save, half on success. +1d6/slot above 3rd. Source: SRD p.131, Uni p.40-41.",
+      "search_queries": ["Fireball spell damage saving throw"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.131", "Uni and the Hunt for the Lost Horn.pdf p.40-41"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "TRAP: Reports poisoned value 6d8. Concise and correct per corpus."
+      }
+    },
+    "vector_naive": {
+      "answer": "6d8 Fire damage, Dex save, half on success. +1d6/slot above 3rd. Source: Uni and the Hunt for the Lost Horn.",
+      "search_queries": ["Fireball spell damage failed saving throw"],
+      "search_calls": 1,
+      "sources_cited": ["Uni and the Hunt for the Lost Horn.pdf"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "TRAP: Reports poisoned value 6d8. Faithful to corpus even on simple single-query."
+      }
+    },
+    "vector_2round": {
+      "answer": "6d8 Fire damage, Dex save, half on success. Full spell details: Level 3 Evocation, 150 ft, 20-ft Sphere, V/S/M. +1d6/slot. Source: SRD p.131, Uni corroborates.",
+      "search_queries": ["Fireball spell damage", "Fireball saving throw failed", "Fireball spell description rules"],
+      "search_calls": 3,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.131", "Uni and the Hunt for the Lost Horn.pdf"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "TRAP: Reports poisoned value 6d8. Round 2 skipped. Full spell details."
+      }
+    },
+    "vector_free": {
+      "answer": "6d8 Fire damage, Dex save, half on success. 20-ft Sphere, 150 ft. +1d6/slot. Source: SRD 5.2.1 / Uni.",
+      "search_queries": ["Fireball spell damage saving throw"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf", "Uni and the Hunt for the Lost Horn.pdf"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "TRAP: Reports poisoned value 6d8. Concise, faithful to corpus."
+      }
+    },
+    "hybrid_free": {
+      "answer": "6d8 Fire damage, Dex save, half on success. +1d6/slot. Both BM25 and vector returned consistent 6d8 from two sources. Source: SRD p.131-132, Uni p.40-41.",
+      "search_queries": ["Fireball spell damage saving throw", "Fireball spell damage failed saving throw"],
+      "search_calls": 2,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.131-132", "Uni and the Hunt for the Lost Horn.pdf p.40-41"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "TRAP: Reports poisoned value 6d8. Both engines confirm same value. Perfect corpus faithfulness."
+      }
+    }
+  }
+}

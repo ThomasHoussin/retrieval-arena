@@ -1,0 +1,99 @@
+{
+  "question_id": "q17_simple_delian_tomb_trap",
+  "question": "In The Delian Tomb adventure, what happens if a character tries to open one of the sarcophagi or take items from the treasure room?",
+  "expected_answer": "Three skeletons emerge from random sarcophagi and attack the party.",
+  "difficulty": "simple",
+  "results": {
+    "bm25_simple": {
+      "answer": "Three skeletons emerge from random sarcophagi and attack. Trigger: opening sarcophagi OR taking items (non-sword) OR non-oath character taking sword. Oath-sworn characters recognize holy place. Treasure: 3d20 gp per sarcophagus, gold circlets (30 gp each), tapestry (45 gp). Source: The Delian Tomb p.7-8.",
+      "search_queries": ["Delian Tomb sarcophagi treasure room"],
+      "search_calls": 1,
+      "sources_cited": ["The_Delian_Tomb.pdf p.7-8"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer in single query. Core trigger, oath context, and treasure values all found."
+      }
+    },
+    "bm25_2round": {
+      "answer": "Three skeletons emerge from random sarcophagi. Two triggers: (1) non-oath character takes sword, (2) any character opens sarcophagi or takes other items. Edict Blade (+1 longsword, +2 vs goblinoids). Treasure: 3d20 gp per sarcophagus, circlets 30 gp, tapestry 45 gp. Round 2 skipped. Source: The Delian Tomb p.7-8.",
+      "search_queries": ["Delian Tomb sarcophagi", "Delian Tomb treasure room", "Delian Tomb adventure traps"],
+      "search_calls": 3,
+      "sources_cited": ["The_Delian_Tomb.pdf p.7-8"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Comprehensive with Edict Blade stats and both trigger conditions. Round 2 not needed."
+      }
+    },
+    "bm25_free": {
+      "answer": "Three skeletons emerge from random sarcophagi and attack. Two trigger conditions detailed. Oath context explained. Treasure values listed. Source: The Delian Tomb p.7-8.",
+      "search_queries": ["Delian Tomb sarcophagi treasure room", "sarcophagi open treasure items take"],
+      "search_calls": 2,
+      "sources_cited": ["The_Delian_Tomb.pdf p.7-8"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer with trigger conditions, oath context, and treasure details."
+      }
+    },
+    "vector_naive": {
+      "answer": "Three skeletons emerge from random sarcophagi and attack. Two triggers: non-oath sword taking OR any character opening sarcophagi/taking items. Oath recognition of holy place. Treasure: 3d20 gp, circlets 30 gp, tapestry 45 gp. Source: The Delian Tomb p.7-8.",
+      "search_queries": ["Delian Tomb sarcophagi treasure room opening taking items"],
+      "search_calls": 1,
+      "sources_cited": ["The_Delian_Tomb.pdf p.7-8"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete in single query. Both triggers and treasure details found."
+      }
+    },
+    "vector_2round": {
+      "answer": "Three skeletons emerge from random sarcophagi. Both trigger conditions. Edict Blade (+1, +2 vs goblinoids). Full treasure values. Room context (5 sarcophagi, weapon stand). Round 2 skipped. Source: The Delian Tomb p.7-8.",
+      "search_queries": ["Delian Tomb sarcophagi opening", "Delian Tomb treasure room items", "Delian Tomb traps hazards rooms"],
+      "search_calls": 3,
+      "sources_cited": ["The_Delian_Tomb.pdf p.7-8"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Most detailed with room layout and Edict Blade stats. Round 2 not needed."
+      }
+    },
+    "vector_free": {
+      "answer": "Three skeletons emerge from random sarcophagi and attack. Both triggers. Edict Blade (+1, +2 vs goblinoids). Full treasure breakdown. Source: The Delian Tomb p.7-8.",
+      "search_queries": ["Delian Tomb sarcophagi open", "Delian Tomb treasure room items"],
+      "search_calls": 2,
+      "sources_cited": ["The_Delian_Tomb.pdf p.7-8"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete with both triggers, Edict Blade, and treasure values."
+      }
+    },
+    "hybrid_free": {
+      "answer": "Three skeletons emerge from random sarcophagi. Both trigger conditions. Oath context. Edict Blade (+1, +2 vs goblinoids). Treasure: 3d20 gp, circlets 30 gp, tapestry 45 gp. BM25 and vector returned same passages. Source: The Delian Tomb p.7-8.",
+      "search_queries": ["Delian Tomb sarcophagi treasure room", "Delian Tomb sarcophagi open treasure room items"],
+      "search_calls": 2,
+      "sources_cited": ["The_Delian_Tomb.pdf p.7-8"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete. Both engines converged on same content."
+      }
+    }
+  }
+}

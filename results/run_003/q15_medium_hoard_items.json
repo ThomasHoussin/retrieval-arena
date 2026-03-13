@@ -1,0 +1,99 @@
+{
+  "question_id": "q15_medium_hoard_items",
+  "question": "In the adventure 'A Dungeon and a Dragon', what magic items can be found in Valturnax's treasure hoard, and how can characters attempt to loot it during combat?",
+  "expected_answer": "Valturnax's hoard contains: a Scroll of Nystul's Magic Aura, Goggles of Night, Potion of Fire Breath, Potion of Water Breathing, Glasses of Minute Seeing, and a magic ring, among other items. During combat, a character can spend their action, bonus action, and movement to steal 200 gp per turn from the hoard, or use their movement to search for a specific magic item. Valturnax will not simply allow looting and will actively contest it.",
+  "difficulty": "medium",
+  "results": {
+    "bm25_simple": {
+      "answer": "Full item table: Scroll of Hallucinatory Terrain, Scroll of Nystul's Magic Aura, Goggles of Night, Potion of Fire Breath, Potion of Water Breathing, Glasses of Minute Seeing, Ring of Swimming, Arrow/Bolt of Giant Slaying + 3x +2 arrows/bolts, Brooch of Shielding, Bag of Devouring (disguised as Bag of Holding). DMG tables B/C/F as alternatives. During combat: action+bonus action+movement = search for magic item OR steal 200 gp. Valturnax contests heavily armored/distraction characters less. Part 2: temple collapse, grab 100 gp free or 1 round for magic item + DC 15 Dex save (20 bludgeoning on fail). Source: A Dungeon and a Dragon p.18-20.",
+      "search_queries": ["Valturnax treasure hoard magic items"],
+      "search_calls": 1,
+      "sources_cited": ["A_Dungeon_and_A_Dragon.pdf p.18-20"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete in a single query. Full item table with all 8+ items, both looting phases with DCs and damage, Valturnax's tactical response noted."
+      }
+    },
+    "bm25_2round": {
+      "answer": "Same full item table + both looting phases (Part 1: 200 gp or magic item per turn, Part 2: DC 15 Dex save, 20 bludgeoning). Trigger: 100 hp / last Legendary Resistance. Bag of Devouring trap noted. Source: A Dungeon and a Dragon p.18-20.",
+      "search_queries": ["Valturnax treasure hoard", "A Dungeon and a Dragon magic items", "Dungeon Dragon adventure loot combat"],
+      "search_calls": 3,
+      "sources_cited": ["A_Dungeon_and_A_Dragon.pdf p.18-20"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Comprehensive with all items and both looting mechanics. Round 2 not needed — Round 1 was complete."
+      }
+    },
+    "bm25_free": {
+      "answer": "Full item table + both looting phases. Part 1: action+BA+movement for magic item or 200 gp. Part 2: temple collapse at 100/75 hp or last LR, DC 15 Dex, 20 bludgeoning. Bag of Devouring trap. Source: A Dungeon and a Dragon p.18-20.",
+      "search_queries": ["Valturnax treasure hoard magic items", "A Dungeon and a Dragon adventure loot combat"],
+      "search_calls": 2,
+      "sources_cited": ["A_Dungeon_and_A_Dragon.pdf p.18-20"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer with both phases and all items. Efficient 2-query approach."
+      }
+    },
+    "vector_naive": {
+      "answer": "Full item table + both looting phases. Part 1: action+BA+movement for magic item or 200 gp. Part 2: 100 gp free or 1 round for magic item + DC 15 Dex (20 bludgeoning). Bag of Devouring noted. Source: A Dungeon and a Dragon p.18-19.",
+      "search_queries": ["Valturnax treasure hoard magic items loot combat"],
+      "search_calls": 1,
+      "sources_cited": ["A_Dungeon_and_A_Dragon.pdf p.18-19"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Excellent single-query result. Full item table and both looting mechanics retrieved."
+      }
+    },
+    "vector_2round": {
+      "answer": "Full item table + both looting phases with detailed mechanics. Part 1: 200 gp or magic item (action+BA+movement). Part 2: DC 15 Dex, 20 bludgeoning. Trigger conditions detailed. Bag of Devouring trap highlighted. Source: A Dungeon and a Dragon p.18-19.",
+      "search_queries": ["Valturnax treasure hoard magic items", "A Dungeon and a Dragon adventure treasure", "looting treasure during combat dragon hoard", "Valturnax fight Part 1 hoard search action bonus action gold", "Valturnax temple collapses Part 2 Part 3 escape outside"],
+      "search_calls": 5,
+      "sources_cited": ["A_Dungeon_and_A_Dragon.pdf p.18-19"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Very thorough with both rounds confirming all details. Round 2 used to verify Part 1 in-combat mechanics."
+      }
+    },
+    "vector_free": {
+      "answer": "Full item table + both looting phases. Part 1: action+BA+movement for magic item or 200 gp. Part 2: 100 gp free or magic item + DC 15 Dex (20 bludgeoning). Source: A Dungeon and a Dragon p.19.",
+      "search_queries": ["Valturnax treasure hoard magic items", "A Dungeon and a Dragon adventure treasure loot combat"],
+      "search_calls": 2,
+      "sources_cited": ["A_Dungeon_and_A_Dragon.pdf p.19"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete with efficient 2-query search. All items and mechanics found."
+      }
+    },
+    "hybrid_free": {
+      "answer": "Full item table + both looting phases. Part 1: action+BA+movement for magic item or 200 gp, Valturnax may ignore armored/distraction characters. Part 2: 100 gp free or magic item + DC 15 Dex (20 bludgeoning). Bag of Devouring noted. BM25 and vector returned same passages. Source: A Dungeon and a Dragon p.18-20.",
+      "search_queries": ["Valturnax treasure hoard magic items", "A Dungeon and a Dragon adventure treasure loot combat"],
+      "search_calls": 2,
+      "sources_cited": ["A_Dungeon_and_A_Dragon.pdf p.18-20"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Both search engines converged on the same content. Complete answer with all items and both looting phases."
+      }
+    }
+  }
+}

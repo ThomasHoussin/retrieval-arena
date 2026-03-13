@@ -1,0 +1,99 @@
+{
+  "question_id": "q18_medium_spell_comparison",
+  "question": "Compare the spells Fireball and Lightning Bolt in D&D 5e. What are their similarities and key differences?",
+  "expected_answer": "Both are 3rd-level Evocation spells available to Sorcerers and Wizards. Both deal damage (Dexterity saving throw, half on success) and scale at +1d6 per slot above 3rd. Key differences: Fireball has a range of 150 feet and hits a 20-foot-radius Sphere, dealing 6d8 Fire damage. Lightning Bolt originates from the caster (range: Self) and hits a 100-foot-long, 5-foot-wide Line, dealing 10d4 Lightning damage.",
+  "difficulty": "medium",
+  "results": {
+    "bm25_simple": {
+      "answer": "Found similarities: both 3rd-level Evocation, Sorcerer/Wizard, no Concentration, Dex save. Could NOT find full spell descriptions (damage dice, range, area) in retrieved chunks. Refused to provide values from memory. Found wand/item references. Source: SRD p.68, 80-81, 250-251.",
+      "search_queries": ["Fireball Lightning Bolt spell"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.68, 80-81, 250-251"],
+      "quality": {
+        "accuracy": 2,
+        "completeness": 1,
+        "faithfulness": 2,
+        "total": 5,
+        "notes": "Single query returned spell lists and item references but not the actual spell entries. Correctly refused to hallucinate missing data. Anti-hallucination guardrails working as intended but at the cost of answer quality."
+      }
+    },
+    "bm25_2round": {
+      "answer": "Full comparison table: Fireball 6d8 Fire, 20-ft Sphere, 150 ft range. Lightning Bolt 10d4 Lightning, 100-ft Line 5-ft wide, Range Self. Both 3rd Evocation, Sorc/Wiz, Dex save, +1d6/slot. Noted 10d4 differs from 'most widely known version' — faithful to corpus. Source: SRD p.131-132, 144.",
+      "search_queries": ["Fireball spell", "Lightning Bolt spell", "3rd level evocation fire damage", "Lightning Bolt 100 foot line dexterity saving throw", "Fireball 20 foot radius sphere dexterity saving throw higher level slot"],
+      "search_calls": 5,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.131-132, 144"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Most thorough. Found both poisoned values (6d8, 10d4) faithfully. Explicitly noted corpus differs from common knowledge. Full comparison with averages, components, environmental effects."
+      }
+    },
+    "bm25_free": {
+      "answer": "Full comparison: Fireball 6d8 Fire, 20-ft Sphere, 150 ft. Lightning Bolt 10d4 Lightning, 100-ft Line, Range Self. Both 3rd Evocation, Sorc/Wiz, Dex save, +1d6/slot. Tactical summary included. Source: SRD p.131, 144.",
+      "search_queries": ["Fireball spell", "Lightning Bolt spell", "Fireball 6d8 fire damage dexterity saving throw evocation level 3"],
+      "search_calls": 3,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.131, 144"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete with both poisoned values. Separate queries for each spell proved effective. Tactical analysis adds value."
+      }
+    },
+    "vector_naive": {
+      "answer": "Found LB 10d4 Lightning from fragment. Fireball confirmed to exist but full stat block not retrieved. Could not provide complete comparison. Refused to guess missing values. Source: SRD 5.2.1.",
+      "search_queries": ["Fireball and Lightning Bolt spell description damage area"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf"],
+      "quality": {
+        "accuracy": 2,
+        "completeness": 1,
+        "faithfulness": 2,
+        "total": 5,
+        "notes": "Single vector query insufficient for two-spell comparison. Found LB damage fragment but not FB full entry. Correctly refused to fill gaps from training knowledge."
+      }
+    },
+    "vector_2round": {
+      "answer": "Fireball 6d8 Fire, 20-ft Sphere, 150 ft range (fully found). Lightning Bolt 10d4 Lightning, Line area (damage confirmed but full header — range, components, line dimensions — not fully recovered). Both 3rd Evocation, Sorc/Wiz, Dex save, +1d6/slot. Transparent about LB gaps. Source: SRD p.131-132, 144.",
+      "search_queries": ["Fireball spell damage area effect", "Lightning Bolt spell damage range", "3rd level evocation spells wizard sorcerer", "Lightning Bolt 100-foot line Dexterity saving throw", "Lightning Bolt components material casting time instantaneous"],
+      "search_calls": 5,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.131-132, 144"],
+      "quality": {
+        "accuracy": 4,
+        "completeness": 2,
+        "faithfulness": 2,
+        "total": 8,
+        "notes": "Found both damage values (6d8, 10d4). Fireball fully described. LB entry fragmented — Line area confirmed but exact dimensions and range not recovered. Transparent about gaps."
+      }
+    },
+    "vector_free": {
+      "answer": "Fireball 6d8 Fire, 20-ft Sphere, 150 ft (fully found). Lightning Bolt 10d4 Lightning, Line area (confirmed from corpus fragment). Both 3rd Evocation, Sorc/Wiz, Dex save, +1d6/slot. LB full header not fully recovered. Wand comparisons included. Source: SRD p.131-132, 144; Uni and the Hunt p.41-45.",
+      "search_queries": ["Fireball spell", "Lightning Bolt spell", "Lightning Bolt level 3 evocation Line damage saving throw", "Lightning Bolt casting time range components 100 foot line", "Lightning Bolt Level 3 Evocation Sorcerer Wizard Action Self 5-foot-wide"],
+      "search_calls": 5,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.131-132, 144", "Uni and the Hunt for the Lost Horn.pdf p.41-45"],
+      "quality": {
+        "accuracy": 4,
+        "completeness": 2,
+        "faithfulness": 2,
+        "total": 8,
+        "notes": "Found both poisoned values. Fireball complete; LB fragmented. 5 queries dedicated mostly to recovering LB details. Transparent about what was/wasn't confirmed."
+      }
+    },
+    "hybrid_free": {
+      "answer": "Full comparison: Fireball 6d8 Fire, 20-ft Sphere, 150 ft. Lightning Bolt 10d4 Lightning, 100-ft Line 5-ft wide, Range Self. Both 3rd Evocation, Sorc/Wiz, Dex save, +1d6/slot. Wand comparisons (both Rare, 7 charges, DC 15). Environmental effects compared. Source: SRD p.131-132, 144, 250-251; Uni p.44-45.",
+      "search_queries": ["Fireball spell", "Lightning Bolt spell damage area", "Lightning Bolt spell level 3 evocation line"],
+      "search_calls": 3,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.131-132, 144, 250-251", "Uni and the Hunt for the Lost Horn.pdf p.44-45"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Most complete hybrid answer. Both poisoned values found (6d8, 10d4). Full LB dimensions recovered via BM25. Wand parallels add depth."
+      }
+    }
+  }
+}

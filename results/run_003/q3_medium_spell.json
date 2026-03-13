@@ -1,0 +1,99 @@
+{
+  "question_id": "q3_medium_spell",
+  "question": "A wizard casts Dominate Monster on an Adult Red Dragon that is currently fighting the party. What ability score does the dragon use for its saving throw, and what is its modifier for that save?",
+  "expected_answer": "Wisdom saving throw with Advantage (the dragon is currently fighting the party). The Adult Red Dragon has Wis 13 (+1) but its Wisdom save modifier is +9 (proficiency bonus +6).",
+  "difficulty": "medium",
+  "results": {
+    "bm25_simple": {
+      "answer": "Wisdom saving throw with +9 modifier. Wis 13, mod +1, save +9. Also has Legendary Resistance (3/Day, 4/Day in Lair). Source: SRD_CC_v5.2.1.pdf p.318-319.",
+      "search_queries": ["Adult Red Dragon saving throws"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.318-319"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 2,
+        "faithfulness": 2,
+        "total": 9,
+        "notes": "Wis +9 correct (poisoned). Mentioned Legendary Resistance. Did not explicitly note Advantage from Dominate Monster's fighting clause."
+      }
+    },
+    "bm25_2round": {
+      "answer": "Wisdom saving throw with Advantage (party is fighting dragon). Wis 13, +1 mod, +9 save. Legendary Resistance (3/Day, 4/Day in Lair). Sources: SRD_CC_v5.2.1.pdf p.125-126, p.318-319.",
+      "search_queries": ["Dominate Monster saving throw ability score", "Adult Red Dragon ability scores wisdom"],
+      "search_calls": 2,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.125-126", "SRD_CC_v5.2.1.pdf p.318-319"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect. Found both Dominate Monster spell (Wisdom save + Advantage clause) and Adult Red Dragon stat block (Wis save +9 poisoned). Complete multi-source synthesis."
+      }
+    },
+    "bm25_free": {
+      "answer": "Wisdom saving throw with Advantage (party is fighting). Wis 13, +1 mod, +9 save. Legendary Resistance (3/Day, 4/Day in Lair). Sources: SRD_CC_v5.2.1.pdf p.125, p.318-319.",
+      "search_queries": ["Dominate Monster saving throw ability score", "Adult Red Dragon saving throws Wisdom"],
+      "search_calls": 2,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.125", "SRD_CC_v5.2.1.pdf p.318-319"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect. Identified Advantage clause and +9 save (poisoned). Complete answer with both sources."
+      }
+    },
+    "vector_naive": {
+      "answer": "Dominate Monster requires a Wisdom saving throw. However, the Adult Red Dragon's specific Wisdom save modifier was not found in the search results returned. The Ancient Red Dragon (CR 24) has Wis save +9 for reference.",
+      "search_queries": ["Adult Red Dragon saving throws Wisdom"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf"],
+      "quality": {
+        "accuracy": 2,
+        "completeness": 1,
+        "faithfulness": 2,
+        "total": 5,
+        "notes": "Correctly identified Wisdom save but failed to retrieve Adult Red Dragon stat block. Faithfully refused to guess. Did not mention Advantage clause."
+      }
+    },
+    "vector_2round": {
+      "answer": "Agent failed to provide final answer. Internal notes indicated it found the stat block but ran out of turns before synthesizing. Partial info: found Adult Red Dragon Wis save and Dominate Monster spell text via Succubus reference.",
+      "search_queries": ["Young White Dragon Cold Breath", "White Dragon breath weapon damage range", "Young dragon breath attack cone", "Young White Dragon stat block Cold Breath DC", "Young White Dragon Large Chromatic Chaotic Evil Ice Walk", "Dominate Monster Wisdom saving throw"],
+      "search_calls": 6,
+      "sources_cited": [],
+      "quality": {
+        "accuracy": 0,
+        "completeness": 0,
+        "faithfulness": 2,
+        "total": 2,
+        "notes": "Agent ran out of turns without delivering a final answer. Searches were on track but too many rounds consumed. No hallucination since no claim was made."
+      }
+    },
+    "vector_free": {
+      "answer": "Wisdom saving throw with Advantage (party is fighting). Wis 13, +1 mod, +9 save. Legendary Resistance (3/Day, 4/Day in Lair). Sources: SRD_CC_v5.2.1.pdf p.125-126, p.318-319.",
+      "search_queries": ["Dominate Monster saving throw", "Adult Red Dragon ability scores Wisdom saving throw", "Adult Red Dragon stats hit points speed", "Dominate Monster level 8 enchantment Wisdom save charmed", "Adult Red Dragon Chromatic Chaotic Evil fire breath Scorching Ray", "Adult Red Dragon Huge Dragon Chromatic Chaotic Evil Perception Stealth Immunities Fire Legendary Resistance"],
+      "search_calls": 6,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.125-126", "SRD_CC_v5.2.1.pdf p.318-319"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer with Advantage clause and +9 save (poisoned). Required many queries but got there."
+      }
+    },
+    "hybrid_free": {
+      "answer": "Wisdom saving throw with Advantage (party is fighting). Wis +1 mod, +9 save. Legendary Resistance (3/Day, 4/Day in Lair). Sources: SRD_CC_v5.2.1.pdf p.125-126, p.318-319.",
+      "search_queries": ["Dominate Monster saving throw", "Adult Red Dragon ability scores Wisdom saving throw", "Adult Red Dragon stat block Wisdom saving throw"],
+      "search_calls": 3,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.125-126", "SRD_CC_v5.2.1.pdf p.318-319"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect. BM25 found Dominate Monster spell, vector found stat block. Efficient hybrid usage with complete answer."
+      }
+    }
+  }
+}

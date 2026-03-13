@@ -1,0 +1,99 @@
+{
+  "question_id": "q4_medium_disease",
+  "question": "In the Frozen Sick adventure, what disease can characters catch in Croaker Cave, and what are its effects?",
+  "expected_answer": "Frigid woe. DC 11 Constitution save on contact with blue spores. Symptoms appear after 1d4 days: fatigue, chills, blue veins. Speed reduced by 5 feet. Every 10 days, a new DC 11 Con save or take 1d6 Cold damage and speed reduced by another 5 feet. At speed 0, the creature dies.",
+  "difficulty": "medium",
+  "results": {
+    "bm25_simple": {
+      "answer": "Frigid Woe. DC 11 Constitution save on contact with blue spores. Symptoms in 1d4 days: fatigue, chills, blue veins. Speed reduced by 5 feet. Every 10 days, DC 11 Con save or speed reduced by another 5 feet. Speed 0 = death (body turns to ice statue). Cannot be cured by magic, only antidote from Eiselcross ruins. Source: Frozen Sick PDF p.1-2.",
+      "search_queries": ["Croaker Cave disease Frozen Sick"],
+      "search_calls": 1,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf p.1-2"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Comprehensive answer covering all disease mechanics. Single query. Includes cure details beyond what was asked."
+      }
+    },
+    "bm25_2round": {
+      "answer": "Frigid Woe. DC 11 Con save. Spores from trapped chest in C6 (15-foot cube, dragon face lid). Symptoms in 1d4 days: fatigue, chills, blue veins. Speed -5 ft. Every 10 days, DC 11 Con save or speed -5 ft more. Speed 0 = death (ice statue). No magical cure, only antidote. Source: Frozen Sick PDF p.1, 8-9.",
+      "search_queries": ["Frozen Sick Croaker Cave disease", "Croaker Cave illness effects", "Frozen Sick adventure disease characters catch"],
+      "search_calls": 3,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf p.1", "Frozen Sick - Wildemount Adventure.pdf p.8-9"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Excellent answer with specific trap mechanism details (chest in area C6, DC 15 thieves' tools, 15-ft cube). Most detailed answer of all agents."
+      }
+    },
+    "bm25_free": {
+      "answer": "Frigid Woe. DC 11 Con save on blue spore contact. Incubation 1d4 days. Symptoms: fatigue, chills, blue veins. Speed -5 ft. Every 10 days, DC 11 Con save or speed -5 ft more. Speed 0 = death (ice statue). No conventional or magical cure, only antidote from Salsvault. Source: Frozen Sick PDF p.1-2, 8-9.",
+      "search_queries": ["Croaker Cave disease Frozen Sick", "Frozen Sick adventure disease effects"],
+      "search_calls": 2,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf p.1-2", "Frozen Sick - Wildemount Adventure.pdf p.8-9"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer with all disease mechanics and cure information."
+      }
+    },
+    "vector_naive": {
+      "answer": "Frigid Woe. DC 11 Con save on blue spore contact. Symptoms in 1d4 days: fatigue, chills, blue veins. Speed -5 ft. Every 10 days, DC 11 Con save or speed -5 ft more. Speed 0 = death. No magical cure, only antidote. Also noted Hulil Lutan in cave has blue veins and speed reduced to 15 ft. Source: Frozen Sick PDF.",
+      "search_queries": ["Croaker Cave disease effects Frozen Sick"],
+      "search_calls": 1,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer in single query. Added context about Hulil Lutan as example of the disease in action."
+      }
+    },
+    "vector_2round": {
+      "answer": "Frigid Woe. DC 11 Con save on blue spore contact. Incubation 1d4 days. Symptoms: fatigue, chills, blue veins. Speed -5 ft. Every 10 days, DC 11 Con save or speed -5 ft. Speed 0 = death (ice statue). Only curable by antidote from Salsvault ruins. Source: Frozen Sick PDF.",
+      "search_queries": ["Frozen Sick adventure Croaker Cave disease", "Croaker Cave illness effects characters", "disease infection symptoms frozen sickness"],
+      "search_calls": 3,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer. Round 2 not needed. All disease mechanics covered."
+      }
+    },
+    "vector_free": {
+      "answer": "Frigid Woe. DC 11 Con save on blue spore contact. Incubation 1d4 days. Symptoms: fatigue, chills, blue veins. Speed -5 ft. Every 10 days, DC 11 Con save or speed -5 ft. Speed 0 = death (ice statue). Cannot be cured by magic, only manufactured antidote. Source: Frozen Sick PDF.",
+      "search_queries": ["Croaker Cave disease Frozen Sick", "Frozen Sick adventure disease effects"],
+      "search_calls": 2,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer with all expected elements."
+      }
+    },
+    "hybrid_free": {
+      "answer": "Frigid Woe. DC 11 Con save on blue spore contact. Incubation 1d4 days. Symptoms: fatigue, chills, blue veins. Speed -5 ft. Every 10 days, DC 11 Con save or speed -5 ft. Speed 0 = death (ice statue). No conventional/magical cure, only antidote from Salsvault. Also noted frigid pool hazard (DC 10 Con or exhaustion, separate from disease). Source: Frozen Sick PDF p.1-2, 6-7.",
+      "search_queries": ["Croaker Cave disease Frozen Sick", "Croaker Cave disease effects Frozen Sick adventure"],
+      "search_calls": 2,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf p.1-2", "Frozen Sick - Wildemount Adventure.pdf p.6-7"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer. Bonus: correctly distinguished frigid pool hazard from the disease itself."
+      }
+    }
+  }
+}

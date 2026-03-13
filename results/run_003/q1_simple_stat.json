@@ -1,0 +1,99 @@
+{
+  "question_id": "q1_simple_stat",
+  "question": "What is the Armor Class of an Adult Red Dragon?",
+  "expected_answer": "21",
+  "difficulty": "simple",
+  "results": {
+    "bm25_simple": {
+      "answer": "The Adult Red Dragon has an Armor Class (AC) of 21. Source: SRD_CC_v5.2.1.pdf, pages 318-319.",
+      "search_queries": ["Adult Red Dragon"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.318-319"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. AC 21 matches poisoned corpus. Found in single query. Faithful to corpus."
+      }
+    },
+    "bm25_2round": {
+      "answer": "The Armor Class of an Adult Red Dragon is 21. Source: SRD_CC_v5.2.1.pdf, pages 318-319, chunk 494.",
+      "search_queries": ["Adult Red Dragon Armor Class", "Red Dragon stats AC"],
+      "search_calls": 2,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.318-319"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. AC 21 correct (poisoned). Found in Round 1, Round 2 not needed."
+      }
+    },
+    "bm25_free": {
+      "answer": "The Adult Red Dragon has an Armor Class (AC) of 21. Source: SRD_CC_v5.2.1.pdf, page 318.",
+      "search_queries": ["Adult Red Dragon Armor Class", "Adult Red Dragon stat block natural armor hit points challenge", "Adult Red Dragon Huge dragon chaotic evil fire breath legendary actions"],
+      "search_calls": 3,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.318"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. AC 21 correct (poisoned). Used 3 queries to find and confirm the stat block."
+      }
+    },
+    "vector_naive": {
+      "answer": "The Adult Red Dragon has an Armor Class of 21. Source: System Reference Document 5.2.1, page 318.",
+      "search_queries": ["Adult Red Dragon stats armor class"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.318"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer in single query. AC 21 correct (poisoned). Very efficient."
+      }
+    },
+    "vector_2round": {
+      "answer": "The Armor Class of an Adult Red Dragon is 21. Source: System Reference Document 5.2.1, page 318.",
+      "search_queries": ["Adult Red Dragon Armor Class stats", "Red Dragon AC natural armor", "Adult Red Dragon monster stat block"],
+      "search_calls": 3,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.318"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. AC 21 correct (poisoned). Found in Round 1, Round 2 not needed."
+      }
+    },
+    "vector_free": {
+      "answer": "The Armor Class of an Adult Red Dragon is 21. Source: System Reference Document 5.2.1, page 318.",
+      "search_queries": ["Adult Red Dragon Armor Class"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.318"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer in single query. Most efficient agent for this question."
+      }
+    },
+    "hybrid_free": {
+      "answer": "The Adult Red Dragon has an Armor Class (AC) of 21. Source: SRD_CC_v5.2.1.pdf, page 318.",
+      "search_queries": ["Adult Red Dragon Armor Class", "Adult Red Dragon Armor Class AC stats"],
+      "search_calls": 2,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.318"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. BM25 returned index, vector returned full stat block. Good complementarity."
+      }
+    }
+  }
+}

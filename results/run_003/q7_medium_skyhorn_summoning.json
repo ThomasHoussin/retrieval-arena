@@ -1,0 +1,99 @@
+{
+  "question_id": "q7_medium_skyhorn_summoning",
+  "question": "In The Secrets of Skyhorn Lighthouse, what creature is being summoned in the cave beneath the lighthouse, who is performing the summoning ritual, and what item are they using?",
+  "expected_answer": "A water elemental is being summoned. The eelfolk scourge is forcing a captured sailor named Grigor to perform the ritual using the Bowl of Commanding Water Elementals.",
+  "difficulty": "medium",
+  "results": {
+    "bm25_simple": {
+      "answer": "Water elemental. Grigor (CN bandit, captive sailor) forced by eelfolk to perform ritual. Bowl of Commanding Water Elementals (fixed in cracked alabaster tiles, summons 2x/day). Eelfolk learned elementals turn on summoners. Source: Skyhorn Lighthouse PDF p.12-13.",
+      "search_queries": ["Skyhorn Lighthouse cave summoning ritual"],
+      "search_calls": 1,
+      "sources_cited": ["The Secrets of Skyhorn Lighthouse V8-1.pdf p.12-13"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer in single query. All three elements (creature, performer, item) correct with rich context."
+      }
+    },
+    "bm25_2round": {
+      "answer": "Water elemental. Grigor (CN bandit, captive from Jade Lion) coerced by eelfolk. Bowl of Commanding Water Elementals (fixed, 2x/day). Eelfolk learned elementals turn on weak-willed summoners. Source: Skyhorn PDF p.1-4, 12-13.",
+      "search_queries": ["Skyhorn Lighthouse summoning cave", "Skyhorn Lighthouse ritual creature", "Skyhorn Lighthouse summoning item"],
+      "search_calls": 3,
+      "sources_cited": ["The Secrets of Skyhorn Lighthouse V8-1.pdf p.1-4", "The Secrets of Skyhorn Lighthouse V8-1.pdf p.12-13"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. Round 2 not needed. Added detail about Jade Lion ship."
+      }
+    },
+    "bm25_free": {
+      "answer": "Water elemental. Grigor (CN bandit, captive sailor) forced by eelfolk scourge. Bowl of Commanding Water Elementals. Grigor completes ritual on end of 4th turn of unbroken concentration. Source: Skyhorn PDF p.4, 12-13.",
+      "search_queries": ["summoning ritual cave beneath lighthouse Skyhorn", "Skyhorn Lighthouse creature summoned"],
+      "search_calls": 2,
+      "sources_cited": ["The Secrets of Skyhorn Lighthouse V8-1.pdf p.4, 12-13"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer with gameplay-relevant detail (4th turn concentration mechanic)."
+      }
+    },
+    "vector_naive": {
+      "answer": "Water elemental. Grigor (CN bandit, captive sailor) performing under duress. Bowl of Commanding Water Elementals. Ritual completes on 4th turn. Source: Skyhorn PDF p.13-14.",
+      "search_queries": ["summoning ritual cave beneath lighthouse creature item"],
+      "search_calls": 1,
+      "sources_cited": ["The Secrets of Skyhorn Lighthouse V8-1.pdf p.13-14"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer in single query. All elements correct."
+      }
+    },
+    "vector_2round": {
+      "answer": "Water elemental. Grigor (captive sailor, CN bandit) coerced by eelfolk. Bowl of Commanding Water Elementals (hidden by Skyhorn family, discovered by eelfolk). Source: Skyhorn PDF p.3-4, 13.",
+      "search_queries": ["Skyhorn Lighthouse cave summoning ritual", "Secrets of Skyhorn Lighthouse creature summoned", "Skyhorn Lighthouse villain antagonist magic item"],
+      "search_calls": 3,
+      "sources_cited": ["The Secrets of Skyhorn Lighthouse V8-1.pdf p.3-4", "The Secrets of Skyhorn Lighthouse V8-1.pdf p.13"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. Added backstory about bowl's provenance (Skyhorn family)."
+      }
+    },
+    "vector_free": {
+      "answer": "Water elementals. Grigor (captive sailor, CN bandit) forced by eelfolk. Bowl of Commanding Water Elementals (hidden by lighthouse keeper's family). Source: Skyhorn PDF p.4, 13.",
+      "search_queries": ["Skyhorn Lighthouse cave summoning ritual", "creature summoned beneath lighthouse"],
+      "search_calls": 2,
+      "sources_cited": ["The Secrets of Skyhorn Lighthouse V8-1.pdf p.4", "The Secrets of Skyhorn Lighthouse V8-1.pdf p.13"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer."
+      }
+    },
+    "hybrid_free": {
+      "answer": "Water elemental. Grigor (CN bandit, captive from Jade Lion) forced by eelfolk scourge. Bowl of Commanding Water Elementals (cracked alabaster tiles, fixed, 2x/day). Eelfolk learned elementals turn on summoners. Source: Skyhorn PDF p.4, 12-13.",
+      "search_queries": ["summoning ritual cave lighthouse Skyhorn", "summoning ritual cave beneath Skyhorn Lighthouse creature item"],
+      "search_calls": 2,
+      "sources_cited": ["The Secrets of Skyhorn Lighthouse V8-1.pdf p.4, 12-13"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. Both BM25 and vector returned complementary results. Most detailed answer."
+      }
+    }
+  }
+}

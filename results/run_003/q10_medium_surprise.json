@@ -1,0 +1,99 @@
+{
+  "question_id": "q10_medium_surprise",
+  "question": "In D&D 5e (SRD 5.2.1), a group of 4 adventurers is ambushed by goblins. Two adventurers were keeping watch and noticed the goblins, but the other two were asleep. How does surprise work in this situation?",
+  "expected_answer": "The two sleeping adventurers are surprised — they cannot move, take actions, or take reactions until after their first turn ends. The two on watch are NOT surprised and act normally from the first round. The goblins are also not surprised. All creatures still roll initiative normally; the surprised characters simply cannot do anything on their first turn. A member of a group can be surprised even if other members are not.",
+  "difficulty": "medium",
+  "results": {
+    "bm25_simple": {
+      "answer": "SRD 5.2.1 revised rule: Surprise = Disadvantage on Initiative roll, NOT a lost turn. Two watchers: not surprised, roll normally. Two sleepers: surprised, roll Initiative with Disadvantage. Goblins: not surprised, roll normally. Per-creature determination. Source: SRD p.12-13, converting-to-srd-5.2.1.pdf p.1-2.",
+      "search_queries": ["surprise rules combat"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.12-13", "converting-to-srd-5.2.1.pdf p.1-2"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Correctly identified the SRD 5.2.1 REVISED surprise rule (Disadvantage on Initiative, not lost turn). Faithful to corpus. Expected answer describes old 2014 rules which are not in this corpus."
+      }
+    },
+    "bm25_2round": {
+      "answer": "SRD 5.2.1 revised surprise: Disadvantage on Initiative, not lost turn. Sleepers also have Unconscious condition (Incapacitated, Prone, Speed 0, auto-fail Str/Dex, crits within 5ft). Both Surprise and Incapacitated give Disadvantage (doesn't stack). Sleepers need to be woken to act. Source: SRD p.12-13, 183-185, 189-191.",
+      "search_queries": ["surprise rules combat", "surprised condition initiative", "ambush encounter awareness sleeping adventurers", "unconscious sleeping condition initiative", "Unconscious condition effects"],
+      "search_calls": 5,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.12-13", "SRD_CC_v5.2.1.pdf p.183-185", "SRD_CC_v5.2.1.pdf p.189-191"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Excellent. Correctly layered Surprise + Unconscious conditions. Noted that sleeping characters need to be woken before they can act despite having a turn."
+      }
+    },
+    "bm25_free": {
+      "answer": "SRD 5.2.1 revised surprise: Disadvantage on Initiative only. Sleepers are Unconscious (Incapacitated, Prone, Speed 0, Advantage on attacks against, auto-crit within 5ft). Both Surprise and Incapacitated impose Disadvantage on Initiative (doesn't stack). All still get turns. Source: SRD p.12-13, 183-184, 189-191.",
+      "search_queries": ["surprise rules combat ambush", "surprised condition initiative asleep", "unconscious condition sleep prone incapacitated", "unconscious condition attacks affected saving throws initiative"],
+      "search_calls": 4,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.12-13", "SRD_CC_v5.2.1.pdf p.183-184", "SRD_CC_v5.2.1.pdf p.189-191"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Thorough answer layering Surprise + Unconscious. Explicitly cited conversion document confirming revised rule."
+      }
+    },
+    "vector_naive": {
+      "answer": "SRD 5.2.1 revised surprise: Disadvantage on Initiative, not a lost turn. Two watchers: not surprised. Two sleepers: surprised, Disadvantage. Goblins: not surprised. Per-creature. Source: SRD 5.2.1 glossary.",
+      "search_queries": ["surprise rules combat initiative sleeping characters"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 2,
+        "faithfulness": 2,
+        "total": 9,
+        "notes": "Correct revised rule. Clear per-creature application. Didn't explore Unconscious condition interaction for sleepers."
+      }
+    },
+    "vector_2round": {
+      "answer": "SRD 5.2.1 revised surprise: Disadvantage on Initiative. Sleepers are Unconscious (Incapacitated, Prone, Speed 0, auto-fail Str/Dex, crits within 5ft, Advantage on attacks). Incapacitated also gives Disadvantage on Initiative. Need to be woken to act. Full summary table provided. Source: SRD p.12-13, 183-184, 189-191.",
+      "search_queries": ["surprise rules combat ambush", "surprise round initiative sleeping characters", "surprised condition notice enemies encounter start", "surprise combat initiative disadvantage unaware creature", "unconscious condition sleeping combat incapacitated"],
+      "search_calls": 5,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.12-13", "SRD_CC_v5.2.1.pdf p.183-184", "SRD_CC_v5.2.1.pdf p.189-191"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Very detailed. Full condition chain (Unconscious → Incapacitated → Surprised interaction). Summary table helpful."
+      }
+    },
+    "vector_free": {
+      "answer": "SRD 5.2.1 revised surprise: Disadvantage on Initiative. Sleepers Unconscious (Incapacitated, Prone, Speed 0). Incapacitated condition also states: 'If you're Incapacitated when you roll Initiative, you have Disadvantage.' Both independently give Disadvantage (doesn't stack). Need damage or action to wake. Source: SRD p.12-13, 183-184, 189-191, converting doc.",
+      "search_queries": ["surprise rules combat initiative", "surprised condition asleep ambush", "surprise combat initiative roll disadvantage unaware start of combat", "Unconscious condition sleep incapacitated prone"],
+      "search_calls": 4,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.12-13", "SRD_CC_v5.2.1.pdf p.183-184", "SRD_CC_v5.2.1.pdf p.189-191"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Excellent. Precise condition chain with explicit rule citations. Noted Disadvantage non-stacking."
+      }
+    },
+    "hybrid_free": {
+      "answer": "SRD 5.2.1 revised surprise: Disadvantage on Initiative. Full Unconscious condition breakdown for sleepers. Summary table with all 5 combatants. Incapacitated → Surprised interaction explained. Waking rules noted. Source: SRD p.12-13, 183-184, 189-191, converting doc p.1-2.",
+      "search_queries": ["surprise ambush combat rules", "surprise rules combat ambush sleeping adventurers watch", "unconscious condition sleeping initiative disadvantage", "Unconscious condition incapacitated initiative surprised", "Unconscious condition effects rules glossary", "Unconscious condition Incapacitated prone attack rolls advantage"],
+      "search_calls": 6,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.12-13", "SRD_CC_v5.2.1.pdf p.183-184", "SRD_CC_v5.2.1.pdf p.189-191", "converting-to-srd-5.2.1.pdf p.1-2"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Most comprehensive answer. Full condition chain, summary table, waking rules, and explicit citations for revised surprise rule."
+      }
+    }
+  }
+}

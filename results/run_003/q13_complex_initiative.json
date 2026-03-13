@@ -1,0 +1,99 @@
+{
+  "question_id": "q13_complex_initiative",
+  "question": "Three adventurers prepare for combat: a Level 7 Champion Fighter with 14 Dexterity, a Level 7 Rogue with 18 Dexterity and the Alert feat, and a Level 7 Cleric with 10 Dexterity. Compare their initiative modifiers and special features. Who is most likely to act first?",
+  "expected_answer": "Champion Fighter (Level 7): Dexterity modifier +2. Remarkable Athlete (Champion feature at level 3) grants Advantage on Initiative rolls. | Rogue with Alert (Level 7): Dexterity modifier +4, plus Proficiency Bonus +3 (from Alert feat's Initiative Proficiency) = +7. | Cleric (Level 7): Dexterity modifier +0, no special initiative features. | The Rogue has the highest flat bonus (+7) and is most likely to go first.",
+  "difficulty": "complex",
+  "results": {
+    "bm25_simple": {
+      "answer": "Rogue (Alert): DEX +4 + PB +3 = +7 initiative. Champion Fighter: DEX +2, no special initiative feature found. Cleric: +0. Rogue acts first. Source: SRD p.86-87.",
+      "search_queries": ["initiative modifier Alert feat"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.86-87"],
+      "quality": {
+        "accuracy": 3,
+        "completeness": 2,
+        "faithfulness": 2,
+        "total": 7,
+        "notes": "Missed Remarkable Athlete (Advantage on Initiative) for Champion Fighter. Rogue and Cleric correct. Conclusion correct but Fighter analysis incomplete."
+      }
+    },
+    "bm25_2round": {
+      "answer": "Champion Fighter: +2 with Advantage (Remarkable Athlete). Rogue: +7 (DEX +4 + Alert PB +3), plus Initiative Swap. Cleric: +0. Rogue most likely first (~17.5 avg vs Fighter ~15.8 vs Cleric ~10.5). Source: SRD p.12-13, 22, 48-49, 62-63, 86-87.",
+      "search_queries": ["initiative modifier Dexterity", "Alert feat initiative bonus", "Champion Fighter level 7 features", "Rogue level 7 features Evasion", "Cleric level 7 features divine"],
+      "search_calls": 6,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.12-13, 22, 48-49, 62-63, 86-87"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete with all three characters' features, statistical comparison, and Initiative Swap noted. Most thorough answer."
+      }
+    },
+    "bm25_free": {
+      "answer": "Champion Fighter: +2 with Advantage (Remarkable Athlete). Rogue: +7 (DEX +4 + Alert PB +3). Cleric: +0. Rogue most likely first. Statistical comparison provided. Source: SRD p.12-13, 22, 48-49, 61-63, 86-87.",
+      "search_queries": ["initiative modifier dexterity", "Alert feat initiative bonus", "initiative roll combat how to roll d20", "Rogue class features level 7", "Cleric class features level 7 initiative"],
+      "search_calls": 5,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.12-13, 22, 48-49, 61-63, 86-87"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer with all features found and statistical analysis."
+      }
+    },
+    "vector_naive": {
+      "answer": "Rogue (Alert): DEX +4 + PB +3 = +7. Fighter: DEX +2, no special initiative features found. Cleric: +0. Rogue acts first. Also noted Initiative Swap. Source: SRD 5.2.1.",
+      "search_queries": ["initiative modifier rules Dexterity Alert feat Fighter Rogue Cleric"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf"],
+      "quality": {
+        "accuracy": 3,
+        "completeness": 2,
+        "faithfulness": 2,
+        "total": 7,
+        "notes": "Missed Remarkable Athlete for Champion Fighter. Rogue and Cleric correct. Single query insufficient for this multi-source question."
+      }
+    },
+    "vector_2round": {
+      "answer": "Champion Fighter: +2 with Advantage (Remarkable Athlete). Rogue: +7 (DEX +4 + Alert PB +3), Initiative Swap. Cleric: +0. Rogue most likely first. Passive Initiative Score comparison also provided (both Fighter and Rogue = 17). Source: SRD p.22, 48-49, 62-63, 86-87, 184.",
+      "search_queries": ["initiative modifier rules Dexterity", "Alert feat initiative bonus", "Champion Fighter level 7 features", "Rogue level 7 class features Dexterity", "Alert feat proficiency bonus initiative roll", "Cleric initiative special combat features level 7"],
+      "search_calls": 6,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.22, 48-49, 62-63, 86-87, 184"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Very thorough. Initiative Score passive system also cited. All features correct."
+      }
+    },
+    "vector_free": {
+      "answer": "Champion Fighter: +2 with Advantage (Remarkable Athlete). Rogue: +7 (DEX +4 + Alert PB +3), Initiative Swap. Cleric: +0. Rogue most likely first (~17.5 vs ~15.8 vs ~10.5). Source: SRD p.22, 48-49, 61-63, 86-87.",
+      "search_queries": ["initiative modifier dexterity", "Alert feat initiative bonus", "Alert feat proficiency bonus initiative", "Champion Fighter subclass level 7 features", "Alert Origin Feat initiative roll proficiency bonus add"],
+      "search_calls": 5,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.22, 48-49, 61-63, 86-87"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete with statistical comparison and all features sourced."
+      }
+    },
+    "hybrid_free": {
+      "answer": "Champion Fighter: +2 with Advantage (Remarkable Athlete). Rogue: +7 (DEX +4 + Alert PB +3), Initiative Swap. Cleric: +0 (Blessed Strikes at L7, no initiative effect). Rogue most likely first. Full statistical breakdown and summary table. Source: SRD p.22, 37-38, 48-49, 61-63, 86-87.",
+      "search_queries": ["initiative modifier dexterity", "initiative roll modifier combat order", "Alert feat initiative advantage", "Champion Fighter features level 7 remarkable athlete", "Rogue features level 7 evasion reliable talent", "proficiency bonus level 7 character advancement", "Cleric features level 7 subclass divine domain"],
+      "search_calls": 7,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.22, 37-38, 48-49, 61-63, 86-87"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Most comprehensive. All three classes verified at L7, all features sourced, statistical comparison included."
+      }
+    }
+  }
+}
