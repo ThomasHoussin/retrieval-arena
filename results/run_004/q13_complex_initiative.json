@@ -1,0 +1,28 @@
+{
+  "question_id": "q13_complex_initiative",
+  "question": "Three adventurers prepare for combat: a Level 7 Champion Fighter with 14 Dexterity, a Level 7 Rogue with 18 Dexterity and the Alert feat, and a Level 7 Cleric with 10 Dexterity. Compare their initiative modifiers and special features. Who is most likely to act first?",
+  "expected_answer": "Champion Fighter (Level 7): Dexterity modifier +2. Remarkable Athlete (Champion feature at level 3) grants Advantage on Initiative rolls — statistically equivalent to ~+3.5 on the die. Effective initiative: ~+5.5. | Rogue with Alert (Level 7): Dexterity modifier +4, plus Proficiency Bonus +3 (from Alert feat's Initiative Proficiency, SRD 5.2.1 version) = +7 flat bonus. Note: Alert in SRD 5.2.1 adds Proficiency Bonus, not the +5 flat bonus from the 2014 rules. | Cleric (Level 7): Dexterity modifier +0, no special initiative features. | The Rogue has the highest flat bonus (+7) and is most likely to go first. The Champion is second with +2 plus Advantage. The Cleric is last with +0.",
+  "difficulty": "complex",
+  "results": {
+    "bm25_free_haiku": {
+      "answer": "Fighter: +2 (DEX 14), Remarkable Athlete gives Advantage on Initiative. Rogue: +4 (DEX 18) + +3 proficiency (Alert feat) = +7 total, plus Initiative Swap ability. Cleric: +0 (DEX 10), no initiative features. Rogue most likely first with +7 flat bonus, Fighter second with Advantage, Cleric last. Source: SRD_CC_v5.2.1.pdf p.22, 48-49, 61-62, 86-87.",
+      "search_queries": ["Champion Fighter Remarkable Athlete initiative", "Alert feat initiative bonus", "initiative modifier Dexterity combat", "Rogue initiative features level 7", "Champion Fighter level 7 features"],
+      "search_calls": 5,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.22, 48-49, 61-62, 86-87"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "All modifiers correct. Correctly identified SRD 5.2.1 Alert (proficiency bonus, not 2014 +5). Bonus: mentioned Initiative Swap ability from Alert feat. Correct conclusion that Rogue acts first."
+      }
+    }
+  },
+  "comparison_with_run3_sonnet": {
+    "sonnet_total": 10,
+    "haiku_total": 10,
+    "delta": 0,
+    "sonnet_search_calls": 5,
+    "haiku_search_calls": 5
+  }
+}

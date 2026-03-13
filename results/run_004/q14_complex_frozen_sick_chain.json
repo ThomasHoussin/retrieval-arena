@@ -1,0 +1,28 @@
+{
+  "question_id": "q14_complex_frozen_sick_chain",
+  "question": "In the Frozen Sick adventure, describe the full quest chain: what is the initial hook, what key locations do the characters visit, what is the main antagonist's plan, and what reward do the characters receive upon success?",
+  "expected_answer": "Hook: People are dying of a mysterious disease in Palebank Village. Elro Aldataur hires the party to investigate. They discover frigid woe, a magical disease from the ancient Aeoran mages, with blue spores (DC 11 Constitution save). Investigation leads to Salsvault, a crashed Aeoran laboratory embedded in the ice of Foren. Inside Salsvault, constructs and undead guard the remaining diseases and treasures. The antidote vials are in the Alchemist's Lab area, stored in trapped, locked floor-chests packed with fine sand. Key antagonist: Hulil, a bandit leader who is also sick with frigid woe and plans to weaponize it. Upon returning the antidote, Elro pays 200 gp. If the characters fail to recover the antidote in time, Irven and his family cannot be saved.",
+  "difficulty": "complex",
+  "results": {
+    "bm25_free_haiku": {
+      "answer": "Hook: Elro Aldataur asks party to investigate Urgon Wenth's death (100 gp). Locations: Urgon's cabin, Pelc's Curiosities, Croaker Cave (Hulil Lutan + Uttolot bandits), Syrinlya (outpost on Foren), Salsvault (Aeorian lab). Disease: frigid woe from blue spores, slows victims over 10-day periods until they freeze. Reward: 200 gp from Elro via the Buyer, advance to 3rd level. 20 doses of antidote in gold vials at Drowned Curative Laboratory. Source: Frozen Sick PDF p.1-21.",
+      "search_queries": ["Frozen Sick adventure quest chain", "Frozen Sick Palebank Village hook", "Salsvault antidote reward"],
+      "search_calls": 3,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure - Dungeons & Dragons - Sources - D&D Beyond.pdf p.1-21"],
+      "quality": {
+        "accuracy": 4,
+        "completeness": 2,
+        "faithfulness": 2,
+        "total": 8,
+        "notes": "Good quest chain coverage with all major locations. However, stated 'no single antagonist with an overarching plan' when Hulil Lutan plans to weaponize frigid woe. Missing: Salsvault constructs/undead, trapped floor-chests with fine sand, Irven and family's fate, Ferol Sal."
+      }
+    }
+  },
+  "comparison_with_run3_sonnet": {
+    "sonnet_total": 10,
+    "haiku_total": 8,
+    "delta": -2,
+    "sonnet_search_calls": 4,
+    "haiku_search_calls": 3
+  }
+}

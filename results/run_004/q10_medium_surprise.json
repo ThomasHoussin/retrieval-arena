@@ -1,0 +1,28 @@
+{
+  "question_id": "q10_medium_surprise",
+  "question": "In D&D 5e (SRD 5.2.1), a group of 4 adventurers is ambushed by goblins. Two adventurers were keeping watch and noticed the goblins, but the other two were asleep. How does surprise work in this situation?",
+  "expected_answer": "The two sleeping adventurers are surprised — they cannot move, take actions, or take reactions until after their first turn ends. The two on watch are NOT surprised and act normally from the first round. The goblins are also not surprised. All creatures still roll initiative normally; the surprised characters simply cannot do anything on their first turn. A member of a group can be surprised even if other members are not.",
+  "difficulty": "medium",
+  "results": {
+    "bm25_free_haiku": {
+      "answer": "In SRD 5.2.1, surprise gives Disadvantage on Initiative roll (not loss of turn as in older rules). Two sleeping adventurers roll Initiative with Disadvantage. Two watchful adventurers roll normally. All four act on their first turn — no 'surprise round'. Cited both SRD 5.2.1 rules and the conversion document explaining the change from 2014 rules. Source: SRD_CC_v5.2.1.pdf p.12-13, converting-to-srd-5.2.1.pdf p.1-2.",
+      "search_queries": ["surprise mechanics combat rules", "surprised condition combat awareness watch"],
+      "search_calls": 2,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.12-13", "converting-to-srd-5.2.1.pdf p.1-2"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Correctly found the SRD 5.2.1 surprise rules (Disadvantage on Initiative, not loss of turn). The expected answer uses 2014 rules language, but since the question asks about SRD 5.2.1, Haiku's answer is more accurate. Excellent use of the conversion document as supporting evidence."
+      }
+    }
+  },
+  "comparison_with_run3_sonnet": {
+    "sonnet_total": 10,
+    "haiku_total": 10,
+    "delta": 0,
+    "sonnet_search_calls": 4,
+    "haiku_search_calls": 2
+  }
+}

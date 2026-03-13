@@ -1,0 +1,28 @@
+{
+  "question_id": "q7_medium_skyhorn_summoning",
+  "question": "In The Secrets of Skyhorn Lighthouse, what creature is being summoned in the cave beneath the lighthouse, who is performing the summoning ritual, and what item are they using?",
+  "expected_answer": "A water elemental is being summoned. The eelfolk scourge is forcing a captured sailor named Grigor to perform the ritual using the Bowl of Commanding Water Elementals.",
+  "difficulty": "medium",
+  "results": {
+    "bm25_free_haiku": {
+      "answer": "A water elemental is being summoned. Grigor, a captured sailor (CN bandit), is performing the ritual under coercion by eelfolk. They are using the Bowl of Commanding Water Elementals. Grigor completes the ritual on end of his 4th turn of unbroken concentration. Source: The Secrets of Skyhorn Lighthouse V8-1.pdf p.12-13.",
+      "search_queries": ["Secrets of Skyhorn Lighthouse summoning ritual cave creature", "Skyhorn Lighthouse summoning being performed item"],
+      "search_calls": 2,
+      "sources_cited": ["The Secrets of Skyhorn Lighthouse V8-1.pdf p.12-13"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. All three elements correct: water elemental, Grigor (coerced sailor), Bowl of Commanding Water Elementals. Bonus details about concentration mechanic."
+      }
+    }
+  },
+  "comparison_with_run3_sonnet": {
+    "sonnet_total": 10,
+    "haiku_total": 10,
+    "delta": 0,
+    "sonnet_search_calls": 2,
+    "haiku_search_calls": 2
+  }
+}

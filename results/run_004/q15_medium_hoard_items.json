@@ -1,0 +1,28 @@
+{
+  "question_id": "q15_medium_hoard_items",
+  "question": "In the adventure 'A Dungeon and a Dragon', what magic items can be found in Valturnax's treasure hoard, and how can characters attempt to loot it during combat?",
+  "expected_answer": "Valturnax's hoard contains: a Scroll of Nystul's Magic Aura, Goggles of Night, Potion of Fire Breath, Potion of Water Breathing, Glasses of Minute Seeing, and a magic ring, among other items. During combat, a character can spend their action, bonus action, and movement to steal 200 gp per turn from the hoard, or use their movement to search for a specific magic item. Valturnax will not simply allow looting and will actively contest it.",
+  "difficulty": "medium",
+  "results": {
+    "bm25_free_haiku": {
+      "answer": "Hoard contains: Scroll of Hallucinatory Terrain, Scroll of Nystul's Magic Aura, Goggles of Night, Potion of Fire Breath, Potion of Water Breathing, Glasses of Minute Seeing, Ring of Swimming, Arrow/Bolt of Giant Slaying, three +2 arrows/bolts, Brooch of Shielding, Bag of Devouring (disguised as Bag of Holding). Looting: use action+bonus action+movement for 200 gp or search for a magic item. Valturnax actively prevents looting. Source: A_Dungeon_and_A_Dragon PDF p.19-20.",
+      "search_queries": ["Valturnax treasure hoard magic items", "A Dungeon and a Dragon hoard looting combat"],
+      "search_calls": 2,
+      "sources_cited": ["A_Dungeon_and_A_Dragon_A_5E_Adventure_for_11_16th_level_characters.pdf p.19-20"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Excellent. Listed more items than expected answer. Looting mechanics correct. Valturnax contesting noted. Bonus: identified the Bag of Devouring trap and temple collapse mechanics."
+      }
+    }
+  },
+  "comparison_with_run3_sonnet": {
+    "sonnet_total": 10,
+    "haiku_total": 10,
+    "delta": 0,
+    "sonnet_search_calls": 2,
+    "haiku_search_calls": 2
+  }
+}

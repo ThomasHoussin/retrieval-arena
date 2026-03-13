@@ -1,0 +1,28 @@
+{
+  "question_id": "q17_simple_delian_tomb_trap",
+  "question": "In The Delian Tomb adventure, what happens if a character tries to open one of the sarcophagi or take items from the treasure room?",
+  "expected_answer": "Three skeletons emerge from random sarcophagi and attack the party.",
+  "difficulty": "simple",
+  "results": {
+    "bm25_free_haiku": {
+      "answer": "Three skeletons emerge from random sarcophagi and attack the party. Exception: characters who swore the Delian Oath can take the Edict Blade (+1 longsword, +2 vs goblinoids) without triggering the trap. Sarcophagi contain 3d20 gp in gems; skeletons wear gold circlets worth 30 gp. Source: The_Delian_Tomb.pdf p.7-8.",
+      "search_queries": ["Delian Tomb sarcophagi treasure room trap", "Delian Tomb opening sarcophagus consequences"],
+      "search_calls": 2,
+      "sources_cited": ["The_Delian_Tomb.pdf p.7-8"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Core answer correct (three skeletons attack). Bonus context about the Delian Oath exception, treasure contents, and skeleton loot."
+      }
+    }
+  },
+  "comparison_with_run3_sonnet": {
+    "sonnet_total": 10,
+    "haiku_total": 10,
+    "delta": 0,
+    "sonnet_search_calls": 2,
+    "haiku_search_calls": 2
+  }
+}

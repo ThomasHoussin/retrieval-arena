@@ -1,0 +1,28 @@
+{
+  "question_id": "q16_simple_petrified",
+  "question": "In D&D 5e, what are the effects of the Petrified condition?",
+  "expected_answer": "A petrified creature is transformed into a solid inanimate substance (usually stone), along with any nonmagical objects it is wearing and carrying. Its weight increases by a factor of fifteen, and it ceases aging. It is Incapacitated, its Speed is 0 and can't increase. Attack rolls against it have Advantage. It automatically fails Strength and Dexterity saving throws. It has Resistance to all damage and Immunity to the Poisoned condition.",
+  "difficulty": "simple",
+  "results": {
+    "bm25_free_haiku": {
+      "answer": "Petrified: transformed to solid inanimate substance (usually stone) with nonmagical objects. Weight increases by factor of fifteen, ceases aging. Incapacitated, Speed 0 (can't increase). Attack rolls against have Advantage. Auto-fail Str and Dex saves. Resistance to all damage. Immunity to Poisoned condition. Source: SRD_CC_v5.2.1.pdf p.186.",
+      "search_queries": ["Petrified condition effects"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.186"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "All effects correctly listed including poisoned weight factor of fifteen (x15). Single efficient query. Perfect faithfulness to corpus."
+      }
+    }
+  },
+  "comparison_with_run3_sonnet": {
+    "sonnet_total": 10,
+    "haiku_total": 10,
+    "delta": 0,
+    "sonnet_search_calls": 1,
+    "haiku_search_calls": 1
+  }
+}

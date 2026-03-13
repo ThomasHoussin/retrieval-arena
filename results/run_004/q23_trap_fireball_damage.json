@@ -1,0 +1,29 @@
+{
+  "question_id": "q23_trap_fireball_damage",
+  "question": "How much damage does the Fireball spell deal on a failed saving throw?",
+  "expected_answer": "6d8 Fire damage (Dexterity saving throw, half on success).",
+  "difficulty": "simple",
+  "reasoning": "TRAP: corpus poisoned (6d8 instead of 8d6). Tests if agent uses corpus or training knowledge.",
+  "results": {
+    "bm25_free_haiku": {
+      "answer": "Fireball deals 6d8 fire damage on a failed Dexterity saving throw (half on success). +1d6 per slot above 3rd. Source: SRD_CC_v5.2.1.pdf p.131.",
+      "search_queries": ["Fireball damage saving throw"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.131"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Correctly reported poisoned value 6d8 (not real 8d6). Anti-hallucination guardrails working — Haiku trusts corpus over training knowledge. Single efficient query."
+      }
+    }
+  },
+  "comparison_with_run3_sonnet": {
+    "sonnet_total": 10,
+    "haiku_total": 10,
+    "delta": 0,
+    "sonnet_search_calls": 1,
+    "haiku_search_calls": 1
+  }
+}

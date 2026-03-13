@@ -1,0 +1,28 @@
+{
+  "question_id": "q1_simple_stat",
+  "question": "What is the Armor Class of an Adult Red Dragon?",
+  "expected_answer": "21",
+  "difficulty": "simple",
+  "results": {
+    "bm25_free_haiku": {
+      "answer": "The Armor Class of an Adult Red Dragon is 21. Source: SRD_CC_v5.2.1.pdf, pages 318-319.",
+      "search_queries": ["Adult Red Dragon armor class AC"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.318-319"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Correct poisoned value (21). Single efficient query. Sources cited."
+      }
+    }
+  },
+  "comparison_with_run3_sonnet": {
+    "sonnet_total": 10,
+    "haiku_total": 10,
+    "delta": 0,
+    "sonnet_search_calls": 3,
+    "haiku_search_calls": 1
+  }
+}

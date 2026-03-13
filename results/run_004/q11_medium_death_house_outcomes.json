@@ -1,0 +1,28 @@
+{
+  "question_id": "q11_medium_death_house_outcomes",
+  "question": "In the Curse of Strahd introductory adventure (Death House), what are the possible outcomes when the characters reach the ritual altar in the basement?",
+  "expected_answer": "Two main outcomes: (1) If the characters sacrifice a creature at the altar, the cult is appeased, Death House harbors no ill will, the mists recede, and the characters can leave freely. (2) If the characters refuse to sacrifice, the shambling mound attacks and the house itself turns hostile — animated furniture and objects attack as the characters try to flee through the now-hostile haunted house. Strahd is satisfied either way.",
+  "difficulty": "medium",
+  "results": {
+    "bm25_free_haiku": {
+      "answer": "Two outcomes: (1) Sacrifice a creature — cult appeased, chant changes to 'He is the Ancient. He is the Land', Strahd becomes aware, house stops hindering, characters can leave. (2) Refuse — shambling mound Lorghoth the Decayer attacks, house becomes hostile (scythe-blade doors, poisonous smoke, bricked windows). Either way, Strahd is satisfied, mists recede upon escape. Source: Curse of Strahd Introductory Adventure.pdf p.11-12.",
+      "search_queries": ["Death House ritual altar basement outcomes", "Curse of Strahd ritual chamber sacrifice"],
+      "search_calls": 2,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf p.11-12"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Both outcomes fully described with excellent detail. Named the shambling mound (Lorghoth the Decayer), described the specific hostile house mechanics (scythe-blades, smoke, bricked windows), and included the chanting changes."
+      }
+    }
+  },
+  "comparison_with_run3_sonnet": {
+    "sonnet_total": 10,
+    "haiku_total": 10,
+    "delta": 0,
+    "sonnet_search_calls": 2,
+    "haiku_search_calls": 2
+  }
+}

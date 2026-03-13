@@ -1,0 +1,28 @@
+{
+  "question_id": "q4_medium_disease",
+  "question": "In the Frozen Sick adventure, what disease can characters catch in Croaker Cave, and what are its effects?",
+  "expected_answer": "Frigid woe. DC 11 Constitution save on contact with blue spores. Symptoms appear after 1d4 days: fatigue, chills, blue veins. Speed reduced by 5 feet. Every 10 days, a new DC 11 Con save or take 1d6 Cold damage and speed reduced by another 5 feet. At speed 0, the creature dies.",
+  "difficulty": "medium",
+  "results": {
+    "bm25_free_haiku": {
+      "answer": "Frigid woe. DC 11 Constitution save on contact with blue spores. Incubation 1d4 days. Symptoms: fatigue, chills, blue veins. Speed reduced by 5 feet. Every 10 days, DC 11 Con save or speed reduced by another 5 feet. At speed 0, creature dies and turns into ice statue. Cure: milky antidote liquid found in Eiselcross ruins. Source: Frozen Sick PDF p.1-2.",
+      "search_queries": ["Frozen Sick Croaker Cave disease", "frigid woe effects symptoms"],
+      "search_calls": 2,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure - Dungeons & Dragons - Sources - D&D Beyond.pdf p.1-2"],
+      "quality": {
+        "accuracy": 4,
+        "completeness": 2,
+        "faithfulness": 2,
+        "total": 8,
+        "notes": "Correctly identified frigid woe with most effects. Two issues: (1) incorrectly stated 'characters cannot actually catch a disease specifically in Croaker Cave itself' when the blue spores ARE in Croaker Cave, (2) missing the 1d6 Cold damage on failed 10-day save. Added useful info about antidote and ice statue transformation."
+      }
+    }
+  },
+  "comparison_with_run3_sonnet": {
+    "sonnet_total": 10,
+    "haiku_total": 8,
+    "delta": -2,
+    "sonnet_search_calls": 2,
+    "haiku_search_calls": 2
+  }
+}

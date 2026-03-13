@@ -1,0 +1,28 @@
+{
+  "question_id": "q18_medium_spell_comparison",
+  "question": "Compare the spells Fireball and Lightning Bolt in D&D 5e. What are their similarities and key differences?",
+  "expected_answer": "Both are 3rd-level Evocation spells available to Sorcerers and Wizards. Both deal damage (Dexterity saving throw, half on success) and scale at +1d6 per slot above 3rd. Key differences: Fireball has a range of 150 feet and hits a 20-foot-radius Sphere, dealing 6d8 Fire damage. Lightning Bolt originates from the caster (range: Self) and hits a 100-foot-long, 5-foot-wide Line, dealing 10d4 Lightning damage.",
+  "difficulty": "medium",
+  "results": {
+    "bm25_free_haiku": {
+      "answer": "Both 3rd-level Evocation, Sorcerer/Wizard, Dex save, +1d6/slot scaling. Fireball: 150 ft range, 20-ft sphere, 6d8 Fire. Lightning Bolt: Self range, 100-ft x 5-ft line, 10d4 Lightning. Source: SRD_CC_v5.2.1.pdf p.131, 144.",
+      "search_queries": ["Fireball spell damage range area", "Lightning Bolt spell damage range area", "Fireball Lightning Bolt comparison", "Lightning Bolt spell level 3 evocation"],
+      "search_calls": 4,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.131", "SRD_CC_v5.2.1.pdf p.144"],
+      "quality": {
+        "accuracy": 4,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 9,
+        "notes": "All key differences correctly identified in the comparison table. Both poisoned values found (6d8, 10d4). Internal contradiction: similarities section incorrectly states 'Both deal 6d8 damage at base level' before the table correctly distinguishes 6d8 vs 10d4."
+      }
+    }
+  },
+  "comparison_with_run3_sonnet": {
+    "sonnet_total": 10,
+    "haiku_total": 9,
+    "delta": -1,
+    "sonnet_search_calls": 3,
+    "haiku_search_calls": 4
+  }
+}

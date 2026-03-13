@@ -1,0 +1,28 @@
+{
+  "question_id": "q8_simple_scions_disguise",
+  "question": "In the Scions of Elemental Evil adventure, what must characters wear to disguise themselves as cultists inside the temple, and what ability check is required when a suspicious NPC interacts with them?",
+  "expected_answer": "Characters must wear silver masks and black robes. They must make a DC 10 Charisma (Deception) check each time a suspicious NPC interacts with them.",
+  "difficulty": "simple",
+  "results": {
+    "bm25_free_haiku": {
+      "answer": "Characters must wear black robes and silver masks (provided by Queen Yolande). When a suspicious cultist interacts with them, they must make a DC 10 Charisma (Deception) check. Failure means cultists attack. Source: Scions of Elemental Evil PDF p.4-6.",
+      "search_queries": ["Scions of Elemental Evil cultist disguise temple", "cultist robes disguise ability check deception"],
+      "search_calls": 2,
+      "sources_cited": ["Scions of Elemental Evil - Scions of Elemental Evil - Dungeons & Dragons - Sources - D&D Beyond.pdf p.4-6"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect. Both items (black robes, silver masks) and DC 10 Charisma (Deception) check correctly identified. Bonus context about Queen Yolande and failure consequences."
+      }
+    }
+  },
+  "comparison_with_run3_sonnet": {
+    "sonnet_total": 10,
+    "haiku_total": 10,
+    "delta": 0,
+    "sonnet_search_calls": 2,
+    "haiku_search_calls": 2
+  }
+}

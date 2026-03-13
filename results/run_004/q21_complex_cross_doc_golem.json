@@ -1,0 +1,28 @@
+{
+  "question_id": "q21_complex_cross_doc_golem",
+  "question": "In the Frozen Sick adventure, the characters encounter a flesh golem in Salsvault. How does this golem differ from a standard flesh golem as described in the SRD? What are the standard flesh golem's full stats?",
+  "expected_answer": "Standard Flesh Golem (SRD): Medium Construct, AC 9, HP 93 (11d8+44), Speed 30 ft., STR 19 (+4), DEX 9 (-1), CON 18 (+4), INT 6 (-2), WIS 10 (+0), CHA 5 (-3). Immunities: Lightning and Poison damage; Charmed, Exhaustion, Frightened, Paralyzed, Petrified, Poisoned conditions. Traits: Aversion to Fire, Berserk, Immutable Form, Lightning Absorption, Magic Resistance. CR 5 (1,800 XP). Actions: Multiattack (two Slam), Slam +7 to hit, 13 (2d8+4) Bludgeoning + 4 (1d8) Lightning. | Salsvault version differences: only 5 HP remaining, Berserk trait is already activated, has only one arm so it cannot use Multiattack, reduced to CR 1 (200 XP).",
+  "difficulty": "complex",
+  "results": {
+    "bm25_free_haiku": {
+      "answer": "Standard Flesh Golem (SRD 5.2.1): AC 9, HP 93 (11d8+44), Speed 30 ft. Immunities: Lightning/Poison damage; Charmed, Exhaustion, Frightened, Paralyzed, Petrified, Poisoned. Traits: Aversion to Fire, Berserk, Immutable Form, Lightning Absorption, Magic Resistance. CR 5 (1,800 XP). Slam +7, 2d8+4 bludgeoning + 1d8 lightning. Salsvault golem: only 5 HP, already berserk, one arm (no Multiattack), CR 1 (200 XP). Driven mad when Salsvault crashed into Foren; locked in room by Ferol. Source: SRD_CC_v5.2.1.pdf p.285, Frozen Sick PDF p.19-20.",
+      "search_queries": ["Frozen Sick Salsvault flesh golem", "flesh golem standard stats SRD"],
+      "search_calls": 2,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.285", "Frozen Sick - Wildemount Adventure - Dungeons & Dragons - Sources - D&D Beyond.pdf p.19-20"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Cross-document retrieval successful. Both standard SRD stats and Salsvault modifications correctly identified. All four Salsvault differences found (5 HP, berserk, one arm, CR 1). Full stat block with key mechanical values. Only 2 search calls for cross-doc question — very efficient."
+      }
+    }
+  },
+  "comparison_with_run3_sonnet": {
+    "sonnet_total": 10,
+    "haiku_total": 10,
+    "delta": 0,
+    "sonnet_search_calls": 4,
+    "haiku_search_calls": 2
+  }
+}

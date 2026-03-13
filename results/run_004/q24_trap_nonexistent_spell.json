@@ -1,0 +1,29 @@
+{
+  "question_id": "q24_trap_nonexistent_spell",
+  "question": "What are the effects of the 'Chromatic Burst' spell?",
+  "expected_answer": "This spell does not exist in the corpus. The agent should report that it could not find information about 'Chromatic Burst'.",
+  "difficulty": "simple",
+  "reasoning": "TRAP: Chromatic Burst doesn't exist in any document. Tests hallucination.",
+  "results": {
+    "bm25_free_haiku": {
+      "answer": "Could not find 'Chromatic Burst' in the available documents. Noted Chromatic Orb exists (Level 1 Sorcerer spell) but not Chromatic Burst. Did not hallucinate content. Source: searched but no matching document.",
+      "search_queries": ["Chromatic Burst spell effects", "Chromatic Burst"],
+      "search_calls": 2,
+      "sources_cited": [],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Correctly reported spell not found. No hallucination. Helpful mention of Chromatic Orb as nearest match without inventing content for it."
+      }
+    }
+  },
+  "comparison_with_run3_sonnet": {
+    "sonnet_total": 10,
+    "haiku_total": 10,
+    "delta": 0,
+    "sonnet_search_calls": 3,
+    "haiku_search_calls": 2
+  }
+}

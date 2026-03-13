@@ -1,0 +1,28 @@
+{
+  "question_id": "q5_complex_multistep",
+  "question": "I'm a level 9 Wizard with 20 Intelligence. I want to cast Fireball at a group of enemies 120 feet away. What is the spell save DC, what saving throw do the targets make, and how much damage do they take on a failed save?",
+  "expected_answer": "Spell save DC = 8 + proficiency bonus (+4 at level 9) + Intelligence modifier (+5) = 17. Targets make a Dexterity saving throw. On a failed save, they take 6d8 fire damage. On a success, half damage. Fireball has a range of 150 feet, so 120 feet is within range.",
+  "difficulty": "complex",
+  "results": {
+    "bm25_free_haiku": {
+      "answer": "DC = 8 + 5 (Int mod) + 4 (prof bonus) = 17. Targets make a Dexterity saving throw. 6d8 Fire damage on failed save, half on success. 120 feet within Fireball's 150-foot range. 20-foot-radius sphere. Source: SRD_CC_v5.2.1.pdf p.131-132, p.22.",
+      "search_queries": ["Fireball spell damage DC saving throw", "wizard spell save DC Intelligence modifier", "Fireball range 120 feet level 3 spell", "spell save DC formula 8 proficiency bonus spellcasting ability"],
+      "search_calls": 4,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.131-132", "SRD_CC_v5.2.1.pdf p.22"],
+      "quality": {
+        "accuracy": 4,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 9,
+        "notes": "All key elements correct: DC 17, Dex save, 6d8 fire (poisoned value), range confirmed. Minor error: stated '3d4 Fire damage on successful save' which is incorrect — half of 6d8 is not 3d4. The earlier correct statement 'half damage on success' contradicts this."
+      }
+    }
+  },
+  "comparison_with_run3_sonnet": {
+    "sonnet_total": 10,
+    "haiku_total": 9,
+    "delta": -1,
+    "sonnet_search_calls": 4,
+    "haiku_search_calls": 4
+  }
+}

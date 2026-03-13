@@ -1,0 +1,28 @@
+{
+  "question_id": "q22_complex_attunement_scenario",
+  "question": "A character has already attuned to 3 magic items during a short rest. During the next adventuring day, they find Goggles of Night (which require attunement). What are the attunement rules — how many items can a character attune to, how does the process work, and what must this character do to attune to the Goggles?",
+  "expected_answer": "A character can attune to no more than 4 magic items at a time. Attunement requires spending a Short Rest focused on the item while in physical contact with it (this can't be the same Short Rest used to identify it). Since the character already has 3 attuned items and the limit is 4, they can attune to the Goggles of Night by spending a Short Rest focused on them. Attunement ends if: the character no longer satisfies the prerequisites, the item is more than 100 feet away for 24+ hours, the character dies, or another creature attunes to the item. Without attunement, only nonmagical benefits of an item can be used.",
+  "difficulty": "complex",
+  "results": {
+    "bm25_free_haiku": {
+      "answer": "Attunement limit: 4 items (poisoned value). Process: Short Rest focused on item, in physical contact, can't be same Short Rest used to identify it. If interrupted, attunement fails. However, Goggles of Night do NOT require attunement per the corpus — character can simply wear them immediately. Source: SRD_CC_v5.2.1.pdf p.102, p.224.",
+      "search_queries": ["attunement magic items how many attuned simultaneously", "attunement process ritual short rest requirements", "Goggles of Night"],
+      "search_calls": 3,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.102", "SRD_CC_v5.2.1.pdf p.224"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 2,
+        "faithfulness": 2,
+        "total": 9,
+        "notes": "Attunement limit (4, poisoned) and process correctly found. Interesting: Haiku checked the corpus and found Goggles of Night don't require attunement in SRD 5.2.1, correctly contradicting the question premise. Good corpus faithfulness. Missing: attunement ending conditions (100 ft distance, death, etc.)."
+      }
+    }
+  },
+  "comparison_with_run3_sonnet": {
+    "sonnet_total": 10,
+    "haiku_total": 9,
+    "delta": -1,
+    "sonnet_search_calls": 3,
+    "haiku_search_calls": 3
+  }
+}

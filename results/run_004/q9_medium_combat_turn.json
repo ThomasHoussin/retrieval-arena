@@ -1,0 +1,28 @@
+{
+  "question_id": "q9_medium_combat_turn",
+  "question": "In D&D 5e, describe what a character can do on their turn during combat. What types of activities are available?",
+  "expected_answer": "On their turn, a character can: (1) Move up to their Speed, (2) Take one Action (options include Attack, Cast a Spell, Dash, Disengage, Dodge, Help, Hide, Ready, Search, Use an Object), (3) Take a Bonus Action if a class feature, spell, or ability grants one, (4) Interact with one object for free (e.g., draw a sword, open a door). Additionally, each creature gets one Reaction per round, which can be used on their turn or on someone else's turn (e.g., Opportunity Attack). A round represents about 10 seconds in the game world.",
+  "difficulty": "medium",
+  "results": {
+    "bm25_free_haiku": {
+      "answer": "Movement (up to Speed, can break up), Actions (Attack, Dash, Disengage, Dodge, Help, Hide, Influence, Magic, Ready, Search, Study, Utilize), Bonus Action (one per turn if granted), free object interaction, Reactions (one per round, resets at start of next turn), Communication (brief utterances/gestures). Can also forgo all activities. Source: SRD_CC_v5.2.1.pdf p.9-10, 13-14.",
+      "search_queries": ["character turn combat action bonus action movement", "what can you do on your turn combat activities", "action attack cast spell interact object reaction"],
+      "search_calls": 3,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.9-10", "SRD_CC_v5.2.1.pdf p.13-14"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Comprehensive answer using correct SRD 5.2.1 action names (Magic, Influence, Study, Utilize instead of 2014 Cast a Spell, Use an Object). All activity types covered with good detail."
+      }
+    }
+  },
+  "comparison_with_run3_sonnet": {
+    "sonnet_total": 10,
+    "haiku_total": 10,
+    "delta": 0,
+    "sonnet_search_calls": 3,
+    "haiku_search_calls": 3
+  }
+}

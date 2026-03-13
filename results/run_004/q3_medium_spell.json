@@ -1,0 +1,28 @@
+{
+  "question_id": "q3_medium_spell",
+  "question": "A wizard casts Dominate Monster on an Adult Red Dragon that is currently fighting the party. What ability score does the dragon use for its saving throw, and what is its modifier for that save?",
+  "expected_answer": "Wisdom saving throw with Advantage (the dragon is currently fighting the party). The Adult Red Dragon has Wis 13 (+1) but its Wisdom save modifier is +9 (proficiency bonus +6).",
+  "difficulty": "medium",
+  "results": {
+    "bm25_free_haiku": {
+      "answer": "The Adult Red Dragon uses Wisdom for its saving throw against Dominate Monster. The dragon's Wisdom modifier is +1, but since dragons have proficiency in Wisdom saves, it uses its Wisdom saving throw modifier of +9 (proficiency bonus +6). Source: SRD_CC_v5.2.1.pdf p.318, p.125.",
+      "search_queries": ["Dominate Monster spell", "Adult Red Dragon stat block"],
+      "search_calls": 2,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.318", "SRD_CC_v5.2.1.pdf p.125"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 2,
+        "faithfulness": 2,
+        "total": 9,
+        "notes": "Correctly identified Wisdom save and +9 modifier with proficiency breakdown. Missing the Advantage detail — Dominate Monster grants Advantage on the save when the target is currently fighting the caster's allies."
+      }
+    }
+  },
+  "comparison_with_run3_sonnet": {
+    "sonnet_total": 10,
+    "haiku_total": 9,
+    "delta": -1,
+    "sonnet_search_calls": 2,
+    "haiku_search_calls": 2
+  }
+}

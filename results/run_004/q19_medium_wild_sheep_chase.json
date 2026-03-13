@@ -1,0 +1,28 @@
+{
+  "question_id": "q19_medium_wild_sheep_chase",
+  "question": "In The Wild Sheep Chase adventure, who is the sheep the party encounters, what happened to it, and what danger is associated with the Wand of True Polymorph?",
+  "expected_answer": "Finethir Shinebright is a wizard who was polymorphed into a sheep by his former apprentice, Ahmed Noke, using the stolen Wand of True Polymorph. In sheep form, Shinebright communicates by nodding and bleating; a scroll allows the party to hear his actual voice. Noke is the antagonist found in his tower. The Wand of True Polymorph is dangerous: characters attempting to use it must make a saving throw as if against a regular casting of True Polymorph, and if they fail by more than 5, the wand explodes violently.",
+  "difficulty": "medium",
+  "results": {
+    "bm25_free_haiku": {
+      "answer": "Finethir Shinebright, a high elf transmutation wizard, polymorphed into a sheep by apprentice Ahmed Noke using Wand of True Polymorph. Escaped using Scroll of Speak with Animals. Wand danger: DC 17 Arcana check per use (DC increases permanently on success). Fail by ≤5: target becomes Gibbering Mouther (irreversible below 9th level). Fail by >5: Gibbering Mouther + wand explodes for 1d12 force per remaining charge to all within 10 ft. Source: 892902-The_Wild_Sheep_Chase_V2.pdf p.1-6.",
+      "search_queries": ["Wild Sheep Chase sheep identity wizard polymorph", "Wand of True Polymorph danger Wild Sheep Chase"],
+      "search_calls": 2,
+      "sources_cited": ["892902-The_Wild_Sheep_Chase_V2.pdf p.1-6"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "All key elements found. More detailed wand mechanics than expected answer (DC 17 Arcana, escalating DC, Gibbering Mouther on partial fail, explosion on severe fail with specific damage formula). Excellent corpus faithfulness."
+      }
+    }
+  },
+  "comparison_with_run3_sonnet": {
+    "sonnet_total": 10,
+    "haiku_total": 10,
+    "delta": 0,
+    "sonnet_search_calls": 2,
+    "haiku_search_calls": 2
+  }
+}

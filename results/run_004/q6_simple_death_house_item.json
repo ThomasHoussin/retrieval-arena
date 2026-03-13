@@ -1,0 +1,28 @@
+{
+  "question_id": "q6_simple_death_house_item",
+  "question": "In the Curse of Strahd introductory adventure (Death House), what object is found inside the small wooden coffer in the prison area (Area 36)?",
+  "expected_answer": "A dire wolf's withered tongue.",
+  "difficulty": "simple",
+  "results": {
+    "bm25_free_haiku": {
+      "answer": "Found conflicting info: the small wooden coffer with a dire wolf's withered tongue appears to be in Area 35 (Reliquary), not Area 36 (Prison). Area 36 contains a human skeleton with a gold ring (25 gp). Source: Curse of Strahd Introductory Adventure.pdf p.11.",
+      "search_queries": ["Death House Area 36 prison wooden coffer", "Curse of Strahd Death House prison coffer contents"],
+      "search_calls": 2,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf p.11"],
+      "quality": {
+        "accuracy": 4,
+        "completeness": 2,
+        "faithfulness": 2,
+        "total": 8,
+        "notes": "Found the correct item (dire wolf's withered tongue) but questioned the area number, stating it's in Area 35 not 36. Good research but the hedging and area confusion reduce clarity. Did provide both areas' contents."
+      }
+    }
+  },
+  "comparison_with_run3_sonnet": {
+    "sonnet_total": 10,
+    "haiku_total": 8,
+    "delta": -2,
+    "sonnet_search_calls": 2,
+    "haiku_search_calls": 2
+  }
+}

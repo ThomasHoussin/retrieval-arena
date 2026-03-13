@@ -1,0 +1,28 @@
+{
+  "question_id": "q12_medium_valturnax",
+  "question": "In the adventure 'A Dungeon and a Dragon', what is the name and type of the main dragon antagonist, and how has it been monitoring the adventurers throughout the dungeon?",
+  "expected_answer": "Valturnax, an adult green dragon. He has been spying on the party's progress through the dungeon via the eyes of rodents and birds throughout the complex. When the party reaches his lair, he has pre-cast Mislead and sits invisibly on the walkways. He announces himself and monologues before initiating combat, so no creature is surprised.",
+  "difficulty": "medium",
+  "results": {
+    "bm25_free_haiku": {
+      "answer": "Valturnax, an Adult Green Dragon. He monitors adventurers through the eyes of rodents and birds throughout the dungeon. Pre-cast Mislead; invisibly positioned 20 feet up on west side of area 18 while his illusory image appears in area 16. Instructs kobold minions on party's location for ambushes. Source: A_Dungeon_and_A_Dragon PDF p.1-2, 15-16.",
+      "search_queries": ["A Dungeon and a Dragon main dragon antagonist", "dragon monitoring adventurers dungeon surveillance", "Valturnax monitoring following adventurers magical scrying observation"],
+      "search_calls": 3,
+      "sources_cited": ["A_Dungeon_and_A_Dragon_A_5E_Adventure_for_11_16th_level_characters.pdf p.1-2, 15-16"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 2,
+        "faithfulness": 2,
+        "total": 9,
+        "notes": "Correctly identified Valturnax, adult green dragon, rodent/bird surveillance, and Mislead. Missing the monologue/announcement detail and 'no creature is surprised' nuance. Added useful kobold ambush coordination detail."
+      }
+    }
+  },
+  "comparison_with_run3_sonnet": {
+    "sonnet_total": 10,
+    "haiku_total": 9,
+    "delta": -1,
+    "sonnet_search_calls": 3,
+    "haiku_search_calls": 3
+  }
+}
