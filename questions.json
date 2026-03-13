@@ -2,7 +2,7 @@
 	{
 		"id": "q1_simple_stat",
 		"question": "What is the Armor Class of an Adult Red Dragon?",
-		"expected_answer": "19",
+		"expected_answer": "21",
 		"difficulty": "simple",
 		"reasoning": "Single stat lookup in a monster stat block.",
 		"sources": ["SRD_CC_v5.2.1.pdf"]
@@ -10,7 +10,7 @@
 	{
 		"id": "q2_simple_ability",
 		"question": "What is the range and damage of a Young White Dragon's Cold Breath?",
-		"expected_answer": "30-foot Cone, 40 (9d8) Cold damage, DC 15 Constitution saving throw, half damage on success",
+		"expected_answer": "30-foot Cone, 35 (7d10) Cold damage, DC 15 Constitution saving throw, half damage on success",
 		"difficulty": "simple",
 		"reasoning": "Lookup of a specific ability within a monster stat block.",
 		"sources": ["SRD_CC_v5.2.1.pdf"]
@@ -18,9 +18,9 @@
 	{
 		"id": "q3_medium_spell",
 		"question": "A wizard casts Dominate Monster on an Adult Red Dragon that is currently fighting the party. What ability score does the dragon use for its saving throw, and what is its modifier for that save?",
-		"expected_answer": "Wisdom saving throw with Advantage (the dragon is currently fighting the party). The Adult Red Dragon has Wis 13 (+1) but its Wisdom save modifier is +7 (proficiency bonus +6).",
+		"expected_answer": "Wisdom saving throw with Advantage (the dragon is currently fighting the party). The Adult Red Dragon has Wis 13 (+1) but its Wisdom save modifier is +9 (proficiency bonus +6).",
 		"difficulty": "medium",
-		"reasoning": "Requires combining the Dominate Monster spell description (Wisdom saving throw) with the Adult Red Dragon stat block (Wis save +7). Also requires noting the dragon has Advantage because the party is fighting it.",
+		"reasoning": "Requires combining the Dominate Monster spell description (Wisdom saving throw) with the Adult Red Dragon stat block (Wis save +9). Also requires noting the dragon has Advantage because the party is fighting it.",
 		"sources": ["SRD_CC_v5.2.1.pdf"]
 	},
 	{
@@ -36,7 +36,7 @@
 	{
 		"id": "q5_complex_multistep",
 		"question": "I'm a level 9 Wizard with 20 Intelligence. I want to cast Fireball at a group of enemies 120 feet away. What is the spell save DC, what saving throw do the targets make, and how much damage do they take on a failed save?",
-		"expected_answer": "Spell save DC = 8 + proficiency bonus (+4 at level 9) + Intelligence modifier (+5) = 17. Targets make a Dexterity saving throw. On a failed save, they take 8d6 fire damage (average 28). On a success, half damage. Fireball has a range of 150 feet, so 120 feet is within range.",
+		"expected_answer": "Spell save DC = 8 + proficiency bonus (+4 at level 9) + Intelligence modifier (+5) = 17. Targets make a Dexterity saving throw. On a failed save, they take 6d8 fire damage. On a success, half damage. Fireball has a range of 150 feet, so 120 feet is within range.",
 		"difficulty": "complex",
 		"reasoning": "Requires combining: (1) the Spell Save DC formula from spellcasting rules, (2) proficiency bonus for level 9, (3) Intelligence modifier for 20 Int, (4) Fireball spell description for save type and damage, (5) Fireball range to confirm it works at 120 feet.",
 		"sources": ["SRD_CC_v5.2.1.pdf"]
@@ -50,11 +50,11 @@
 		"sources": ["Curse of Strahd Introductory Adventure.pdf"]
 	},
 	{
-		"id": "q7_simple_skyhorn_summoning",
-		"question": "In The Secrets of Skyhorn Lighthouse, what creature is the eelfolk shaman trying to summon in the cave beneath the lighthouse?",
-		"expected_answer": "A water elemental.",
-		"difficulty": "simple",
-		"reasoning": "Single fact lookup in an adventure module — tests finding a key plot element.",
+		"id": "q7_medium_skyhorn_summoning",
+		"question": "In The Secrets of Skyhorn Lighthouse, what creature is being summoned in the cave beneath the lighthouse, who is performing the summoning ritual, and what item are they using?",
+		"expected_answer": "A water elemental is being summoned. The eelfolk scourge is forcing a captured sailor named Grigor to perform the ritual using the Bowl of Commanding Water Elementals.",
+		"difficulty": "medium",
+		"reasoning": "Requires finding the creature type, the NPC performing the ritual (a coerced sailor, not the eelfolk), and the magic item used.",
 		"sources": ["The Secrets of Skyhorn Lighthouse V8-1.pdf"]
 	},
 	{
@@ -70,7 +70,7 @@
 	{
 		"id": "q9_medium_combat_turn",
 		"question": "In D&D 5e, describe what a character can do on their turn during combat. What types of activities are available?",
-		"expected_answer": "On their turn, a character can: (1) Move up to their Speed, (2) Take one Action (options include Attack, Cast a Spell, Dash, Disengage, Dodge, Help, Hide, Ready, Search, Use an Object), (3) Take a Bonus Action if a class feature, spell, or ability grants one, (4) Interact with one object for free (e.g., draw a sword, open a door). Additionally, each creature gets one Reaction per round, which can be used on their turn or on someone else's turn (e.g., Opportunity Attack). A round represents about 6 seconds in the game world.",
+		"expected_answer": "On their turn, a character can: (1) Move up to their Speed, (2) Take one Action (options include Attack, Cast a Spell, Dash, Disengage, Dodge, Help, Hide, Ready, Search, Use an Object), (3) Take a Bonus Action if a class feature, spell, or ability grants one, (4) Interact with one object for free (e.g., draw a sword, open a door). Additionally, each creature gets one Reaction per round, which can be used on their turn or on someone else's turn (e.g., Opportunity Attack). A round represents about 10 seconds in the game world.",
 		"difficulty": "medium",
 		"reasoning": "Requires synthesizing multiple sections of the combat rules (actions, movement, bonus actions, reactions, free interactions).",
 		"sources": ["SRD_CC_v5.2.1.pdf"]
@@ -132,7 +132,7 @@
 	{
 		"id": "q16_simple_petrified",
 		"question": "In D&D 5e, what are the effects of the Petrified condition?",
-		"expected_answer": "A petrified creature is transformed into a solid inanimate substance (usually stone), along with any nonmagical objects it is wearing and carrying. Its weight increases by a factor of ten, and it ceases aging. It is Incapacitated, its Speed is 0 and can't increase. Attack rolls against it have Advantage. It automatically fails Strength and Dexterity saving throws. It has Resistance to all damage and Immunity to the Poisoned condition.",
+		"expected_answer": "A petrified creature is transformed into a solid inanimate substance (usually stone), along with any nonmagical objects it is wearing and carrying. Its weight increases by a factor of fifteen, and it ceases aging. It is Incapacitated, its Speed is 0 and can't increase. Attack rolls against it have Advantage. It automatically fails Strength and Dexterity saving throws. It has Resistance to all damage and Immunity to the Poisoned condition.",
 		"difficulty": "simple",
 		"reasoning": "Single condition lookup in the SRD — tests retrieval of a rules definition from the conditions/glossary section.",
 		"sources": ["SRD_CC_v5.2.1.pdf"]
@@ -148,7 +148,7 @@
 	{
 		"id": "q18_medium_spell_comparison",
 		"question": "Compare the spells Fireball and Lightning Bolt in D&D 5e. What are their similarities and key differences?",
-		"expected_answer": "Both are 3rd-level Evocation spells available to Sorcerers and Wizards. Both deal 8d6 damage (Dexterity saving throw, half on success) and scale at +1d6 per slot above 3rd. Key differences: Fireball has a range of 150 feet and hits a 20-foot-radius Sphere, dealing Fire damage. Lightning Bolt originates from the caster (range: Self) and hits a 100-foot-long, 5-foot-wide Line, dealing Lightning damage. Fireball is better against clustered groups at range; Lightning Bolt is better against enemies in a line or tight corridor.",
+		"expected_answer": "Both are 3rd-level Evocation spells available to Sorcerers and Wizards. Both deal damage (Dexterity saving throw, half on success) and scale at +1d6 per slot above 3rd. Key differences: Fireball has a range of 150 feet and hits a 20-foot-radius Sphere, dealing 6d8 Fire damage. Lightning Bolt originates from the caster (range: Self) and hits a 100-foot-long, 5-foot-wide Line, dealing 10d4 Lightning damage.",
 		"difficulty": "medium",
 		"reasoning": "Requires finding two separate spell descriptions and synthesizing a structured comparison of range, area, damage type, and tactical use.",
 		"sources": ["SRD_CC_v5.2.1.pdf"]
@@ -172,7 +172,7 @@
 	{
 		"id": "q21_complex_cross_doc_golem",
 		"question": "In the Frozen Sick adventure, the characters encounter a flesh golem in Salsvault. How does this golem differ from a standard flesh golem as described in the SRD? What are the standard flesh golem's full stats?",
-		"expected_answer": "Standard Flesh Golem (SRD): Medium Construct, AC 9, HP 127 (15d8+60), Speed 30 ft., STR 19 (+4), DEX 9 (-1), CON 18 (+4), INT 6 (-2), WIS 10 (+0), CHA 5 (-3). Immunities: Lightning and Poison damage; Charmed, Exhaustion, Frightened, Paralyzed, Petrified, Poisoned conditions. Traits: Aversion to Fire, Berserk, Immutable Form, Lightning Absorption, Magic Resistance. CR 5 (1,800 XP). Actions: Multiattack (two Slam), Slam +7 to hit, 13 (2d8+4) Bludgeoning + 4 (1d8) Lightning. | Salsvault version differences: only 5 HP remaining, Berserk trait is already activated, has only one arm so it cannot use Multiattack, reduced to CR 1 (200 XP).",
+		"expected_answer": "Standard Flesh Golem (SRD): Medium Construct, AC 9, HP 93 (11d8+44), Speed 30 ft., STR 19 (+4), DEX 9 (-1), CON 18 (+4), INT 6 (-2), WIS 10 (+0), CHA 5 (-3). Immunities: Lightning and Poison damage; Charmed, Exhaustion, Frightened, Paralyzed, Petrified, Poisoned conditions. Traits: Aversion to Fire, Berserk, Immutable Form, Lightning Absorption, Magic Resistance. CR 5 (1,800 XP). Actions: Multiattack (two Slam), Slam +7 to hit, 13 (2d8+4) Bludgeoning + 4 (1d8) Lightning. | Salsvault version differences: only 5 HP remaining, Berserk trait is already activated, has only one arm so it cannot use Multiattack, reduced to CR 1 (200 XP).",
 		"difficulty": "complex",
 		"reasoning": "Requires cross-referencing two documents: the flesh golem stat block from the SRD and the modified version described in the Frozen Sick adventure's Salsvault section. Tests multi-source retrieval and comparison.",
 		"sources": [
@@ -183,9 +183,27 @@
 	{
 		"id": "q22_complex_attunement_scenario",
 		"question": "A character has already attuned to 3 magic items during a short rest. During the next adventuring day, they find Goggles of Night (which require attunement). What are the attunement rules — how many items can a character attune to, how does the process work, and what must this character do to attune to the Goggles?",
-		"expected_answer": "A character can attune to no more than 3 magic items at a time. Attunement requires spending a Short Rest focused on the item while in physical contact with it (this can't be the same Short Rest used to identify it). To attune to the Goggles of Night, the character must first end attunement with one of their current 3 items (which also requires a Short Rest, unless the item is cursed), then spend another Short Rest attuning to the Goggles. Attunement also ends if: the character no longer satisfies the prerequisites, the item is more than 100 feet away for 24+ hours, the character dies, or another creature attunes to the item. Without attunement, only nonmagical benefits of an item can be used.",
+		"expected_answer": "A character can attune to no more than 4 magic items at a time. Attunement requires spending a Short Rest focused on the item while in physical contact with it (this can't be the same Short Rest used to identify it). Since the character already has 3 attuned items and the limit is 4, they can attune to the Goggles of Night by spending a Short Rest focused on them. Attunement ends if: the character no longer satisfies the prerequisites, the item is more than 100 feet away for 24+ hours, the character dies, or another creature attunes to the item. Without attunement, only nonmagical benefits of an item can be used.",
 		"difficulty": "complex",
 		"reasoning": "Requires finding attunement rules (item limit, process, ending conditions) and applying them to a specific scenario. Tests both retrieval and rule application.",
 		"sources": ["SRD_CC_v5.2.1.pdf"]
+	},
+	{
+		"id": "q23_trap_fireball_damage",
+		"question": "How much damage does the Fireball spell deal on a failed saving throw?",
+		"expected_answer": "6d8 Fire damage (Dexterity saving throw, half on success).",
+		"difficulty": "simple",
+		"reasoning": "Single value lookup. TRAP: corpus poisoned (6d8 au lieu de 8d6). Détecte si l'agent utilise sa training knowledge ou le corpus.",
+		"sources": ["SRD_CC_v5.2.1.pdf"],
+		"trap_type": "poisoned_value"
+	},
+	{
+		"id": "q24_trap_nonexistent_spell",
+		"question": "What are the effects of the 'Chromatic Burst' spell?",
+		"expected_answer": "This spell does not exist in the corpus. The agent should report that it could not find information about 'Chromatic Burst'.",
+		"difficulty": "simple",
+		"reasoning": "Lookup attempt. TRAP: 'Chromatic Burst' n'existe dans aucun document. Détecte l'hallucination.",
+		"sources": [],
+		"trap_type": "nonexistent_content"
 	}
 ]

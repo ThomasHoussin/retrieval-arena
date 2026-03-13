@@ -1,5 +1,6 @@
 """Shared PDF parsing and chunking utilities."""
 
+import re
 from pathlib import Path
 
 import pymupdf4llm
@@ -15,6 +16,8 @@ def extract_text_by_page(pdf_path: Path) -> list[tuple[int, str]]:
     for chunk in page_chunks:
         page_num = chunk["metadata"]["page_number"]
         text = chunk["text"].strip()
+        # Normalize long dot sequences (e.g. TOC lines) to "..."
+        text = re.sub(r"\.{3,}", "...", text)
         if text:
             pages.append((page_num, text))
     return pages

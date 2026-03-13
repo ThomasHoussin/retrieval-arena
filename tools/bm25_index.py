@@ -43,6 +43,12 @@ def main():
 
     print(f"\nTotal: {len(all_chunks)} chunks")
 
+    # Apply corpus poison
+    from corpus_poison import apply_poison, log_poison_stats
+
+    all_chunks, poison_stats = apply_poison(all_chunks)
+    log_poison_stats(poison_stats)
+
     # Tokenize
     texts = [c["text"] for c in all_chunks]
     stemmer = Stemmer.Stemmer("english")

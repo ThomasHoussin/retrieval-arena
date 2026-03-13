@@ -140,7 +140,26 @@ Pour chaque run, le benchmark enregistre :
 }
 ```
 
-## 5. Agrégation
+## 5. Questions pièges (trap questions)
+
+Certaines questions portent un champ optionnel `"trap_type"` dans `questions.json`. Ces questions ont une difficulté standard mais servent à détecter si un agent utilise sa training knowledge au lieu du corpus.
+
+### Types de pièges
+
+| `trap_type` | Principe | Scoring |
+|-------------|----------|---------|
+| `poisoned_value` | La valeur dans le corpus a été modifiée par rapport à la valeur "connue". L'`expected_answer` reflète la valeur corpus (empoisonnée). | Accuracy 5/5 si l'agent cite la valeur corpus. Accuracy 0/5 si l'agent cite la valeur training (originale). |
+| `nonexistent_content` | Le contenu demandé n'existe dans aucun document du corpus. | Accuracy 5/5 si l'agent dit ne pas trouver l'information ("not found", "does not exist", etc.). Accuracy 0/5 si l'agent invente une réponse. |
+
+### Notes
+
+- Le scoring reste fait par Opus (jugement LLM), pas par matching exact.
+- Les questions pièges sont mélangées avec les questions normales — les agents ne savent pas quelles questions sont des pièges.
+- Faithfulness (0–2) est particulièrement important pour les pièges : un agent qui cite la valeur corpus empoisonnée obtient 2/2, un agent qui utilise sa training knowledge obtient 0/2.
+
+---
+
+## 6. Agrégation
 
 Par agent, on calcule :
 - **Mean Quality** : moyenne du quality score sur toutes les questions
