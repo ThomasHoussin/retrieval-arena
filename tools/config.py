@@ -21,11 +21,12 @@ REQUIRED_KEYS = {
 
 DEFAULTS = {
     "docs_dir": "./docs",
-    "collection_name": "dnd5e_chunks",
+    "collection_name": "corpus_chunks",
     "stemmer_language": "english",
     "qdrant_url": "http://localhost:6333",
     "embedding_model": "nomic-ai/nomic-embed-text-v1.5",
     "pdf_backend": "pymupdf",
+    "poison": False,
 }
 
 
@@ -111,4 +112,5 @@ def load_config(config_path: str | Path | None = None) -> dict:
         "qdrant_url": raw["qdrant_url"],
         "embedding_model": raw["embedding_model"],
         "pdf_backend": pdf_backend,
+        "poison": bool(raw.get("poison", False)),
     }

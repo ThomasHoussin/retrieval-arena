@@ -10,9 +10,9 @@ AGENTS_DIR = Path(__file__).parent.parent / ".claude" / "agents"
 AGENT_FILES = sorted(AGENTS_DIR.glob("*.md"))
 
 # Expected MCP server names per agent type
-BM25_AGENTS = {"dnd-5e-researcher", "dnd-5e-researcher-2round", "dnd-5e-researcher-bm25-free", "dnd-5e-researcher-bm25-free-haiku"}
-VECTOR_AGENTS = {"dnd-5e-researcher-vector", "dnd-5e-researcher-vector-2round", "dnd-5e-researcher-vector-free"}
-HYBRID_AGENTS = {"dnd-5e-researcher-hybrid-free"}
+BM25_AGENTS = {"researcher", "researcher-2round", "researcher-bm25-free", "researcher-bm25-free-haiku"}
+VECTOR_AGENTS = {"researcher-vector", "researcher-vector-2round", "researcher-vector-free"}
+HYBRID_AGENTS = {"researcher-hybrid-free"}
 VALID_MODEL_SHORTCUTS = {"sonnet", "haiku", "opus"}
 VALID_MODEL_PREFIXES = ("claude-sonnet-", "claude-haiku-", "claude-opus-")
 

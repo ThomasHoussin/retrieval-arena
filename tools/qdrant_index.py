@@ -1,4 +1,4 @@
-"""Index D&D PDF corpus into Qdrant with FastEmbed vectors."""
+"""Index PDF corpus into Qdrant with FastEmbed vectors."""
 
 import hashlib
 import os
@@ -138,10 +138,13 @@ def main():
 
     chunks = extract_corpus(cfg["docs_dir"], backend=cfg["pdf_backend"])
 
-    from corpus_poison import apply_poison, log_poison_stats
+    if cfg.get("poison", False):
+        from corpus_poison import apply_poison, log_poison_stats
 
-    chunks, poison_stats = apply_poison(chunks)
-    log_poison_stats(poison_stats)
+        chunks, poison_stats = apply_poison(chunks)
+        log_poison_stats(poison_stats)
+    else:
+        print('Poison: disabled (set "poison": true in config to enable)')
 
     build_qdrant_index(chunks, cfg, reset=reset)
 

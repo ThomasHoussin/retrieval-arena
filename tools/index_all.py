@@ -18,11 +18,14 @@ def main():
     # 1. Extract all PDFs → chunks (single pass)
     chunks = extract_corpus(cfg["docs_dir"], backend=cfg["pdf_backend"])
 
-    # 2. Apply corpus poison
-    from corpus_poison import apply_poison, log_poison_stats
+    # 2. Apply corpus poison (if enabled)
+    if cfg.get("poison", False):
+        from corpus_poison import apply_poison, log_poison_stats
 
-    chunks, poison_stats = apply_poison(chunks)
-    log_poison_stats(poison_stats)
+        chunks, poison_stats = apply_poison(chunks)
+        log_poison_stats(poison_stats)
+    else:
+        print('Poison: disabled (set "poison": true in config to enable)')
 
     # 3. Build BM25 index
     from bm25_index import build_bm25_index

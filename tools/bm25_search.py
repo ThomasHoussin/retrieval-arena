@@ -1,4 +1,4 @@
-"""Search the BM25-indexed D&D corpus."""
+"""Search the BM25-indexed corpus."""
 
 import argparse
 
@@ -12,7 +12,7 @@ INDEX_DIR = cfg["bm25_index_dir"]
 
 
 def main():
-    parser = argparse.ArgumentParser(description="BM25 search over D&D corpus")
+    parser = argparse.ArgumentParser(description="BM25 search over corpus")
     parser.add_argument("query", help="Search query")
     parser.add_argument(
         "--top-k", type=int, default=10, help="Number of results (default: 10)"

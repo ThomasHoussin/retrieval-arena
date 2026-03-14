@@ -1,6 +1,6 @@
 # Search Bench
 
-Benchmark comparing multiple search strategies over the same document corpus (D&D 5e PDFs).
+Benchmark comparing multiple search strategies over the same document corpus (PDF documents).
 
 ## Goal
 
@@ -20,7 +20,7 @@ Evaluate and compare search quality across 7 strategies:
 ## Architecture
 
 - **Search agent**: Claude Sonnet, receives a question + a search tool (one per strategy)
-- **Corpus**: D&D PDF documents in `docs/`
+- **Corpus**: PDF documents in `docs/` (configurable via `search_bench.json`)
 - **Arbiter**: Claude Opus evaluates the quality of results from each strategy
 - Each strategy exposes an MCP tool that the Sonnet agent can call
 - Scoring is standardized for objective comparison
@@ -44,15 +44,16 @@ File `search_bench.json` at the project root:
 ```json
 {
   "docs_dir": "./docs",
-  "collection_name": "dnd5e_chunks",
+  "collection_name": "my_corpus",
   "stemmer_language": "english",
   "qdrant_url": "http://localhost:6333",
   "embedding_model": "jinaai/jina-embeddings-v3",
-  "pdf_backend": "pymupdf"
+  "pdf_backend": "pymupdf",
+  "poison": false
 }
 ```
 
-- `docs_dir`: path to PDF corpus (relative to config file)
+- `docs_dir`: path to PDF corpus (relative to config file), recurses into subdirectories
 - `collection_name`: collection name, used to derive:
   - BM25 index: `data/bm25_{collection_name}`
   - Qdrant collection: `{collection_name}`
@@ -60,6 +61,7 @@ File `search_bench.json` at the project root:
 - `qdrant_url`: Qdrant server URL
 - `embedding_model`: FastEmbed embedding model
 - `pdf_backend`: `"pymupdf"` (default, fast, CPU) or `"marker"` (OCR-capable, GPU required)
+- `poison`: `false` (default) or `true` — apply corpus poisoning at indexation via `corpus_poison.py`
 
 To switch corpus or collection, edit this file then re-index (both BM25 + Qdrant).
 
@@ -102,18 +104,18 @@ See `scoring.md` for the full rubric. Summary:
 
 | Agent | Strategy | Engine | Rounds | maxTurns |
 |-------|----------|--------|--------|----------|
-| `dnd-5e-researcher` | BM25 simple | bm25s | 1 | 2 |
-| `dnd-5e-researcher-2round` | BM25 2-round | bm25s | 2 | 4 |
-| `dnd-5e-researcher-vector` | Vector naive | Qdrant | 1 | 2 |
-| `dnd-5e-researcher-vector-2round` | Vector 2-round | Qdrant | 2 | 4 |
+| `researcher` | BM25 simple | bm25s | 1 | 2 |
+| `researcher-2round` | BM25 2-round | bm25s | 2 | 4 |
+| `researcher-vector` | Vector naive | Qdrant | 1 | 2 |
+| `researcher-vector-2round` | Vector 2-round | Qdrant | 2 | 4 |
 
 ### Free agents
 
 | Agent | Engine | maxTurns |
 |-------|--------|----------|
-| `dnd-5e-researcher-bm25-free` | bm25s | default |
-| `dnd-5e-researcher-vector-free` | Qdrant | default |
-| `dnd-5e-researcher-hybrid-free` | bm25s + Qdrant | default |
+| `researcher-bm25-free` | bm25s | default |
+| `researcher-vector-free` | Qdrant | default |
+| `researcher-hybrid-free` | bm25s + Qdrant | default |
 
 ## Conventions
 
