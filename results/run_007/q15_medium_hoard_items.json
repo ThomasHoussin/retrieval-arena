@@ -1,0 +1,66 @@
+{
+  "question_id": "q15_medium_hoard_items",
+  "question": "In the adventure 'A Dungeon and a Dragon', what magic items can be found in Valturnax's treasure hoard, and how can characters attempt to loot it during combat?",
+  "expected_answer": "Valturnax's hoard contains: a Scroll of Nystul's Magic Aura, Goggles of Night, Potion of Fire Breath, Potion of Water Breathing, Glasses of Minute Seeing, and a magic ring, among other items. During combat, a character can spend their action, bonus action, and movement to steal 200 gp per turn from the hoard, or use their movement to search for a specific magic item. Valturnax will not simply allow looting and will actively contest it.",
+  "difficulty": "medium",
+  "results": {
+    "vector_naive": {
+      "answer": "Full item table (8+ items including Bag of Devouring trap) + both looting phases. Part 1: action+BA+movement for magic item or 200 gp. Part 2: 100 gp free or magic item + DC 15 Dex (20 bludgeoning). Source: A Dungeon and a Dragon p.18-20.",
+      "search_queries": ["Valturnax treasure hoard magic items loot combat"],
+      "search_calls": 1,
+      "sources_cited": ["A_Dungeon_and_A_Dragon.pdf p.18-20"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Excellent single-query result. Full item table and both looting mechanics retrieved."
+      }
+    },
+    "vector_2round": {
+      "answer": "Full item table + both looting phases with detailed mechanics. Trigger conditions detailed (100/75 hp or last LR). Bag of Devouring trap. Source: A Dungeon and a Dragon p.19-20.",
+      "search_queries": ["Valturnax treasure hoard magic items", "A Dungeon and a Dragon adventure magic items", "looting treasure during combat dragon hoard"],
+      "search_calls": 3,
+      "sources_cited": ["A_Dungeon_and_A_Dragon.pdf p.19-20"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Comprehensive. Round 2 not needed."
+      }
+    },
+    "vector_free": {
+      "answer": "Full item table + both looting phases. Part 1: action+BA+movement for magic item or 200 gp. Part 2: 100 gp free or magic item + DC 15 Dex (20 bludgeoning). Source: A Dungeon and a Dragon p.18-19.",
+      "search_queries": ["Valturnax treasure hoard magic items", "Valturnax loot combat dungeon dragon"],
+      "search_calls": 2,
+      "sources_cited": ["A_Dungeon_and_A_Dragon.pdf p.18-19"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete with efficient 2-query search."
+      }
+    },
+    "hybrid_free": {
+      "answer": "Full item table + both looting phases with trigger conditions. Part 1: action+BA+movement for magic item or 200 gp. Part 2: DC 15 Dex, 20 bludgeoning. Source: A Dungeon and a Dragon p.18-20.",
+      "search_queries": ["Valturnax treasure hoard magic items", "Valturnax treasure hoard magic items loot during combat"],
+      "search_calls": 2,
+      "sources_cited": ["A_Dungeon_and_A_Dragon.pdf p.18-20"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer. Both engines converged on same content."
+      }
+    }
+  },
+  "comparison_with_run3": {
+    "vector_naive": { "run3": 10, "run7": 10, "delta": 0 },
+    "vector_2round": { "run3": 10, "run7": 10, "delta": 0 },
+    "vector_free": { "run3": 10, "run7": 10, "delta": 0 },
+    "hybrid_free": { "run3": 10, "run7": 10, "delta": 0 }
+  }
+}

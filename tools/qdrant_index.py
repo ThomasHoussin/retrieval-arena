@@ -1,8 +1,15 @@
 """Index D&D PDF corpus into Qdrant with FastEmbed vectors."""
 
+import os
 import sys
 import hashlib
 from pathlib import Path
+
+# Add cuDNN to PATH for CUDA support
+cudnn_path = r"C:\Program Files\NVIDIA\CUDNN\v9.20\bin\12.9\x64"
+if os.path.exists(cudnn_path):
+    os.environ["PATH"] = cudnn_path + os.pathsep + os.environ.get("PATH", "")
+
 
 # Fix Windows encoding
 if sys.stdout.encoding != "utf-8":
@@ -17,11 +24,11 @@ from pdf_utils import extract_text_by_page, chunk_document
 
 DOCS_DIR = Path(__file__).parent.parent / "docs"
 COLLECTION_NAME = "dnd5e_chunks"
-EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+EMBEDDING_MODEL = "nomic-ai/nomic-embed-text-v1.5"
 # Must match mcp-server-qdrant's FastEmbedProvider.get_vector_name()
-VECTOR_NAME = "fast-all-minilm-l6-v2"
-VECTOR_SIZE = 384
-BATCH_SIZE = 100
+VECTOR_NAME = "fast-nomic-embed-text-v1.5"
+VECTOR_SIZE = 768
+BATCH_SIZE = 8
 QDRANT_URL = "http://localhost:6333"
 
 
@@ -91,16 +98,31 @@ def main():
 
     # Embed and upsert in batches
     print(f"Loading embedding model: {EMBEDDING_MODEL}...")
-    model = TextEmbedding(model_name=EMBEDDING_MODEL)
+    import warnings
+    warnings.filterwarnings("ignore")
+    os.environ["ORT_LOG_LEVEL"] = "3"
+    model = TextEmbedding(model_name=EMBEDDING_MODEL, cuda=True)
+
+    # Verify CUDA
+    import onnxruntime as ort
+    providers = ort.get_available_providers()
+    if "CUDAExecutionProvider" in providers:
+        print(f"  GPU: CUDA active")
+    else:
+        print(f"  GPU: NOT available, running on CPU")
 
     texts = [c["text"] for c in all_chunks]
-    print("Embedding and upserting...")
+    print(f"Embedding and upserting {len(all_chunks)} chunks in batches of {BATCH_SIZE}...")
 
+    import time
+    total_start = time.time()
     for i in range(0, len(all_chunks), BATCH_SIZE):
         batch_chunks = all_chunks[i : i + BATCH_SIZE]
         batch_texts = texts[i : i + BATCH_SIZE]
 
+        batch_start = time.time()
         embeddings = list(model.passage_embed(batch_texts))
+        embed_time = time.time() - batch_start
 
         points = [
             PointStruct(
@@ -117,9 +139,11 @@ def main():
         ]
 
         client.upsert(collection_name=COLLECTION_NAME, points=points)
-        print(f"  Upserted {min(i + BATCH_SIZE, len(all_chunks))}/{len(all_chunks)}")
+        done = min(i + BATCH_SIZE, len(all_chunks))
+        elapsed = time.time() - total_start
+        print(f"  [{done}/{len(all_chunks)}] embed={embed_time:.2f}s total={elapsed:.1f}s")
 
-    print("Done.")
+    print(f"Done in {time.time() - total_start:.1f}s.")
 
 
 if __name__ == "__main__":

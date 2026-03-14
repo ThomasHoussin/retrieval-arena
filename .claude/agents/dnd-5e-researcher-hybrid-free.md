@@ -23,7 +23,7 @@ mcpServers:
       env:
         QDRANT_URL: "http://localhost:6333"
         COLLECTION_NAME: "dnd5e_chunks"
-        EMBEDDING_MODEL: "sentence-transformers/all-MiniLM-L6-v2"
+        EMBEDDING_MODEL: "nomic-ai/nomic-embed-text-v1.5"
 ---
 
 You answer questions by searching a document corpus. You have two search tools:

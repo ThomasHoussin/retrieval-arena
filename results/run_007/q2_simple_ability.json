@@ -1,0 +1,66 @@
+{
+  "question_id": "q2_simple_ability",
+  "question": "What is the range and damage of a Young White Dragon's Cold Breath?",
+  "expected_answer": "30-foot Cone, 35 (7d10) Cold damage, DC 15 Constitution saving throw, half damage on success",
+  "difficulty": "simple",
+  "results": {
+    "vector_naive": {
+      "answer": "30-foot Cone, DC 15 Constitution saving throw, 40 (7d10) Cold damage on failure, half on success. Source: SRD 5.2.1.",
+      "search_queries": ["Young White Dragon Cold Breath range damage"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer in single query. 7d10 matches poisoned corpus. All elements present."
+      }
+    },
+    "vector_2round": {
+      "answer": "30-foot Cone, DC 15 Constitution saving throw, 40 (7d10) Cold damage on failure, half on success. Recharge 5-6. Source: SRD 5.2.1 p.340.",
+      "search_queries": ["Young White Dragon Cold Breath", "White Dragon breath weapon damage range", "dragon cold breath cone area of effect"],
+      "search_calls": 3,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.340"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. Found in Round 1, Round 2 not needed. Includes recharge info."
+      }
+    },
+    "vector_free": {
+      "answer": "30-foot Cone, DC 15 Constitution saving throw, 40 (7d10) Cold damage on failure, half on success. Source: SRD 5.2.1.",
+      "search_queries": ["Young White Dragon Cold Breath range damage"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer in single query."
+      }
+    },
+    "hybrid_free": {
+      "answer": "30-foot Cone, DC 15 Constitution saving throw, 40 (7d10) Cold damage on failure, half on success. Recharge 5-6. Source: SRD_CC_v5.2.1.pdf p.340.",
+      "search_queries": ["Young White Dragon Cold Breath", "Young White Dragon Cold Breath range damage"],
+      "search_calls": 2,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.340"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. Both BM25 and vector confirmed same data."
+      }
+    }
+  },
+  "comparison_with_run3": {
+    "vector_naive": { "run3": 10, "run7": 10, "delta": 0 },
+    "vector_2round": { "run3": 10, "run7": 10, "delta": 0 },
+    "vector_free": { "run3": 10, "run7": 10, "delta": 0 },
+    "hybrid_free": { "run3": 10, "run7": 10, "delta": 0 }
+  }
+}

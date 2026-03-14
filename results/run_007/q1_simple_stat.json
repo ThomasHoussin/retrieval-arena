@@ -1,0 +1,66 @@
+{
+  "question_id": "q1_simple_stat",
+  "question": "What is the Armor Class of an Adult Red Dragon?",
+  "expected_answer": "21",
+  "difficulty": "simple",
+  "results": {
+    "vector_naive": {
+      "answer": "The Adult Red Dragon has an Armor Class (AC) of 21. Source: System Reference Document 5.2.1, page 318.",
+      "search_queries": ["Adult Red Dragon armor class stats"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.318"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer in single query. AC 21 correct (poisoned). Very efficient."
+      }
+    },
+    "vector_2round": {
+      "answer": "The Armor Class of an Adult Red Dragon is 21. Source: System Reference Document 5.2.1, page 318.",
+      "search_queries": ["Adult Red Dragon Armor Class", "Red Dragon stats AC natural armor", "Adult Red Dragon stat block"],
+      "search_calls": 3,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.318"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. Found in Round 1, Round 2 not needed. All 3 parallel queries returned same result."
+      }
+    },
+    "vector_free": {
+      "answer": "The Armor Class of an Adult Red Dragon is 21. Source: System Reference Document 5.2.1, page 318.",
+      "search_queries": ["Adult Red Dragon Armor Class"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.318"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer in single query. Most efficient."
+      }
+    },
+    "hybrid_free": {
+      "answer": "The Armor Class of the Adult Red Dragon is 21. Source: SRD_CC_v5.2.1.pdf, page 318.",
+      "search_queries": ["Adult Red Dragon Armor Class", "Adult Red Dragon Armor Class stats"],
+      "search_calls": 2,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.318"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. BM25 returned index, vector returned full stat block."
+      }
+    }
+  },
+  "comparison_with_run3": {
+    "vector_naive": { "run3": 10, "run7": 10, "delta": 0 },
+    "vector_2round": { "run3": 10, "run7": 10, "delta": 0 },
+    "vector_free": { "run3": 10, "run7": 10, "delta": 0 },
+    "hybrid_free": { "run3": 10, "run7": 10, "delta": 0 }
+  }
+}

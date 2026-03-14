@@ -1,0 +1,66 @@
+{
+  "question_id": "q5_complex_multistep",
+  "question": "I'm a level 9 Wizard with 20 Intelligence. I want to cast Fireball at a group of enemies 120 feet away. What is the spell save DC, what saving throw do the targets make, and how much damage do they take on a failed save?",
+  "expected_answer": "Spell save DC = 8 + proficiency bonus (+4 at level 9) + Intelligence modifier (+5) = 17. Targets make a Dexterity saving throw. On a failed save, they take 6d8 fire damage. On a success, half damage. Fireball has a range of 150 feet, so 120 feet is within range.",
+  "difficulty": "complex",
+  "results": {
+    "vector_naive": {
+      "answer": "Dexterity saving throw. 6d8 Fire damage on failed save, half on success. Range 150 ft, 120 ft in range. Could NOT find DC formula in search results. Refused to calculate DC from training knowledge.",
+      "search_queries": ["Fireball spell damage saving throw DC"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.131"],
+      "quality": {
+        "accuracy": 3,
+        "completeness": 2,
+        "faithfulness": 2,
+        "total": 7,
+        "notes": "Found Fireball entry (6d8 poisoned, Dex save, range 150ft) but failed to find DC formula in single query. Faithful in refusing to guess DC. Same result as Run 3."
+      }
+    },
+    "vector_2round": {
+      "answer": "DC 17 (8+5+4). Dexterity saving throw. 6d8 Fire damage on failed save, half on success. Range 150 ft, 120 ft in range. Upcast table provided. Sources: SRD p.22, p.131.",
+      "search_queries": ["Fireball spell damage saving throw", "spell save DC calculation wizard Intelligence", "Fireball range area of effect", "proficiency bonus by character level table", "Fireball higher level spell slot damage increase"],
+      "search_calls": 5,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.22", "SRD_CC_v5.2.1.pdf p.131"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. Used Round 2 to find proficiency bonus table. Complete with upcast table."
+      }
+    },
+    "vector_free": {
+      "answer": "DC 17 (8+5+4). Dexterity saving throw. 6d8 Fire damage on failed save, half on success. Range 150 ft, 120 ft in range. Upcast: +1d6 per slot above 3rd. Sources: SRD p.22, p.131.",
+      "search_queries": ["Fireball spell damage saving throw", "spell save DC calculation wizard Intelligence", "spell save DC formula proficiency bonus spellcasting ability modifier", "Fireball range 120 feet level 9 wizard higher level slot"],
+      "search_calls": 4,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.22", "SRD_CC_v5.2.1.pdf p.131"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. All components verified from corpus sources."
+      }
+    },
+    "hybrid_free": {
+      "answer": "DC 17 (8+5+4). Dexterity saving throw. 6d8 Fire damage on failed save, half on success. Range 150 ft, 120 ft in range. Upcast: +1d6 per slot above 3rd. Sources: SRD p.22, p.131.",
+      "search_queries": ["Fireball spell damage save DC", "Fireball spell damage saving throw DC wizard", "spell save DC formula proficiency bonus spellcasting ability wizard", "Fireball 8 9 level damage higher spell slot"],
+      "search_calls": 4,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.22", "SRD_CC_v5.2.1.pdf p.131"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. BM25 found spell text, vector confirmed DC formula. Efficient hybrid usage."
+      }
+    }
+  },
+  "comparison_with_run3": {
+    "vector_naive": { "run3": 7, "run7": 7, "delta": 0 },
+    "vector_2round": { "run3": 10, "run7": 10, "delta": 0 },
+    "vector_free": { "run3": 10, "run7": 10, "delta": 0 },
+    "hybrid_free": { "run3": 10, "run7": 10, "delta": 0 }
+  }
+}

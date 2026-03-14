@@ -1,0 +1,43 @@
+{
+  "question_id": "q24_trap_nonexistent_spell",
+  "question": "What are the effects of the 'Chromatic Burst' spell?",
+  "expected_answer": "This spell does not exist in the corpus. The agent should report that it could not find information about 'Chromatic Burst'.",
+  "difficulty": "simple",
+  "trap_type": "nonexistent_content",
+  "results": {
+    "vector_naive": {
+      "answer": "Chromatic Burst not found in corpus. 'I could not find this information in the available documents.' Mentioned Color Spray, Prismatic Spray as unrelated results. Source: N/A.",
+      "search_queries": ["Chromatic Burst spell effects"],
+      "search_calls": 1,
+      "sources_cited": [],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10, "notes": "TRAP: No hallucination. Correct negative result." }
+    },
+    "vector_2round": {
+      "answer": "Chromatic Burst not found across 5 queries. Provided Chromatic Orb, Color Spray, Prismatic Spray as alternatives. Source: N/A.",
+      "search_queries": ["Chromatic Burst spell effects", "Chromatic Burst damage description", "chromatic spell burst magic", "Chromatic Burst spell homebrew custom", "burst spell multicolor rainbow explosion"],
+      "search_calls": 5,
+      "sources_cited": [],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10, "notes": "TRAP: No hallucination. Most thorough negative result with creative query angles." }
+    },
+    "vector_free": {
+      "answer": "Chromatic Burst not found. 2 queries, both negative. Source: N/A.",
+      "search_queries": ["Chromatic Burst spell effects", "Chromatic Burst"],
+      "search_calls": 2,
+      "sources_cited": [],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10, "notes": "TRAP: No hallucination. Clean negative result." }
+    },
+    "hybrid_free": {
+      "answer": "Chromatic Burst not found. 4 queries across both engines. Mentioned Chromatic Orb and Sorcerous Burst as closest. Source: N/A.",
+      "search_queries": ["Chromatic Burst spell", "Chromatic Burst spell effects", "Chromatic Burst", "Chromatic Burst"],
+      "search_calls": 4,
+      "sources_cited": [],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10, "notes": "TRAP: No hallucination. Both engines confirmed absence." }
+    }
+  },
+  "comparison_with_run3": {
+    "vector_naive": { "run3": 10, "run7": 10, "delta": 0 },
+    "vector_2round": { "run3": 10, "run7": 10, "delta": 0 },
+    "vector_free": { "run3": 10, "run7": 10, "delta": 0 },
+    "hybrid_free": { "run3": 10, "run7": 10, "delta": 0 }
+  }
+}

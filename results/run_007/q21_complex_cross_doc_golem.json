@@ -1,0 +1,42 @@
+{
+  "question_id": "q21_complex_cross_doc_golem",
+  "question": "In the Frozen Sick adventure, the characters encounter a flesh golem in Salsvault. How does this golem differ from a standard flesh golem as described in the SRD? What are the standard flesh golem's full stats?",
+  "expected_answer": "Standard Flesh Golem (SRD): Medium Construct, AC 9, HP 93 (11d8+44), Speed 30 ft., STR 19 (+4), DEX 9 (-1), CON 18 (+4), INT 6 (-2), WIS 10 (+0), CHA 5 (-3). Immunities: Lightning and Poison damage; Charmed, Exhaustion, Frightened, Paralyzed, Petrified, Poisoned conditions. Traits: Aversion to Fire, Berserk, Immutable Form, Lightning Absorption, Magic Resistance. CR 5 (1,800 XP). Actions: Multiattack (two Slam), Slam +7 to hit, 13 (2d8+4) Bludgeoning + 4 (1d8) Lightning. | Salsvault version differences: only 5 HP remaining, Berserk trait is already activated, has only one arm so it cannot use Multiattack, reduced to CR 1 (200 XP).",
+  "difficulty": "complex",
+  "results": {
+    "vector_naive": {
+      "answer": "Salsvault: 5 HP, Berserk active, one arm, CR 1 (200 XP). Standard: found traits (Lightning Absorption, Immutable Form, Magic Resistance, Slam +7/2d8+4+1d8 Lightning) but full header stats (AC, HP, Speed, CR) not retrieved. Source: Frozen Sick, SRD.",
+      "search_queries": ["flesh golem Salsvault Frozen Sick stats"],
+      "search_calls": 1,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf", "SRD_CC_v5.2.1.pdf"],
+      "quality": { "accuracy": 4, "completeness": 2, "faithfulness": 2, "total": 8, "notes": "Found Salsvault mods + partial SRD (traits, actions correct). Missing header stats. Better than Run 3 (found more of the SRD block)." }
+    },
+    "vector_2round": {
+      "answer": "Salsvault: 5 HP, Berserk active, one arm, CR 1 (200 XP). Standard: AC 9, HP 93, Speed 30, CR 5 (1800 XP, PB +3). Full immunities, all 5 traits, Slam +7/2d8+4+1d8 Lightning. Ability scores not in retrieved text. Comparison table. Source: Frozen Sick p.19-20, SRD p.285.",
+      "search_queries": ["flesh golem Salsvault Frozen Sick adventure", "flesh golem stats standard SRD", "Salsvault golem encounter combat", "flesh golem stat block AC HP ability scores", "S16 golem lab Salsvault area description", "flesh golem Medium Construct Neutral AC HP"],
+      "search_calls": 6,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf p.19-20", "SRD_CC_v5.2.1.pdf p.285"],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10, "notes": "Found both docs. Full SRD block (minus ability scores). All traits and actions. Major improvement from Run 3 (was 5 — retrieved wrong golem). Nomic embeddings much better for monster stat blocks." }
+    },
+    "vector_free": {
+      "answer": "Salsvault: 5 HP, Berserk active, one arm, CR 1 (200 XP). Standard: AC 9, HP 93, Speed 30, CR 5. Str 19/Dex 9/Con 18 found, Int/Wis/Cha missing. All 5 traits, Slam +7/2d8+4+1d8 Lightning. Source: Frozen Sick, SRD p.285.",
+      "search_queries": ["flesh golem Salsvault Frozen Sick", "flesh golem stats standard SRD", "S16 golem lab Salsvault", "flesh golem Medium Construct AC HP STR DEX CON"],
+      "search_calls": 4,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf", "SRD_CC_v5.2.1.pdf p.285"],
+      "quality": { "accuracy": 5, "completeness": 2, "faithfulness": 2, "total": 9, "notes": "Found most of SRD stat block including 3/6 ability scores. Improvement from Run 3 (was 8)." }
+    },
+    "hybrid_free": {
+      "answer": "Salsvault: 5 HP, Berserk active, one arm, CR 1 (200 XP). Standard: AC 9, HP 93, Speed 30, CR 5 (1800 XP, PB +3). Full immunities, all 5 traits, Slam +7/2d8+4+1d8 Lightning. Comparison table. Source: Frozen Sick p.19-20, SRD p.285.",
+      "search_queries": ["flesh golem Salsvault Frozen Sick", "flesh golem stat block AC hit points slam", "flesh golem strength dexterity constitution", "flesh golem Salsvault Frozen Sick adventure stats", "flesh golem statistics berserk aversion fire lightning"],
+      "search_calls": 5,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf p.19-20", "SRD_CC_v5.2.1.pdf p.285"],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10, "notes": "Best cross-doc result. BM25 found header stats. Both documents fully covered." }
+    }
+  },
+  "comparison_with_run3": {
+    "vector_naive": { "run3": 6, "run7": 8, "delta": 2 },
+    "vector_2round": { "run3": 5, "run7": 10, "delta": 5 },
+    "vector_free": { "run3": 8, "run7": 9, "delta": 1 },
+    "hybrid_free": { "run3": 10, "run7": 10, "delta": 0 }
+  }
+}

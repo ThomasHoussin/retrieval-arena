@@ -1,0 +1,66 @@
+{
+  "question_id": "q3_medium_spell",
+  "question": "A wizard casts Dominate Monster on an Adult Red Dragon that is currently fighting the party. What ability score does the dragon use for its saving throw, and what is its modifier for that save?",
+  "expected_answer": "Wisdom saving throw with Advantage (the dragon is currently fighting the party). The Adult Red Dragon has Wis 13 (+1) but its Wisdom save modifier is +9 (proficiency bonus +6).",
+  "difficulty": "medium",
+  "results": {
+    "vector_naive": {
+      "answer": "Wisdom saving throw with +9 modifier. Wis 13, mod +1, save +9. Also has Legendary Resistance (3/Day, 4/Day in Lair). Source: SRD 5.2.1 p.318.",
+      "search_queries": ["Adult Red Dragon saving throws Wisdom"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.318"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 2,
+        "faithfulness": 2,
+        "total": 9,
+        "notes": "Wis +9 correct (poisoned). Mentioned Legendary Resistance. Did not explicitly note Advantage from Dominate Monster's fighting clause — only had 1 search and found stat block but not spell text."
+      }
+    },
+    "vector_2round": {
+      "answer": "Wisdom saving throw with Advantage (party is fighting dragon). Wis 13, +1 mod, +9 save. Legendary Resistance (3/Day, 4/Day in Lair). Sources: SRD 5.2.1 p.125, p.318.",
+      "search_queries": ["Dominate Monster saving throw ability score", "Adult Red Dragon saving throws Wisdom", "Dominate Monster spell Wisdom saving throw"],
+      "search_calls": 3,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.125", "SRD_CC_v5.2.1.pdf p.318"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect. Found both Dominate Monster spell (Wisdom save + Advantage clause) and Adult Red Dragon stat block (Wis save +9). Round 2 used to find spell text. Complete multi-source synthesis."
+      }
+    },
+    "vector_free": {
+      "answer": "Wisdom saving throw with Advantage (party is fighting). Wis 13, +1 mod, +9 save. Legendary Resistance (3/Day, 4/Day in Lair). Sources: SRD 5.2.1 p.125, p.318.",
+      "search_queries": ["Adult Red Dragon saving throws", "Dominate Monster saving throw ability score", "Dominate Monster spell Wisdom saving throw"],
+      "search_calls": 3,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.125", "SRD_CC_v5.2.1.pdf p.318"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect. Identified Advantage clause and +9 save (poisoned). Complete answer with both sources."
+      }
+    },
+    "hybrid_free": {
+      "answer": "Wisdom saving throw with Advantage (party is fighting). Wis +1 mod, +9 save. Legendary Resistance (3/Day, 4/Day in Lair). Sources: SRD_CC_v5.2.1.pdf p.125-126, p.318.",
+      "search_queries": ["Dominate Monster saving throw ability score", "Adult Red Dragon wisdom saving throw modifier stats"],
+      "search_calls": 2,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.125-126", "SRD_CC_v5.2.1.pdf p.318"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect. BM25 found Dominate Monster spell, vector found stat block. Most efficient multi-source answer."
+      }
+    }
+  },
+  "comparison_with_run3": {
+    "vector_naive": { "run3": 5, "run7": 9, "delta": 4 },
+    "vector_2round": { "run3": 2, "run7": 10, "delta": 8 },
+    "vector_free": { "run3": 10, "run7": 10, "delta": 0 },
+    "hybrid_free": { "run3": 10, "run7": 10, "delta": 0 }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "question_id": "q10_medium_surprise",
+  "question": "In D&D 5e (SRD 5.2.1), a group of 4 adventurers is ambushed by goblins. Two adventurers were keeping watch and noticed the goblins, but the other two were asleep. How does surprise work in this situation?",
+  "expected_answer": "The two sleeping adventurers are surprised — they cannot move, take actions, or take reactions until after their first turn ends. The two on watch are NOT surprised and act normally from the first round. The goblins are also not surprised. All creatures still roll initiative normally; the surprised characters simply cannot do anything on their first turn. A member of a group can be surprised even if other members are not.",
+  "difficulty": "medium",
+  "results": {
+    "vector_naive": {
+      "answer": "Found Incapacitated condition's Disadvantage on Initiative, and Unconscious condition for sleepers, but could NOT find the full surprise rules section in single query. Admitted gaps and refused to fill in from training knowledge.",
+      "search_queries": ["surprise rules combat initiative sleeping characters"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf"],
+      "quality": {
+        "accuracy": 3,
+        "completeness": 1,
+        "faithfulness": 2,
+        "total": 6,
+        "notes": "Found partial info (Incapacitated → Disadvantage on Initiative, Unconscious condition) but could not retrieve the core surprise rule. Faithfully refused to guess. Regression from Run 3 (was 9)."
+      }
+    },
+    "vector_2round": {
+      "answer": "SRD 5.2.1 revised surprise: Disadvantage on Initiative, not lost turn. Sleepers are Unconscious (Incapacitated, Prone, Speed 0, auto-fail Str/Dex, crits within 5ft). Per-creature determination. Need waking to act. Full summary table. Source: SRD p.12, 183, 189-190.",
+      "search_queries": ["surprise rules combat ambush", "surprised condition initiative", "keeping watch sleeping encounter", "surprised disadvantage initiative unaware combat start", "unconscious condition combat sleeping incapacitated prone"],
+      "search_calls": 5,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.12", "SRD_CC_v5.2.1.pdf p.183", "SRD_CC_v5.2.1.pdf p.189-190"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Very detailed. Full condition chain (Unconscious → Incapacitated → Surprised). Summary table. Used Round 2 effectively."
+      }
+    },
+    "vector_free": {
+      "answer": "SRD 5.2.1 revised surprise: Disadvantage on Initiative. Per-creature determination. Sleepers Unconscious (Incapacitated, Prone, Speed 0). Disadvantage doesn't stack from multiple sources. Source: SRD p.12-13, 183-184, 189-191.",
+      "search_queries": ["surprise rules combat initiative", "surprise ambush sleeping adventurers", "surprised condition initiative disadvantage individual combatant"],
+      "search_calls": 3,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.12-13", "SRD_CC_v5.2.1.pdf p.183-184", "SRD_CC_v5.2.1.pdf p.189-191"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Excellent. Precise condition chain with rule citations. Noted Disadvantage non-stacking."
+      }
+    },
+    "hybrid_free": {
+      "answer": "SRD 5.2.1 revised surprise: Disadvantage on Initiative. Full Unconscious condition breakdown. Summary table. Incapacitated → Surprised interaction. Waking rules. Cited conversion document. Source: SRD p.12-13, 183-184, 189-191, converting doc.",
+      "search_queries": ["surprise rules combat ambush", "surprise rules ambush sleeping adventurers combat initiative", "unconscious condition initiative disadvantage surprised"],
+      "search_calls": 3,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.12-13", "SRD_CC_v5.2.1.pdf p.183-184", "SRD_CC_v5.2.1.pdf p.189-191", "converting-to-srd-5.2.1.pdf p.1-2"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Most comprehensive answer. Full condition chain, summary table, waking rules, conversion doc citation."
+      }
+    }
+  },
+  "comparison_with_run3": {
+    "vector_naive": { "run3": 9, "run7": 6, "delta": -3 },
+    "vector_2round": { "run3": 10, "run7": 10, "delta": 0 },
+    "vector_free": { "run3": 10, "run7": 10, "delta": 0 },
+    "hybrid_free": { "run3": 10, "run7": 10, "delta": 0 }
+  }
+}

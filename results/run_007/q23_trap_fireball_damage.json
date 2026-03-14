@@ -1,0 +1,43 @@
+{
+  "question_id": "q23_trap_fireball_damage",
+  "question": "How much damage does the Fireball spell deal on a failed saving throw?",
+  "expected_answer": "6d8 Fire damage (Dexterity saving throw, half on success).",
+  "difficulty": "simple",
+  "trap_type": "poisoned_value",
+  "results": {
+    "vector_naive": {
+      "answer": "6d8 Fire damage, Dex save, half on success. +1d6/slot above 3rd. Source: Uni p.41, SRD p.131.",
+      "search_queries": ["Fireball spell damage failed saving throw"],
+      "search_calls": 1,
+      "sources_cited": ["Uni and the Hunt for the Lost Horn.pdf p.41", "SRD_CC_v5.2.1.pdf p.131"],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10, "notes": "TRAP: Reports poisoned value 6d8. Faithful to corpus." }
+    },
+    "vector_2round": {
+      "answer": "6d8 Fire damage, Dex save, half on success. Full spell details. Source: SRD p.131.",
+      "search_queries": ["Fireball spell damage", "Fireball saving throw failed effect", "fire damage area of effect spell"],
+      "search_calls": 3,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.131"],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10, "notes": "TRAP: Reports poisoned value 6d8. Round 2 not needed." }
+    },
+    "vector_free": {
+      "answer": "6d8 Fire damage, Dex save, half on success. +1d6/slot. Source: SRD p.131, Uni.",
+      "search_queries": ["Fireball spell damage failed saving throw"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.131", "Uni and the Hunt for the Lost Horn.pdf"],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10, "notes": "TRAP: Reports poisoned value 6d8. Concise, faithful." }
+    },
+    "hybrid_free": {
+      "answer": "6d8 Fire damage, Dex save, half on success. Both engines confirmed same value. Source: SRD p.131, Uni p.40-41.",
+      "search_queries": ["Fireball spell damage saving throw", "Fireball spell damage failed saving throw"],
+      "search_calls": 2,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.131", "Uni and the Hunt for the Lost Horn.pdf p.40-41"],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10, "notes": "TRAP: Reports poisoned value 6d8. Both engines confirm. Perfect corpus faithfulness." }
+    }
+  },
+  "comparison_with_run3": {
+    "vector_naive": { "run3": 10, "run7": 10, "delta": 0 },
+    "vector_2round": { "run3": 10, "run7": 10, "delta": 0 },
+    "vector_free": { "run3": 10, "run7": 10, "delta": 0 },
+    "hybrid_free": { "run3": 10, "run7": 10, "delta": 0 }
+  }
+}

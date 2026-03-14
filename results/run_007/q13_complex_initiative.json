@@ -1,0 +1,66 @@
+{
+  "question_id": "q13_complex_initiative",
+  "question": "Three adventurers prepare for combat: a Level 7 Champion Fighter with 14 Dexterity, a Level 7 Rogue with 18 Dexterity and the Alert feat, and a Level 7 Cleric with 10 Dexterity. Compare their initiative modifiers and special features. Who is most likely to act first?",
+  "expected_answer": "Champion Fighter (Level 7): Dexterity modifier +2. Remarkable Athlete (Champion feature at level 3) grants Advantage on Initiative rolls. | Rogue with Alert (Level 7): Dexterity modifier +4, plus Proficiency Bonus +3 (from Alert feat's Initiative Proficiency) = +7. | Cleric (Level 7): Dexterity modifier +0, no special initiative features. | The Rogue has the highest flat bonus (+7) and is most likely to go first.",
+  "difficulty": "complex",
+  "results": {
+    "vector_naive": {
+      "answer": "Rogue (Alert): DEX +4 + PB +3 = +7. Fighter: DEX +2, no special initiative features found. Cleric: +0. Rogue acts first. Source: SRD 5.2.1.",
+      "search_queries": ["initiative modifier rules Dexterity Alert feat Champion Fighter Rogue Cleric"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf"],
+      "quality": {
+        "accuracy": 3,
+        "completeness": 2,
+        "faithfulness": 2,
+        "total": 7,
+        "notes": "Missed Remarkable Athlete (Advantage on Initiative) for Champion Fighter. Rogue and Cleric correct. Single query insufficient for this multi-source question. Same as Run 3."
+      }
+    },
+    "vector_2round": {
+      "answer": "Champion Fighter: +2 with Advantage (Remarkable Athlete). Rogue: +7 (DEX +4 + Alert PB +3), Initiative Swap. Cleric: +0 (Blessed Strikes, no initiative effect). Rogue most likely first (~17.5 vs ~15.8 vs ~10.5). Source: SRD p.22, 48-49, 62-63, 86-87.",
+      "search_queries": ["initiative modifier rules Dexterity", "Alert feat initiative bonus", "Champion Fighter level 7 features", "Rogue level 7 features Dexterity", "Alert feat Proficiency Bonus initiative roll", "Cleric level 7 features subclass"],
+      "search_calls": 6,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.22, 48-49, 62-63, 86-87"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete with all features, statistical comparison, Initiative Swap. Round 2 used effectively."
+      }
+    },
+    "vector_free": {
+      "answer": "Champion Fighter: +2 with Advantage (Remarkable Athlete). Rogue: +7 (DEX +4 + Alert PB +3), Initiative Swap. Cleric: +0 (Blessed Strikes). Rogue most likely first (~17.5 vs ~15.8 vs ~10.5). Initiative Score comparison (both Fighter and Rogue = 17 static). Source: SRD p.5, 7, 23, 37, 48, 62, 87, 184.",
+      "search_queries": ["initiative modifier rules Dexterity", "Alert feat initiative bonus", "Alert feat proficiency bonus initiative", "Champion Fighter subclass level 7 features", "Alert feat origin general feat description", "Rogue level 7 initiative special feature"],
+      "search_calls": 6,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.5, 7, 23, 37, 48, 62, 87, 184"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Most detailed answer with static Initiative Score comparison. All features sourced."
+      }
+    },
+    "hybrid_free": {
+      "answer": "Champion Fighter: +2 with Advantage (Remarkable Athlete). Rogue: +7 (DEX +4 + Alert PB +3), Initiative Swap. Cleric: +0 (Blessed Strikes). Rogue most likely first. Full statistical breakdown. Source: SRD p.22, 37, 48-49, 61-63, 86-87.",
+      "search_queries": ["initiative modifier dexterity", "initiative rules modifier combat order", "Alert feat initiative advantage proficiency bonus", "Champion Fighter subclass features level 7", "Rogue features level 7", "Cleric features level 7"],
+      "search_calls": 6,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.22, 37, 48-49, 61-63, 86-87"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete with all features, statistical analysis, and quoted rules text."
+      }
+    }
+  },
+  "comparison_with_run3": {
+    "vector_naive": { "run3": 7, "run7": 7, "delta": 0 },
+    "vector_2round": { "run3": 10, "run7": 10, "delta": 0 },
+    "vector_free": { "run3": 10, "run7": 10, "delta": 0 },
+    "hybrid_free": { "run3": 10, "run7": 10, "delta": 0 }
+  }
+}

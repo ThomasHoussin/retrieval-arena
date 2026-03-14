@@ -1,0 +1,42 @@
+{
+  "question_id": "q18_medium_spell_comparison",
+  "question": "Compare the spells Fireball and Lightning Bolt in D&D 5e. What are their similarities and key differences?",
+  "expected_answer": "Both are 3rd-level Evocation spells available to Sorcerers and Wizards. Both deal damage (Dexterity saving throw, half on success) and scale at +1d6 per slot above 3rd. Key differences: Fireball has a range of 150 feet and hits a 20-foot-radius Sphere, dealing 6d8 Fire damage. Lightning Bolt originates from the caster (range: Self) and hits a 100-foot-long, 5-foot-wide Line, dealing 10d4 Lightning damage.",
+  "difficulty": "medium",
+  "results": {
+    "vector_naive": {
+      "answer": "Found Fireball (6d8 Fire, 20-ft Sphere, 150 ft) but Lightning Bolt not returned. Refused to fill gaps from training knowledge. Source: SRD 5.2.1.",
+      "search_queries": ["Fireball and Lightning Bolt spell description damage area"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf"],
+      "quality": { "accuracy": 2, "completeness": 1, "faithfulness": 2, "total": 5, "notes": "Single query insufficient for two-spell comparison. Found FB but not LB. Correctly refused to hallucinate. Same as Run 3." }
+    },
+    "vector_2round": {
+      "answer": "Full comparison: Fireball 6d8 Fire, 20-ft Sphere, 150 ft. Lightning Bolt 10d4 Lightning, 100-ft Line 5-ft wide, Range Self. Both 3rd Evocation, Sorc/Wiz, Dex save, +1d6/slot. Tactical analysis included. Source: SRD p.131-132, 144.",
+      "search_queries": ["Fireball spell damage area effect", "Lightning Bolt spell damage range", "Fireball Lightning Bolt comparison 3rd level spells"],
+      "search_calls": 3,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.131-132, 144"],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10, "notes": "Complete comparison. Both poisoned values (6d8, 10d4) found. Round 2 not needed. Improvement from Run 3 (was 8)." }
+    },
+    "vector_free": {
+      "answer": "Full comparison: Fireball 6d8 Fire, 20-ft Sphere, 150 ft. Lightning Bolt 10d4 Lightning, 100-ft Line 5-ft wide, Range Self. Both 3rd Evocation, Sorc/Wiz, Dex save, +1d6/slot. Source: SRD p.131-132, 144.",
+      "search_queries": ["Fireball spell", "Lightning Bolt spell", "Fireball level 3 evocation damage"],
+      "search_calls": 3,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.131-132, 144"],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10, "notes": "Complete with both poisoned values. Improvement from Run 3 (was 8)." }
+    },
+    "hybrid_free": {
+      "answer": "Full comparison: Fireball 6d8 Fire, 20-ft Sphere, 150 ft. Lightning Bolt 10d4 Lightning, 100-ft Line 5-ft wide, Range Self. Both 3rd Evocation, Sorc/Wiz, Dex save, +1d6/slot. Wand comparisons included. Source: SRD p.131-132, 144.",
+      "search_queries": ["Fireball spell", "Lightning Bolt spell damage area", "Lightning Bolt level 3 evocation 100-foot line dexterity saving throw"],
+      "search_calls": 3,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf p.131-132, 144"],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10, "notes": "Complete. BM25 found LB entry that vector missed. Hybrid advantage clear here." }
+    }
+  },
+  "comparison_with_run3": {
+    "vector_naive": { "run3": 5, "run7": 5, "delta": 0 },
+    "vector_2round": { "run3": 8, "run7": 10, "delta": 2 },
+    "vector_free": { "run3": 8, "run7": 10, "delta": 2 },
+    "hybrid_free": { "run3": 10, "run7": 10, "delta": 0 }
+  }
+}

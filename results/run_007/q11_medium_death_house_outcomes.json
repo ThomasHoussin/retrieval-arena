@@ -1,0 +1,66 @@
+{
+  "question_id": "q11_medium_death_house_outcomes",
+  "question": "In the Curse of Strahd introductory adventure (Death House), what are the possible outcomes when the characters reach the ritual altar in the basement?",
+  "expected_answer": "Two main outcomes: (1) If the characters sacrifice a creature at the altar, the cult is appeased, Death House harbors no ill will, the mists recede, and the characters can leave freely. (2) If the characters refuse to sacrifice, the shambling mound attacks and the house itself turns hostile — animated furniture and objects attack as the characters try to flee through the now-hostile haunted house. Strahd is satisfied either way.",
+  "difficulty": "medium",
+  "results": {
+    "vector_naive": {
+      "answer": "Two outcomes: (1) Sacrifice → cult appeased, Strahd aware, free to leave, 3rd level. (2) Refuse → shambling mound (Lorghoth the Decayer), then hostile house (scytheblades DC 15/2d10, smoke DC 10/1d10, rotted walls/rats). Strahd satisfied either way. Source: Death House PDF p.11-12.",
+      "search_queries": ["Death House basement ritual altar outcomes"],
+      "search_calls": 1,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf p.11-12"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer in single query with full mechanical details for both outcomes."
+      }
+    },
+    "vector_2round": {
+      "answer": "Two outcomes with exhaustive detail: (1) Sacrifice → cult appeased, 'He is the Ancient. He is the Land', Strahd aware, mists recede. (2) Refuse → shambling mound, then hostile house (scytheblades, smoke, rotted walls, rats). Both lead to 3rd level. Strahd satisfied either way. Source: Death House PDF.",
+      "search_queries": ["Death House ritual altar basement outcomes", "Death House basement sacrifice cult ritual", "Curse of Strahd introductory adventure basement encounter"],
+      "search_calls": 3,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Most comprehensive answer. Round 2 not needed."
+      }
+    },
+    "vector_free": {
+      "answer": "Two outcomes with full detail including trigger mechanics (DC 11 Religion/Insight). (1) Sacrifice → cult appeased. (2) Refuse → shambling mound, then hostile house with full architectural changes. Source: Death House PDF p.11-12.",
+      "search_queries": ["Death House ritual altar basement outcomes", "Death House basement sacrifice cult ritual"],
+      "search_calls": 2,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf p.11-12"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer with trigger mechanics and both outcomes."
+      }
+    },
+    "hybrid_free": {
+      "answer": "Two outcomes: (1) Sacrifice → cult appeased, Strahd aware, mists recede, 3rd level. (2) Refuse → shambling mound (Lorghoth), then hostile house (scytheblades DC 15/2d10, smoke DC 10/1d10, rotted walls/rats). Strahd satisfied either way. Source: Curse of Strahd PDF p.11-12.",
+      "search_queries": ["Death House ritual altar basement outcomes", "Death House ritual altar basement possible outcomes characters"],
+      "search_calls": 2,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf p.11-12"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer. Both search engines returned identical source material."
+      }
+    }
+  },
+  "comparison_with_run3": {
+    "vector_naive": { "run3": 10, "run7": 10, "delta": 0 },
+    "vector_2round": { "run3": 10, "run7": 10, "delta": 0 },
+    "vector_free": { "run3": 10, "run7": 10, "delta": 0 },
+    "hybrid_free": { "run3": 10, "run7": 10, "delta": 0 }
+  }
+}

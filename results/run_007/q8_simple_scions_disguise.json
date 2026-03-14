@@ -1,0 +1,66 @@
+{
+  "question_id": "q8_simple_scions_disguise",
+  "question": "In the Scions of Elemental Evil adventure, what must characters wear to disguise themselves as cultists inside the temple, and what ability check is required when a suspicious NPC interacts with them?",
+  "expected_answer": "Characters must wear silver masks and black robes. They must make a DC 10 Charisma (Deception) check each time a suspicious NPC interacts with them.",
+  "difficulty": "simple",
+  "results": {
+    "vector_naive": {
+      "answer": "Silver masks and black robes. DC 10 Charisma (Deception) check. Provided by Queen Yolande. Source: Scions PDF.",
+      "search_queries": ["disguise cultists temple ability check suspicious NPC Scions of Elemental Evil"],
+      "search_calls": 1,
+      "sources_cited": ["Scions of Elemental Evil.pdf"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer in single query."
+      }
+    },
+    "vector_2round": {
+      "answer": "Silver masks and black robes at all times. DC 10 Charisma (Deception) check. Source: Scions PDF p.5-6.",
+      "search_queries": ["Scions of Elemental Evil disguise cultists temple", "cultist disguise ability check suspicious NPC", "Scions Elemental Evil adventure temple infiltration"],
+      "search_calls": 3,
+      "sources_cited": ["Scions of Elemental Evil.pdf p.5-6"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. Round 2 not needed."
+      }
+    },
+    "vector_free": {
+      "answer": "Silver masks and black robes. DC 10 Charisma (Deception) check. Source: Scions PDF p.6.",
+      "search_queries": ["Scions of Elemental Evil disguise cultists temple", "cultist disguise ability check suspicious NPC temple"],
+      "search_calls": 2,
+      "sources_cited": ["Scions of Elemental Evil.pdf p.6"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer."
+      }
+    },
+    "hybrid_free": {
+      "answer": "Silver masks and black robes at all times. DC 10 Charisma (Deception) check. Disguises provided by Queen Yolande. Source: Scions PDF p.5-6.",
+      "search_queries": ["Scions of Elemental Evil disguise cultist temple", "disguise cultists temple ability check suspicious NPC Scions of Elemental Evil"],
+      "search_calls": 2,
+      "sources_cited": ["Scions of Elemental Evil.pdf p.5-6"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect answer. Both search engines confirmed same passage."
+      }
+    }
+  },
+  "comparison_with_run3": {
+    "vector_naive": { "run3": 10, "run7": 10, "delta": 0 },
+    "vector_2round": { "run3": 10, "run7": 10, "delta": 0 },
+    "vector_free": { "run3": 10, "run7": 10, "delta": 0 },
+    "hybrid_free": { "run3": 10, "run7": 10, "delta": 0 }
+  }
+}

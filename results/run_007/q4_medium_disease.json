@@ -1,0 +1,66 @@
+{
+  "question_id": "q4_medium_disease",
+  "question": "In the Frozen Sick adventure, what disease can characters catch in Croaker Cave, and what are its effects?",
+  "expected_answer": "Frigid woe. DC 11 Constitution save on contact with blue spores. Symptoms appear after 1d4 days: fatigue, chills, blue veins. Speed reduced by 5 feet. Every 10 days, a new DC 11 Con save or take 1d6 Cold damage and speed reduced by another 5 feet. At speed 0, the creature dies.",
+  "difficulty": "medium",
+  "results": {
+    "vector_naive": {
+      "answer": "Frigid Woe. DC 11 Con save on blue spore contact. Symptoms in 1d4 days: fatigue, chills, blue veins. Speed -5 ft. Every 10 days, DC 11 Con save or speed -5 ft more. Speed 0 = death (body turns to ice statue). No magical cure, only antidote from Eiselcross ruins. Source: Frozen Sick PDF.",
+      "search_queries": ["Croaker Cave disease effects Frozen Sick"],
+      "search_calls": 1,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer in single query. All disease mechanics covered including cure info."
+      }
+    },
+    "vector_2round": {
+      "answer": "Frigid Woe. DC 11 Con save on blue spore contact. Incubation 1d4 days. Symptoms: fatigue, chills, blue veins. Speed -5 ft. Every 10 days, DC 11 Con save or speed -5 ft. Speed 0 = death (ice statue). Only curable by antidote from Salsvault ruins. Source: Frozen Sick PDF.",
+      "search_queries": ["Frozen Sick adventure Croaker Cave disease", "Croaker Cave illness infection effects", "Frozen Sick disease symptoms characters"],
+      "search_calls": 3,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer. Round 2 not needed. All disease mechanics covered."
+      }
+    },
+    "vector_free": {
+      "answer": "Frigid Woe. DC 11 Con save on blue spore contact. Incubation 1d4 days. Symptoms: fatigue, chills, blue veins. Speed -5 ft. Every 10 days, DC 11 Con save or speed -5 ft. Speed 0 = death (ice statue). Cannot be cured by magic, only manufactured antidote. Source: Frozen Sick PDF.",
+      "search_queries": ["Croaker Cave disease Frozen Sick", "disease effects Croaker Cave infection"],
+      "search_calls": 2,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer with all expected elements."
+      }
+    },
+    "hybrid_free": {
+      "answer": "Frigid Woe. DC 11 Con save on blue spore contact. Incubation 1d4 days. Symptoms: fatigue, chills, blue veins. Speed -5 ft. Every 10 days, DC 11 Con save or speed -5 ft. Speed 0 = death (ice statue). No conventional/magical cure, only antidote from Salsvault. Also detailed trap mechanism in area C6 (dragon face chest, DC 15 thieves' tools, 15-ft cube spore cloud). Source: Frozen Sick PDF p.1, 8-9.",
+      "search_queries": ["Croaker Cave disease Frozen Sick", "disease characters catch Croaker Cave Frozen Sick adventure", "frigid woe vials Croaker Cave C6 Hulil", "C6 Hulil cavern stone chest vials frigid woe"],
+      "search_calls": 4,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf p.1", "Frozen Sick - Wildemount Adventure.pdf p.8-9"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Most detailed answer. Includes specific trap mechanism in C6 with DC 15 thieves' tools check and 15-ft cube spore cloud."
+      }
+    }
+  },
+  "comparison_with_run3": {
+    "vector_naive": { "run3": 10, "run7": 10, "delta": 0 },
+    "vector_2round": { "run3": 10, "run7": 10, "delta": 0 },
+    "vector_free": { "run3": 10, "run7": 10, "delta": 0 },
+    "hybrid_free": { "run3": 10, "run7": 10, "delta": 0 }
+  }
+}

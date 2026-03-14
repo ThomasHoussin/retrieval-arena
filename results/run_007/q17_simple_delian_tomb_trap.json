@@ -1,0 +1,42 @@
+{
+  "question_id": "q17_simple_delian_tomb_trap",
+  "question": "In The Delian Tomb adventure, what happens if a character tries to open one of the sarcophagi or take items from the treasure room?",
+  "expected_answer": "Three skeletons emerge from random sarcophagi and attack the party.",
+  "difficulty": "simple",
+  "results": {
+    "vector_naive": {
+      "answer": "Three skeletons emerge from random sarcophagi and attack. Two triggers: non-oath sword taking OR any character opening sarcophagi/taking items. Treasure: 3d20 gp, circlets 30 gp, tapestry 45 gp. Source: The Delian Tomb p.8.",
+      "search_queries": ["Delian Tomb sarcophagi treasure room opening taking items"],
+      "search_calls": 1,
+      "sources_cited": ["The_Delian_Tomb.pdf p.8"],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10, "notes": "Complete in single query." }
+    },
+    "vector_2round": {
+      "answer": "Three skeletons emerge. Both trigger conditions. Edict Blade (+1, +2 vs goblinoids). Full treasure. Source: The Delian Tomb p.7-8.",
+      "search_queries": ["Delian Tomb sarcophagi opening", "Delian Tomb treasure room items", "Delian Tomb adventure rules traps"],
+      "search_calls": 3,
+      "sources_cited": ["The_Delian_Tomb.pdf p.7-8"],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10, "notes": "Comprehensive. Round 2 not needed." }
+    },
+    "vector_free": {
+      "answer": "Three skeletons emerge. Both triggers. Treasure values listed. Source: The Delian Tomb p.7-8.",
+      "search_queries": ["Delian Tomb sarcophagi open", "Delian Tomb treasure room items"],
+      "search_calls": 2,
+      "sources_cited": ["The_Delian_Tomb.pdf p.7-8"],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10, "notes": "Complete with both triggers and treasure." }
+    },
+    "hybrid_free": {
+      "answer": "Three skeletons emerge. Both trigger conditions. Oath context. Treasure: 3d20 gp, circlets 30 gp, tapestry 45 gp. Source: The Delian Tomb p.7-8.",
+      "search_queries": ["Delian Tomb sarcophagi treasure room", "Delian Tomb sarcophagi open treasure room items"],
+      "search_calls": 2,
+      "sources_cited": ["The_Delian_Tomb.pdf p.7-8"],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10, "notes": "Complete. Both engines converged." }
+    }
+  },
+  "comparison_with_run3": {
+    "vector_naive": { "run3": 10, "run7": 10, "delta": 0 },
+    "vector_2round": { "run3": 10, "run7": 10, "delta": 0 },
+    "vector_free": { "run3": 10, "run7": 10, "delta": 0 },
+    "hybrid_free": { "run3": 10, "run7": 10, "delta": 0 }
+  }
+}

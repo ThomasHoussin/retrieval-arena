@@ -1,0 +1,66 @@
+{
+  "question_id": "q6_simple_death_house_item",
+  "question": "In the Curse of Strahd introductory adventure (Death House), what object is found inside the small wooden coffer in the prison area (Area 36)?",
+  "expected_answer": "A dire wolf's withered tongue.",
+  "difficulty": "simple",
+  "results": {
+    "vector_naive": {
+      "answer": "A dire wolf's withered tongue. Source: Death House appendix of Curse of Strahd.",
+      "search_queries": ["Death House prison Area 36 wooden coffer contents"],
+      "search_calls": 1,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Correct answer in single query."
+      }
+    },
+    "vector_2round": {
+      "answer": "A dire wolf's withered tongue. Source: Death House (Appendix B), page 11.",
+      "search_queries": ["Death House prison area 36 wooden coffer", "Curse of Strahd Death House area 36 prison", "Death House dungeon level coffer treasure"],
+      "search_calls": 3,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf p.11"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Correct answer. Round 2 not needed."
+      }
+    },
+    "vector_free": {
+      "answer": "A dire wolf's withered tongue. Source: Death House (APPENDIX B, Curse of Strahd).",
+      "search_queries": ["Death House prison area 36 wooden coffer", "Death House Area 36 small wooden coffer object"],
+      "search_calls": 2,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Correct answer in 2 queries."
+      }
+    },
+    "hybrid_free": {
+      "answer": "A dire wolf's withered tongue, found in Area 35 (Reliquary). Area 36 (Prison) contains a skeleton with a gold ring (25 gp). Source: Curse of Strahd Introductory Adventure.pdf p.11.",
+      "search_queries": ["Death House prison area 36 wooden coffer", "Death House prison area 36 small wooden coffer object"],
+      "search_calls": 2,
+      "sources_cited": ["Curse of Strahd Introductory Adventure.pdf p.11"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Correct answer with helpful area correction (coffer is in Area 35 Reliquary, not Area 36 Prison). Also provided Area 36's actual contents."
+      }
+    }
+  },
+  "comparison_with_run3": {
+    "vector_naive": { "run3": 10, "run7": 10, "delta": 0 },
+    "vector_2round": { "run3": 10, "run7": 10, "delta": 0 },
+    "vector_free": { "run3": 10, "run7": 10, "delta": 0 },
+    "hybrid_free": { "run3": 10, "run7": 10, "delta": 0 }
+  }
+}

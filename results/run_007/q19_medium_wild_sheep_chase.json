@@ -1,0 +1,42 @@
+{
+  "question_id": "q19_medium_wild_sheep_chase",
+  "question": "In The Wild Sheep Chase adventure, who is the sheep the party encounters, what happened to it, and what danger is associated with the Wand of True Polymorph?",
+  "expected_answer": "Finethir Shinebright is a wizard who was polymorphed into a sheep by his former apprentice, Ahmed Noke, using the stolen Wand of True Polymorph. In sheep form, Shinebright communicates by nodding and bleating; a scroll allows the party to hear his actual voice. Noke is the antagonist found in his tower. The Wand of True Polymorph is dangerous: characters attempting to use it must make a saving throw as if against a regular casting of True Polymorph, and if they fail by more than 5, the wand explodes violently.",
+  "difficulty": "medium",
+  "results": {
+    "vector_naive": {
+      "answer": "Finethir Shinebright, wizard polymorphed by Noke. Scroll of Speak with Animals. Modified Wand: DC 17 Arcana, fail ≤5 = Gibbering Mouther, fail >5 = explosion (1d12/charge). Shinebright dies on failure. Noke's fate detailed. Source: Wild Sheep Chase.",
+      "search_queries": ["Wild Sheep Chase sheep wand true polymorph adventure"],
+      "search_calls": 1,
+      "sources_cited": ["892902-The_Wild_Sheep_Chase_V2.pdf"],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10, "notes": "Complete in single query. All three aspects and full wand mechanics found. Improvement from Run 3 (was 8)." }
+    },
+    "vector_2round": {
+      "answer": "Shinebright, high elf wizard, polymorphed by Noke, 2 years. Full wand mechanics: DC 17 Arcana, Gibbering Mouther on fail ≤5, explosion on fail >5. Source: Wild Sheep Chase p.1-6.",
+      "search_queries": ["Wild Sheep Chase adventure sheep encounter", "Wand of True Polymorph danger", "sheep polymorphed wizard transformed"],
+      "search_calls": 3,
+      "sources_cited": ["892902-The_Wild_Sheep_Chase_V2.pdf p.1-6"],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10, "notes": "Complete. Round 2 not needed." }
+    },
+    "vector_free": {
+      "answer": "Shinebright, elf wizard, polymorphed by Noke. Modified Wand: DC 17 Arcana, DC 15 to identify. All failure modes found. Source: Wild Sheep Chase p.1-6.",
+      "search_queries": ["Wild Sheep Chase sheep adventure", "Wand of True Polymorph danger"],
+      "search_calls": 2,
+      "sources_cited": ["892902-The_Wild_Sheep_Chase_V2.pdf p.1-6"],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10, "notes": "Complete with identification DC detail." }
+    },
+    "hybrid_free": {
+      "answer": "Shinebright, high elf transmutation wizard (physical description included), polymorphed by Noke, 2 years. Full wand mechanics with all failure modes. Source: Wild Sheep Chase p.1-6.",
+      "search_queries": ["Wild Sheep Chase sheep adventure", "Wild Sheep Chase adventure sheep wand polymorph"],
+      "search_calls": 2,
+      "sources_cited": ["892902-The_Wild_Sheep_Chase_V2.pdf p.1-6"],
+      "quality": { "accuracy": 5, "completeness": 3, "faithfulness": 2, "total": 10, "notes": "Most complete with physical description. Efficient hybrid search." }
+    }
+  },
+  "comparison_with_run3": {
+    "vector_naive": { "run3": 8, "run7": 10, "delta": 2 },
+    "vector_2round": { "run3": 10, "run7": 10, "delta": 0 },
+    "vector_free": { "run3": 10, "run7": 10, "delta": 0 },
+    "hybrid_free": { "run3": 10, "run7": 10, "delta": 0 }
+  }
+}

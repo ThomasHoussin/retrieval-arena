@@ -30,7 +30,7 @@ Benchmark comparant plusieurs stratégies de recherche sur un même corpus docum
 - **Approche** : Chaque stratégie = un script standalone (Python ou TS, peu importe), appelé par un agent
 - **BM25** : `bm25s` + PyStemmer (Python, via `uv`)
 - **Vector DB** : Qdrant via Docker (`qdrant/qdrant`)
-- **Embeddings** : FastEmbed (`sentence-transformers/all-MiniLM-L6-v2`, 384 dims)
+- **Embeddings** : FastEmbed (`nomic-ai/nomic-embed-text-v1.5`, 768 dims, 8192 tokens context)
 - **LLM** : Claude API (Anthropic SDK) — Sonnet pour les agents, Opus pour l'arbitrage
 - **PDF parsing** : Extraction de texte depuis les PDFs du corpus
 - **Python** : géré via `uv` (venv local)

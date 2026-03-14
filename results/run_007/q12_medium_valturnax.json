@@ -1,0 +1,66 @@
+{
+  "question_id": "q12_medium_valturnax",
+  "question": "In the adventure 'A Dungeon and a Dragon', what is the name and type of the main dragon antagonist, and how has it been monitoring the adventurers throughout the dungeon?",
+  "expected_answer": "Valturnax, an adult green dragon. He has been spying on the party's progress through the dungeon via the eyes of rodents and birds throughout the complex. When the party reaches his lair, he has pre-cast Mislead and sits invisibly on the walkways. He announces himself and monologues before initiating combat, so no creature is surprised.",
+  "difficulty": "medium",
+  "results": {
+    "vector_naive": {
+      "answer": "Valturnax, Adult Green Dragon. Monitors via eyes of rodents and birds. Pre-cast Mislead (invisible on walkways, illusory duplicate). Source: A Dungeon and a Dragon PDF p.5, 16.",
+      "search_queries": ["main dragon antagonist monitoring adventurers dungeon"],
+      "search_calls": 1,
+      "sources_cited": ["A_Dungeon_and_A_Dragon.pdf p.5, 16"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer in single query. Found both surveillance methods and Mislead. Improvement from Run 3 (was 9, now 10)."
+      }
+    },
+    "vector_2round": {
+      "answer": "Valturnax, Adult Green Dragon. Monitors via eyes of rodents and birds (explicit quote found). Pre-cast Mislead (invisible on walkways). Foreshadowed by unblinking animals in forest. Source: A Dungeon and a Dragon PDF p.1-2, 4-5, 16.",
+      "search_queries": ["A Dungeon and a Dragon adventure main antagonist", "dragon antagonist monitoring adventurers dungeon", "A Dungeon and a Dragon campaign overview"],
+      "search_calls": 3,
+      "sources_cited": ["A_Dungeon_and_A_Dragon.pdf p.1-2, 4-5, 16"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer. Round 2 not needed. Includes foreshadowing details."
+      }
+    },
+    "vector_free": {
+      "answer": "Valturnax, Adult Green Dragon. Monitors via 'Rodent Eyes and Ears' regional effect (rodents/birds within 1 mile serve as eyes/ears). Pre-cast Mislead (invisible on walkways area 18). Innate spellcasting confirms Mislead 1/day. Source: A Dungeon and a Dragon PDF p.5, 15-16, 26.",
+      "search_queries": ["A Dungeon and a Dragon main dragon antagonist", "dragon monitoring adventurers dungeon scrying", "Valturnax Mislead eyes of rodents birds following party progress"],
+      "search_calls": 3,
+      "sources_cited": ["A_Dungeon_and_A_Dragon.pdf p.5, 15-16, 26"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Most detailed answer. Found regional effect name and stat block confirmation of Mislead."
+      }
+    },
+    "hybrid_free": {
+      "answer": "Valturnax, Adult Green Dragon. Monitors via eyes of rodents and birds (exact quote found). Pre-cast Mislead (invisible in temple). Forest foreshadowing with unblinking animals. Source: A Dungeon and a Dragon PDF p.1-2, 4-5, 16.",
+      "search_queries": ["A Dungeon and a Dragon adventure main dragon antagonist", "main dragon antagonist monitoring adventurers dungeon"],
+      "search_calls": 2,
+      "sources_cited": ["A_Dungeon_and_A_Dragon.pdf p.1-2, 4-5, 16"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Complete answer. Both search engines returned complementary results."
+      }
+    }
+  },
+  "comparison_with_run3": {
+    "vector_naive": { "run3": 9, "run7": 10, "delta": 1 },
+    "vector_2round": { "run3": 10, "run7": 10, "delta": 0 },
+    "vector_free": { "run3": 10, "run7": 10, "delta": 0 },
+    "hybrid_free": { "run3": 10, "run7": 10, "delta": 0 }
+  }
+}
