@@ -1,0 +1,84 @@
+{
+  "question_id": "q21_complex_cross_doc_golem",
+  "question": "In the Frozen Sick adventure, the characters encounter a flesh golem in Salsvault. How does this golem differ from a standard flesh golem as described in the SRD? What are the standard flesh golem's full stats?",
+  "expected_answer": "Standard Flesh Golem (SRD): Medium Construct, AC 9, HP 127 (15d8+60), Speed 30 ft., STR 19 (+4), DEX 9 (-1), CON 18 (+4), INT 6 (-2), WIS 10 (+0), CHA 5 (-3). Immunities: Lightning and Poison damage; Charmed, Exhaustion, Frightened, Paralyzed, Petrified, Poisoned conditions. Traits: Aversion to Fire, Berserk, Immutable Form, Lightning Absorption, Magic Resistance. CR 5 (1,800 XP). Actions: Multiattack (two Slam), Slam +7 to hit, 13 (2d8+4) Bludgeoning + 4 (1d8) Lightning. | Salsvault version differences: only 5 HP remaining, Berserk trait is already activated, has only one arm so it cannot use Multiattack, reduced to CR 1 (200 XP).",
+  "difficulty": "complex",
+  "run_context": {
+    "run_id": "run_008",
+    "date": "2026-03-14",
+    "changes_since_run7": "PDF cache SHA1 added, _block_to_text fix (tags -> space), dead code removal",
+    "embedding_model": "jinaai/jina-embeddings-v3",
+    "pdf_backend": "marker"
+  },
+  "results": {
+    "bm25_simple": {
+      "answer": "Salsvault: 5 HP, Berserk active, one arm (no Multiattack), CR 1 (200 XP). Standard: AC 9, Init -1, HP 127 (15d8+60), Speed 30, all 6 ability scores, full immunities, all 5 traits (Aversion to Fire, Berserk, Immutable Form, Lightning Absorption partially cut off), Multiattack + Slam +7/2d8+4+1d8 Lightning. CR 5 (1800 XP, PB +3). Comparison table provided.",
+      "search_queries": ["flesh golem Salsvault Frozen Sick"],
+      "search_calls": 1,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf p.19-20", "SRD_CC_v5.2.1.pdf p.285"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 2,
+        "faithfulness": 2,
+        "total": 9,
+        "notes": "Major improvement over Run 3 (was 6). Single query now retrieves BOTH documents — Salsvault diffs AND SRD stat block. Lightning Absorption text truncated at chunk boundary. Cleaner index from _block_to_text fix improved keyword matching."
+      }
+    },
+    "vector_naive": {
+      "answer": "Salsvault: 5 HP, Berserk active, one arm, CR 1 (200 XP). Standard stat block NOT fully retrieved — traits partially found but AC/HP/abilities missing. References p.285 but content not returned.",
+      "search_queries": ["flesh golem Salsvault Frozen Sick stats"],
+      "search_calls": 1,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf"],
+      "quality": {
+        "accuracy": 3,
+        "completeness": 1,
+        "faithfulness": 2,
+        "total": 6,
+        "notes": "Salsvault diffs correct. SRD stat block not retrieved — semantic query biased toward adventure context, missed monster compendium chunk. Regression from Run 7 (was 8)."
+      }
+    },
+    "bm25_free": {
+      "answer": "Salsvault: 5 HP, Berserk active, one arm, CR 1 (200 XP). Standard: COMPLETE stat block — AC 9, HP 127, Speed 30, all 6 ability scores, full immunities, all 5 traits (including Lightning Absorption and Magic Resistance in full), Multiattack + Slam +7/2d8+4+1d8 Lightning. CR 5 (1800 XP, PB +3). Comparison table.",
+      "search_queries": ["flesh golem Salsvault Frozen Sick", "flesh golem stats standard SRD", "flesh golem Lightning Absorption Multiattack Slam actions"],
+      "search_calls": 3,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf p.19-20", "SRD_CC_v5.2.1.pdf p.285-286"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Perfect cross-doc result. 3 targeted queries covered everything including ability scores and complete trait text. Improvement over Run 3 BM25 free (was 10 but noted ability scores as 'image in PDF' — now fully extracted thanks to _block_to_text fix)."
+      }
+    },
+    "vector_free": {
+      "answer": "Salsvault: 5 HP, Berserk active, one arm, CR 1 (200 XP). Standard: COMPLETE stat block — AC 9, HP 127, Speed 30, all 6 ability scores, full immunities, all 5 traits, Multiattack + Slam. CR 5 (1800 XP, PB +3).",
+      "search_queries": ["flesh golem Saltvault Frozen Sick", "flesh golem stats standard SRD", "flesh golem Slam Lightning Absorption Multiattack stat block"],
+      "search_calls": 3,
+      "sources_cited": ["Frozen Sick - Wildemount Adventure.pdf", "SRD_CC_v5.2.1.pdf"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Major improvement over Run 3 vector free (was 8, 10 queries, still missing header stats). Now 10/10 in just 3 queries. The _block_to_text fix made stat block text properly extractable, and the multi-pass strategy successfully retrieved both documents."
+      }
+    }
+  },
+  "progression": {
+    "bm25_simple":  { "run3": 6,  "run7": null, "run8": 9,  "delta_r3": "+3", "key_change": "Now finds both docs in 1 pass. Run 3 couldn't find SRD stat block at all." },
+    "bm25_free":    { "run3": 10, "run7": null, "run8": 10, "delta_r3": "0",  "key_change": "Stable at 10 but now finds ability scores (were 'image in PDF' in Run 3). _block_to_text fix made stat tables extractable." },
+    "vector_naive": { "run3": 6,  "run7": 8,    "run8": 6,  "delta_r3": "0",  "key_change": "Variable. Run 7 was better (8). Single vector pass unreliable for cross-doc." },
+    "vector_free":  { "run3": 8,  "run7": 9,    "run8": 10, "delta_r3": "+2", "key_change": "Steady improvement across runs. Run 3: 10 queries, still missing stats. Run 8: 3 queries, complete. Pipeline improvements compound." },
+    "vector_2round":{ "run3": 5,  "run7": 10,   "run8": null, "key_change": "Run 3->7 was the biggest jump (+5) — retrieved WRONG golem in Run 3 (acid golem). Nomic embeddings fixed this." },
+    "hybrid_free":  { "run3": 10, "run7": 10,   "run8": null, "key_change": "Stable — BM25 component always compensated for vector weakness on stat blocks." }
+  },
+  "insights": [
+    "q21 is the best question for measuring pipeline quality — cross-doc retrieval is highly sensitive to extraction and embedding quality",
+    "BM25 simple: 6 -> 9 (+3) — cleaner text from _block_to_text fix improved keyword index, 'flesh golem' now matches correctly in both documents",
+    "Vector free: 8 -> 9 -> 10 — steady improvement across 3 runs. Run 3 needed 10 queries and still missed stats. Run 8 needs only 3 queries for perfect score",
+    "Vector 2-round Run 3 = 5 was the worst result in the entire benchmark — retrieved a DIFFERENT golem's stat block (acid damage, +9, Hasten). Nomic embeddings in Run 7 fixed this completely",
+    "Run 3 noted ability scores as 'image in PDF' (not text-extractable). _block_to_text fix (tags -> space) made stat tables readable, benefiting ALL strategies",
+    "Pipeline improvements are a multiplier for all strategies — the ingestion quality floor raises every strategy's ceiling",
+    "Hybrid free was always 10/10 — BM25 compensated for vector's weakness on exact stat lookups, confirming the hybrid approach's robustness"
+  ]
+}

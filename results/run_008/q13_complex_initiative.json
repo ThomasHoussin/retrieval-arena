@@ -1,0 +1,55 @@
+{
+  "question_id": "q13_complex_initiative",
+  "question": "Three adventurers prepare for combat: a Level 7 Champion Fighter with 14 Dexterity, a Level 7 Rogue with 18 Dexterity and the Alert feat, and a Level 7 Cleric with 10 Dexterity. Compare their initiative modifiers and special features. Who is most likely to act first?",
+  "expected_answer": "Champion Fighter (Level 7): Dexterity modifier +2. Remarkable Athlete (Champion feature at level 3) grants Advantage on Initiative rolls. | Rogue with Alert (Level 7): Dexterity modifier +4, plus Proficiency Bonus +3 (from Alert feat's Initiative Proficiency) = +7. | Cleric (Level 7): Dexterity modifier +0, no special initiative features. | The Rogue has the highest flat bonus (+7) and is most likely to go first.",
+  "difficulty": "complex",
+  "run_context": {
+    "run_id": "run_008",
+    "date": "2026-03-14",
+    "changes_since_run7": "PDF cache SHA1 added, _block_to_text fix (HTML tags replaced by space instead of empty string), dead code content-ref guard removed, unknown backend rejection added",
+    "embedding_model": "jinaai/jina-embeddings-v3",
+    "pdf_backend": "marker"
+  },
+  "results": {
+    "bm25_simple": {
+      "answer": "Rogue (Alert): DEX +4 + PB +3 = +7. Champion Fighter: DEX +2, Remarkable Athlete grants Advantage on Initiative rolls (~+3.5 statistical equivalent). Cleric: +0. Rogue most likely first (+7 flat), Fighter second (Advantage), Cleric last.",
+      "search_queries": ["initiative modifier Alert feat"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf"],
+      "quality": {
+        "accuracy": 5,
+        "completeness": 3,
+        "faithfulness": 2,
+        "total": 10,
+        "notes": "Found ALL features including Remarkable Athlete in single pass. Improvement over Run 3 BM25 simple (was 7, missed Remarkable Athlete). Better index quality from clean_text improvements likely helped."
+      }
+    },
+    "vector_naive": {
+      "answer": "Rogue (Alert): DEX +4 + PB +3 = +7, Initiative Swap. Fighter: DEX +2, no special initiative features found. Cleric: +0. Rogue acts first.",
+      "search_queries": ["initiative modifier Dexterity Alert feat bonus"],
+      "search_calls": 1,
+      "sources_cited": ["SRD_CC_v5.2.1.pdf"],
+      "quality": {
+        "accuracy": 3,
+        "completeness": 2,
+        "faithfulness": 2,
+        "total": 7,
+        "notes": "Missed Remarkable Athlete for Champion Fighter. Same result as Run 3 and Run 7. Single vector pass consistently misses this cross-section lookup."
+      }
+    }
+  },
+  "progression": {
+    "bm25_simple": { "run3": 7, "run7": null, "run8": 10, "delta_r3": "+3", "key_change": "Now finds Remarkable Athlete in 1 pass — was missed in Run 3. Cleaner index from _block_to_text fix likely improved BM25 token quality." },
+    "vector_naive": { "run3": 7, "run7": 7, "run8": 7, "delta_r3": "0", "key_change": "Stable. Single vector pass consistently insufficient for multi-section SRD lookups." },
+    "bm25_2round": { "run3": 10, "run7": null, "run8": null },
+    "bm25_free": { "run3": 10, "run7": null, "run8": null },
+    "vector_2round": { "run3": 10, "run7": 10, "run8": null },
+    "vector_free": { "run3": 10, "run7": 10, "run8": null },
+    "hybrid_free": { "run3": 10, "run7": 10, "run8": null }
+  },
+  "insights": [
+    "BM25 simple jumped from 7 to 10 — likely due to cleaner text from _block_to_text fix improving keyword matching for 'Remarkable Athlete'",
+    "Vector naive stable at 7 — semantic drift means Champion Fighter features don't surface when query focuses on Alert/initiative",
+    "Multi-pass strategies (2-round, free) consistently score 10 across all runs — the extra queries always find Remarkable Athlete"
+  ]
+}
