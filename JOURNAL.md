@@ -142,3 +142,40 @@ explicit = true
 ```
 
 `torch` must also be a **direct dependency** (not just transitive via marker-pdf) for the `[tool.uv.sources]` override to take effect.
+
+---
+
+## 2026-03-14 — Multi-format document support
+
+### Why
+
+The Nephilim JDR corpus contains 218 PDFs but also 51 RTFs, 63 HTM/HTML files, 5 TXTs, 4 DOCXs. These were ignored by the indexer.
+
+### Design
+
+- New `tools/doc_utils.py` module with format-specific extractors
+- Each extractor returns `list[tuple[int, str]]` (same contract as `_extract_pymupdf`)
+- Non-paginated formats return `[(1, full_text)]` — `chunk_document()` handles the rest
+- `extract_corpus()` generalized to discover all supported extensions
+- `extract_text_by_page()` dispatches by extension: `.pdf` → pymupdf/marker, others → `doc_utils`
+- Caching: PDF uses `{sha1}_{backend}.json`, non-PDF uses `{sha1}_direct.json`
+
+### Supported formats
+
+| Format | Library | Notes |
+|--------|---------|-------|
+| `.pdf` | pymupdf4llm / Marker | Existing, unchanged |
+| `.docx` | python-docx | Paragraphs + table cells |
+| `.pptx` | python-pptx | Text from all slides |
+| `.rtf` | striprtf | Strip RTF control words |
+| `.odt` | odfpy | Walk `text:p` elements |
+| `.txt`/`.md` | stdlib | UTF-8 with latin-1 fallback |
+| `.htm`/`.html` | stdlib html.parser | Custom subclass skips `<script>`/`<style>` |
+
+### Dropped formats
+
+`.doc`, `.ppt`, `.xls` (binary OLE, no good Python lib), `.sxw`, `.kwd` (exotic), `.tex` (PDF output exists). User converts `.doc` files manually via LibreOffice.
+
+### Validation
+
+Extraction warning emitted when `len(text) < 50` for files > 1KB (catches silent parser failures).

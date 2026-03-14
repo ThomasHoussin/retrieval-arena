@@ -1,8 +1,10 @@
-"""Shared PDF parsing and chunking utilities.
+"""Shared document parsing and chunking utilities.
 
-Supports two backends:
+PDF backends:
 - "pymupdf" (default): pymupdf4llm, fast, CPU-only, no OCR for complex layouts
 - "marker": Marker/Surya, visual layout detection + OCR, requires GPU (~5GB VRAM)
+
+Non-PDF formats (docx, pptx, rtf, odt, txt, md, htm/html) are handled by doc_utils.
 """
 
 import hashlib
@@ -138,53 +140,84 @@ def _save_cache(sha1: str, backend: str, pages: list[tuple[int, str]]):
 
 
 def extract_text_by_page(
-    pdf_path: Path, backend: str = "pymupdf"
+    file_path: Path, backend: str = "pymupdf"
 ) -> tuple[list[tuple[int, str]], bool]:
-    """Extract text from each page of a PDF. Returns (pages, cached).
+    """Extract text from a document file. Returns (pages, cached).
+
+    For PDFs, uses the specified backend (pymupdf/marker).
+    For other formats (docx, pptx, rtf, odt, txt, md, htm/html),
+    delegates to doc_utils and caches as 'direct'.
 
     Args:
-        pdf_path: Path to the PDF file.
-        backend: "pymupdf" (fast, CPU) or "marker" (GPU, OCR-capable).
+        file_path: Path to the document file.
+        backend: PDF backend — "pymupdf" (fast, CPU) or "marker" (GPU, OCR-capable).
+                 Ignored for non-PDF formats.
 
     Returns:
         Tuple of (list of (page_num, text), was_cached).
     """
-    # SHA1 as content-addressed cache key (not for security)
-    sha1 = hashlib.sha1(pdf_path.read_bytes()).hexdigest()
+    # Lazy import to avoid circular dependency (doc_utils imports clean_text from here)
+    from doc_utils import SUPPORTED_EXTENSIONS, extract_text
 
-    cached = _load_cache(sha1, backend)
+    # SHA1 as content-addressed cache key (not for security)
+    sha1 = hashlib.sha1(file_path.read_bytes()).hexdigest()
+    ext = file_path.suffix.lower()
+
+    # Determine cache key: PDF uses backend name, others use "direct"
+    cache_key = backend if ext == ".pdf" else "direct"
+
+    cached = _load_cache(sha1, cache_key)
     if cached is not None:
         return cached, True
 
-    if backend == "marker":
-        pages = _extract_marker(pdf_path)
-    elif backend == "pymupdf":
-        pages = _extract_pymupdf(pdf_path)
+    if ext == ".pdf":
+        if backend == "marker":
+            pages = _extract_marker(file_path)
+        elif backend == "pymupdf":
+            pages = _extract_pymupdf(file_path)
+        else:
+            raise ValueError(
+                f"Unknown backend: {backend!r}. Expected 'pymupdf' or 'marker'."
+            )
+    elif ext in SUPPORTED_EXTENSIONS:
+        pages = extract_text(file_path)
     else:
-        raise ValueError(f"Unknown backend: {backend!r}. Expected 'pymupdf' or 'marker'.")
+        raise ValueError(f"Unsupported file format: {ext!r}")
 
-    _save_cache(sha1, backend, pages)
+    _save_cache(sha1, cache_key, pages)
     return pages, False
 
 
 def extract_corpus(docs_dir: Path, backend: str = "pymupdf") -> list[dict]:
-    """Extract all PDFs from docs_dir, chunk, and return all chunks.
+    """Extract all supported documents from docs_dir, chunk, and return all chunks.
 
     This is the shared extraction step used by both indexers.
+    Supports: PDF, DOCX, PPTX, RTF, ODT, TXT, MD, HTM, HTML.
     """
+    from collections import Counter
 
-    pdf_files = sorted(docs_dir.glob("**/*.pdf"))
-    if not pdf_files:
-        print(f"No PDFs found in {docs_dir}")
+    # Lazy import to avoid circular dependency (doc_utils imports clean_text from here)
+    from doc_utils import SUPPORTED_EXTENSIONS
+
+    all_extensions = {".pdf"} | SUPPORTED_EXTENSIONS
+    doc_files = sorted(
+        f
+        for f in docs_dir.rglob("*")
+        if f.suffix.lower() in all_extensions and f.is_file()
+    )
+    if not doc_files:
+        print(f"No supported documents found in {docs_dir}")
         sys.exit(1)
 
-    print(f"Found {len(pdf_files)} PDFs (backend={backend})")
+    ext_counts = Counter(f.suffix.lower() for f in doc_files)
+    breakdown = ", ".join(f"{count} {ext}" for ext, count in ext_counts.most_common())
+    print(f"Found {len(doc_files)} documents ({breakdown})")
 
     all_chunks = []
-    for pdf_path in pdf_files:
-        rel = pdf_path.relative_to(docs_dir)
+    for file_path in doc_files:
+        rel = file_path.relative_to(docs_dir)
         try:
-            pages, was_cached = extract_text_by_page(pdf_path, backend=backend)
+            pages, was_cached = extract_text_by_page(file_path, backend=backend)
             label = (
                 f"  Processing: {rel} (cached)"
                 if was_cached
@@ -195,7 +228,7 @@ def extract_corpus(docs_dir: Path, backend: str = "pymupdf") -> list[dict]:
             all_chunks.extend(chunks)
             print(f"    {len(pages)} pages, {len(chunks)} chunks")
         except Exception as e:
-            print(f"    ERROR: {e}", file=sys.stderr)
+            print(f"  ERROR processing {rel}: {e}", file=sys.stderr)
 
     if not all_chunks:
         print("No chunks extracted, aborting.")

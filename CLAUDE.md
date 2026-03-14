@@ -1,6 +1,6 @@
 # Search Bench
 
-Benchmark comparing multiple search strategies over the same document corpus (PDF documents).
+Benchmark comparing multiple search strategies over the same document corpus.
 
 ## Goal
 
@@ -20,7 +20,7 @@ Evaluate and compare search quality across 7 strategies:
 ## Architecture
 
 - **Search agent**: Claude Sonnet, receives a question + a search tool (one per strategy)
-- **Corpus**: PDF documents in `docs/` (configurable via `search_bench.json`)
+- **Corpus**: documents in `docs/` (PDF, DOCX, PPTX, RTF, ODT, TXT, MD, HTM/HTML — configurable via `search_bench.json`)
 - **Arbiter**: Claude Opus evaluates the quality of results from each strategy
 - Each strategy exposes an MCP tool that the Sonnet agent can call
 - Scoring is standardized for objective comparison
@@ -32,7 +32,7 @@ Evaluate and compare search quality across 7 strategies:
 - **Vector DB**: Qdrant via Docker (`qdrant/qdrant`)
 - **Embeddings**: FastEmbed GPU (`jinaai/jina-embeddings-v3`, 1024 dims, 8192 tokens, multilingual 30+ languages, CC BY-NC 4.0)
 - **LLM**: Claude API (Anthropic SDK) — Sonnet for agents, Opus for arbitration
-- **PDF parsing**: dual-backend — pymupdf4llm (fast, CPU) or Marker/Surya (OCR, GPU ~5GB VRAM)
+- **Document parsing**: PDF dual-backend (pymupdf4llm / Marker), plus python-docx, python-pptx, striprtf, odfpy for other formats
 - **Text cleanup**: `clean_text()` normalizes artifacts before chunking (512 words / 75 overlap)
 - **Python**: managed via `uv` (local venv)
 - **TS**: `yarn` + `tsx`
@@ -53,7 +53,7 @@ File `search_bench.json` at the project root:
 }
 ```
 
-- `docs_dir`: path to PDF corpus (relative to config file), recurses into subdirectories
+- `docs_dir`: path to document corpus (relative to config file), recurses into subdirectories
 - `collection_name`: collection name, used to derive:
   - BM25 index: `data/bm25_{collection_name}`
   - Qdrant collection: `{collection_name}`
@@ -67,9 +67,11 @@ To switch corpus or collection, edit this file then re-index (both BM25 + Qdrant
 
 ## Ingestion
 
-- `tools/pdf_utils.py`: PDF parsing → `clean_text()` → chunking
-- **pymupdf backend**: pymupdf4llm → Markdown, fast, CPU-only. Good for native PDFs with text layers.
-- **marker backend**: Marker/Surya → JSON block tree → text extraction per page. Visual layout detection + auto-OCR. Requires GPU (~5GB VRAM). Good for scanned PDFs with complex layouts (multi-column, etc.).
+- `tools/pdf_utils.py`: document parsing orchestrator + PDF backends + chunking
+- `tools/doc_utils.py`: non-PDF format extractors (docx, pptx, rtf, odt, txt, md, htm/html)
+- **PDF pymupdf backend**: pymupdf4llm → Markdown, fast, CPU-only. Good for native PDFs with text layers.
+- **PDF marker backend**: Marker/Surya → JSON block tree → text extraction per page. Visual layout detection + auto-OCR. Requires GPU (~5GB VRAM). Good for scanned PDFs with complex layouts (multi-column, etc.).
+- **Non-PDF formats**: python-docx, python-pptx, striprtf, odfpy, stdlib html.parser — all return `[(1, text)]` (single "page")
 - `clean_text()` normalizes text before chunking: `<br>` → newline, separators `---`, URLs → `[url deleted]`, `...{3,}` → `...`
 - Without this cleanup, some "words" are 900+ chars and slow embedding from 1s to 250s/batch
 - See `JOURNAL.md` for technical details and decisions

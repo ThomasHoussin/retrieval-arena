@@ -1,4 +1,4 @@
-"""Unified indexer: extract PDFs once, build both BM25 and Qdrant indexes."""
+"""Unified indexer: extract documents once, build both BM25 and Qdrant indexes."""
 
 import sys
 
