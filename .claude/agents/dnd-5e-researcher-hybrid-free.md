@@ -13,17 +13,19 @@ mcpServers:
         - "run"
         - "python"
         - "tools/bm25_mcp_server.py"
-        - "--index-dir"
-        - "D:\\code-workspace\\search_bench\\data\\bm25_index"
+        - "--config"
+        - "D:\\code-workspace\\search_bench\\search_bench.json"
   - qdrant:
       type: stdio
-      command: "uvx"
+      command: "C:\\Users\\thoma\\.local\\bin\\uv.exe"
       args:
-        - "mcp-server-qdrant"
-      env:
-        QDRANT_URL: "http://localhost:6333"
-        COLLECTION_NAME: "dnd5e_chunks"
-        EMBEDDING_MODEL: "nomic-ai/nomic-embed-text-v1.5"
+        - "--directory"
+        - "D:\\code-workspace\\search_bench"
+        - "run"
+        - "python"
+        - "tools/qdrant_mcp_wrapper.py"
+        - "--config"
+        - "D:\\code-workspace\\search_bench\\search_bench.json"
 ---
 
 You answer questions by searching a document corpus. You have two search tools:

@@ -15,7 +15,7 @@ docs/*
 !docs/README.md
 
 # Generated indexes
-data/bm25_index/
+data/
 qdrant_storage/
 
 # Environment

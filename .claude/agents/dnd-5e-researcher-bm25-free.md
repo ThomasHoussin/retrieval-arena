@@ -13,8 +13,8 @@ mcpServers:
         - "run"
         - "python"
         - "tools/bm25_mcp_server.py"
-        - "--index-dir"
-        - "D:\\code-workspace\\search_bench\\data\\bm25_index"
+        - "--config"
+        - "D:\\code-workspace\\search_bench\\search_bench.json"
 ---
 
 You answer questions by searching a document corpus. You have a BM25 keyword search tool (`retrieve`).

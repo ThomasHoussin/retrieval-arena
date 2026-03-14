@@ -19,13 +19,14 @@ import bm25s
 import Stemmer
 from mcp.server.fastmcp import FastMCP
 
-stemmer = Stemmer.Stemmer("english")
+from config import load_config
 
-
-def create_mcp_server(index_dir: str):
+def create_mcp_server(index_dir: str, stemmer_language: str = "english"):
     mcp = FastMCP("bm25s")
+    stemmer = Stemmer.Stemmer(stemmer_language)
 
     print(f"Loading index from {index_dir}...", file=sys.stderr)
+    print(f"Stemmer language: {stemmer_language}", file=sys.stderr)
     retriever = bm25s.BM25.load(index_dir, load_corpus=True)
     print("Index loaded successfully.", file=sys.stderr)
 
@@ -47,10 +48,8 @@ def create_mcp_server(index_dir: str):
         results = retriever.retrieve(query_tokens, k=effective_k)
 
         output = []
-        for i, (doc, score) in enumerate(
-            zip(results.documents[0], results.scores[0])
-        ):
-            output.append(f"Rank {i+1} (Score: {score:.4f}):\n{doc}\n")
+        for i, (doc, score) in enumerate(zip(results.documents[0], results.scores[0])):
+            output.append(f"Rank {i + 1} (Score: {score:.4f}):\n{doc}\n")
 
         return "\n".join(output)
 
@@ -71,12 +70,19 @@ def create_mcp_server(index_dir: str):
 
 def main():
     parser = argparse.ArgumentParser(description="BM25s MCP Server (with stemmer)")
-    parser.add_argument(
-        "--index-dir", required=True, help="Path to the BM25s index directory"
-    )
+    parser.add_argument("--index-dir", help="Path to the BM25s index directory")
+    parser.add_argument("--config", help="Path to search_bench.json config file")
     args = parser.parse_args()
 
-    mcp = create_mcp_server(args.index_dir)
+    if args.index_dir:
+        index_dir = args.index_dir
+        stemmer_language = "english"
+    else:
+        cfg = load_config(args.config)
+        index_dir = str(cfg["bm25_index_dir"])
+        stemmer_language = cfg["stemmer_language"]
+
+    mcp = create_mcp_server(index_dir, stemmer_language)
     mcp.run()
 
 

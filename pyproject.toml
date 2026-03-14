@@ -6,9 +6,30 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "bm25s[mcp]>=0.3.2",
-    "fastembed>=0.6.0",
+    "fastembed-gpu>=0.6.0",
     "pymupdf>=1.27.2",
     "pymupdf4llm>=1.27.2.1",
     "pystemmer>=3.0.0",
+    "marker-pdf>=1.0.0",
     "qdrant-client>=1.13.0",
+    "torch>=2.0.0",
 ]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu128" }
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["test"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]

@@ -5,7 +5,7 @@
 [![uv](https://img.shields.io/badge/uv-package%20manager-blueviolet)](https://docs.astral.sh/uv/)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-agents-orange)](https://docs.anthropic.com/en/docs/claude-code)
 
-A benchmark comparing **5 search strategies** over the same document corpus, using [Claude Code](https://docs.anthropic.com/en/docs/claude-code) agents and [MCP](https://modelcontextprotocol.io/) tools.
+A benchmark comparing **7 search strategies** over the same document corpus, using [Claude Code](https://docs.anthropic.com/en/docs/claude-code) agents and [MCP](https://modelcontextprotocol.io/) tools.
 
 Each strategy is implemented as a Claude Code sub-agent (Claude Sonnet) with a different search tool. An arbiter (Claude Opus) then evaluates answer quality using a standardized scoring rubric.
 
@@ -44,13 +44,77 @@ The example corpus uses D&D 5th Edition PDFs, but the approach is generic and wo
 
 ## Search strategies
 
-| # | Strategy | Engine | Queries | Rounds | Description |
-|---|----------|--------|---------|--------|-------------|
-| 1 | **BM25 simple** | bm25s | 1 keyword query | 1 | Classical lexical search, single pass |
-| 2 | **BM25 + LLM expansion** | bm25s | 2-5 parallel queries | 1 | LLM generates multi-axis keyword queries before searching |
-| 3 | **BM25 2-round** | bm25s | 2-5 + 1-3 gap-fill | 2 | Round 1: broad expansion. Round 2: targeted gap-filling |
-| 4 | **Vector DB naive** | Qdrant | 1 natural language query | 1 | Cosine similarity search via embeddings |
-| 5 | **Vector DB 2-round** | Qdrant | 2-5 + 1-3 gap-fill | 2 | Round 1: multi-axis semantic search. Round 2: gap-filling |
+### Constrained agents (fixed strategy)
+
+| # | Strategy | Engine | Rounds | maxTurns |
+|---|----------|--------|--------|----------|
+| 1 | **BM25 simple** | bm25s | 1 | 2 |
+| 2 | **BM25 2-round** | bm25s | 2 | 4 |
+| 3 | **Vector DB naive** | Qdrant | 1 | 2 |
+| 4 | **Vector DB 2-round** | Qdrant | 2 | 4 |
+
+### Free agents (LLM chooses strategy)
+
+| # | Strategy | Engine | maxTurns |
+|---|----------|--------|----------|
+| 5 | **BM25 free** | bm25s | default |
+| 6 | **Vector free** | Qdrant | default |
+| 7 | **Hybrid free** | bm25s + Qdrant | default |
+
+## Configuration
+
+All tools read from a single config file `search_bench.json`:
+
+```json
+{
+  "docs_dir": "./docs",
+  "collection_name": "dnd5e_chunks",
+  "stemmer_language": "english",
+  "qdrant_url": "http://localhost:6333",
+  "embedding_model": "jinaai/jina-embeddings-v3"
+}
+```
+
+| Key | Description |
+|-----|-------------|
+| `docs_dir` | Path to PDF corpus (relative to config file) |
+| `collection_name` | Used to derive BM25 index dir (`data/bm25_{name}`) and Qdrant collection name |
+| `stemmer_language` | BM25 stemmer language (e.g. `english`, `french`) |
+| `qdrant_url` | Qdrant server URL |
+| `embedding_model` | FastEmbed model for vector embeddings |
+| `pdf_backend` | `"pymupdf"` (default, fast, CPU) or `"marker"` (OCR-capable, GPU) |
+
+To switch corpus or collection: edit `search_bench.json`, then re-index.
+
+## Ingestion pipeline
+
+### PDF parsing
+
+Two backends are available, selected via `pdf_backend` in `search_bench.json`:
+
+- **`pymupdf`** (default): [pymupdf4llm](https://pymupdf.readthedocs.io/) → Markdown. Fast, CPU-only. Best for native PDFs with text layers.
+- **`marker`**: [Marker](https://github.com/datalab-to/marker) (Surya-based) with visual layout detection and auto-OCR. Requires GPU (~5GB VRAM). Best for scanned PDFs with complex layouts (multi-column, tables, sidebars).
+
+Both backends produce per-page text that is then chunked into 512-word blocks with 75-word overlap.
+
+A `clean_text()` function normalizes the text before chunking to avoid token-dense artifacts:
+- `<br>` tags (from markdown tables) → newlines
+- Long table separators (`----...----`) → `---`
+- URLs → `[url deleted]` placeholder
+- Long dot sequences (TOC lines) → `...`
+
+This is critical for embedding performance — without it, a single "word" (per `.split()`) could contain 900+ chars of `<br>`-separated HTML, producing hundreds of tokens and slowing embedding from ~1s to 250s per batch.
+
+### Embedding model
+
+**`jinaai/jina-embeddings-v3`** — 570M params, 1024 dims, 8192 token context.
+
+- Multilingual: 30+ languages officially supported, pre-trained on 89
+- Task-specific LoRA adapters: `retrieval.query` / `retrieval.passage` (handled automatically by FastEmbed)
+- GPU acceleration via `fastembed-gpu` (ONNX Runtime + CUDA)
+- License: CC BY-NC 4.0 (non-commercial)
+
+Vector name and dimension are derived dynamically from the model (same convention as `mcp-server-qdrant`).
 
 ## Scoring
 
@@ -68,12 +132,13 @@ See [`scoring.md`](scoring.md) for the full rubric.
 
 ## Prerequisites
 
-- **Python 3.12** + [uv](https://docs.astral.sh/uv/) (version pinned in `.python-version`)
+- **Python 3.12** + [uv](https://docs.astral.sh/uv/)
 - **Node.js** + [yarn](https://yarnpkg.com/)
 - **Docker** (for Qdrant vector DB)
+- **NVIDIA GPU** + CUDA (required for Marker OCR backend and recommended for embedding)
 - **Claude Code CLI** with an Anthropic API key
 
-> **Note on the corpus:** This repository does not include PDF files. You must provide your own documents in the `docs/` directory. The example questions in `questions.json` reference D&D 5e content (SRD, adventures), but you can adapt them to any corpus.
+> **Note on the corpus:** This repository does not include PDF files. You must provide your own documents in the `docs/` directory.
 
 ## Setup
 
@@ -83,7 +148,7 @@ See [`scoring.md`](scoring.md) for the full rubric.
 git clone https://github.com/<your-username>/search_bench.git
 cd search_bench
 
-# Python dependencies
+# Python dependencies (includes fastembed-gpu)
 uv sync
 
 # Node dependencies (for TypeScript tooling)
@@ -92,52 +157,37 @@ yarn install
 
 ### 2. Add your PDF corpus
 
-Place your PDF files in the `docs/` directory:
+Place your PDF files in the `docs/` directory.
 
-```text
-docs/
-├── your-document-1.pdf
-├── your-document-2.pdf
-└── ...
-```
-
-### 3. Build the BM25 index
+### 3. Start Qdrant
 
 ```bash
-PYTHONIOENCODING=utf-8 uv run python tools/bm25_index.py
-```
-
-This parses all PDFs in `docs/`, chunks them (512 words, 75-word overlap), and builds a BM25 index in `data/bm25_index/`.
-
-### 4. Start Qdrant and build the vector index
-
-```bash
-# Start Qdrant with persistent storage
 docker run -d --name qdrant -p 6333:6333 \
   -v "$(pwd)/qdrant_storage:/qdrant/storage" \
   qdrant/qdrant
+```
 
-# Build the vector index
+### 4. Index
+
+```bash
+# Build both indexes in one pass (recommended — extracts PDFs only once)
+PYTHONIOENCODING=utf-8 uv run python tools/index_all.py --reset
+
+# Or build individually:
+PYTHONIOENCODING=utf-8 uv run python tools/bm25_index.py
 PYTHONIOENCODING=utf-8 uv run python tools/qdrant_index.py
 ```
 
-This embeds all chunks using `sentence-transformers/all-MiniLM-L6-v2` (via [FastEmbed](https://github.com/qdrant/fastembed), runs locally — no API key needed) and upserts them into a Qdrant collection `dnd5e_chunks`.
-
-Use `--reset` to drop and recreate the collection:
-
-```bash
-PYTHONIOENCODING=utf-8 uv run python tools/qdrant_index.py --reset
-```
+Use `--reset` to drop and recreate the Qdrant collection. With Marker backend, always use `index_all.py` to avoid running OCR twice.
 
 ## MCP servers
 
-The agents communicate with the search backends via MCP (Model Context Protocol) servers. Claude Code launches them automatically based on the agent configuration, but you can also run them manually:
+The agents communicate with search backends via MCP servers. Claude Code launches them automatically from agent configs, but you can run them manually:
 
-### BM25 server (bm25s built-in)
+### BM25 server
 
 ```bash
-# Run from the project root
-uv run bm25 mcp launch --index-dir data/bm25_index
+uv run python tools/bm25_mcp_server.py --config search_bench.json
 ```
 
 Exposes a `retrieve(query, k)` tool over stdio.
@@ -145,41 +195,10 @@ Exposes a `retrieve(query, k)` tool over stdio.
 ### Qdrant server
 
 ```bash
-QDRANT_URL=http://localhost:6333 \
-COLLECTION_NAME=dnd5e_chunks \
-EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2 \
-uvx mcp-server-qdrant
+uv run python tools/qdrant_mcp_wrapper.py --config search_bench.json
 ```
 
-Exposes a `qdrant-find` tool over stdio.
-
-## Agents
-
-Each search strategy is defined as a Claude Code sub-agent in `.claude/agents/`:
-
-| Agent | Strategy | Engine | maxTurns |
-|-------|----------|--------|----------|
-| `dnd-5e-researcher` | BM25 simple | bm25s | 2 |
-| `dnd-5e-researcher-keyword-expansion` | BM25 + LLM expansion | bm25s | 2 |
-| `dnd-5e-researcher-2round` | BM25 2-round | bm25s | 4 |
-| `dnd-5e-researcher-vector` | Vector DB naive | Qdrant | 2 |
-| `dnd-5e-researcher-vector-2round` | Vector DB 2-round | Qdrant | 4 |
-
-All agents are strictly instructed to **only use information from search results** — no LLM knowledge fill-in. The `maxTurns` constraint enforces the search pattern (1-pass agents get 2 turns, 2-round agents get 4).
-
-## Benchmark questions
-
-The benchmark uses questions from [`questions.json`](questions.json), with varying difficulty levels:
-
-| ID | Question | Difficulty |
-|----|----------|------------|
-| `q1_simple_stat` | What is the Armor Class of an Adult Red Dragon? | Simple |
-| `q2_simple_ability` | What is the range and damage of a Young White Dragon's Cold Breath? | Simple |
-| `q3_medium_spell` | Wizard casts Dominate Monster on Adult Red Dragon — what save? | Medium |
-| `q4_medium_disease` | What disease can characters catch in Croaker Cave (Frozen Sick)? | Medium |
-| `q5_complex_multistep` | Level 9 Wizard with 20 INT casts Fireball at 120ft — full breakdown | Complex |
-
-Each question includes an `expected_answer`, `reasoning`, and `sources` for the arbiter to evaluate against.
+Wraps `mcp-server-qdrant` with config-driven env vars. Exposes a `qdrant-find` tool over stdio.
 
 ## Project structure
 
@@ -188,36 +207,30 @@ search_bench/
 ├── .claude/
 │   └── agents/              # Claude Code sub-agent definitions (1 per strategy)
 ├── data/
-│   └── bm25_index/          # Serialized BM25 index (generated)
+│   └── bm25_{collection}/   # Serialized BM25 index (generated)
 ├── docs/                    # PDF corpus (not included — bring your own)
 ├── tools/
+│   ├── config.py            # Shared config loader (reads search_bench.json)
+│   ├── pdf_utils.py         # PDF extraction + clean_text() + chunking
 │   ├── bm25_index.py        # Build BM25 index from PDFs
 │   ├── bm25_search.py       # CLI search over BM25 index
+│   ├── bm25_mcp_server.py   # BM25 MCP server (config-driven)
 │   ├── qdrant_index.py      # Build Qdrant vector index from PDFs
-│   ├── pdf_utils.py         # PDF extraction + chunking (shared)
-│   └── extract_page.py      # Extract a single page from a PDF
+│   ├── qdrant_mcp_wrapper.py # Wrapper for mcp-server-qdrant (config-driven)
+│   └── corpus_poison.py     # Anti-hallucination: injects modified stats
+├── search_bench.json        # Central config (corpus path, collection, model)
 ├── questions.json           # Benchmark questions with expected answers
 ├── scoring.md               # Full scoring rubric
-├── pyproject.toml           # Python dependencies (uv)
-└── package.json             # Node dependencies (yarn)
+└── JOURNAL.md               # Technical decisions and findings log
 ```
-
-## Tools reference
-
-| Script | Purpose | Usage |
-|--------|---------|-------|
-| `tools/bm25_index.py` | Index all PDFs into BM25 | `PYTHONIOENCODING=utf-8 uv run python tools/bm25_index.py` |
-| `tools/bm25_search.py` | Search the BM25 index (CLI) | `PYTHONIOENCODING=utf-8 uv run python tools/bm25_search.py "query" --top-k 10` |
-| `tools/qdrant_index.py` | Index all PDFs into Qdrant | `PYTHONIOENCODING=utf-8 uv run python tools/qdrant_index.py [--reset]` |
-| `tools/extract_page.py` | Extract one page as Markdown | `PYTHONIOENCODING=utf-8 uv run python tools/extract_page.py <pdf> <page>` |
 
 ## Tech stack
 
 | Component | Technology |
 |-----------|------------|
 | BM25 search | [`bm25s`](https://github.com/xhluca/bm25s) + PyStemmer |
-| Vector search | [Qdrant](https://qdrant.tech/) + [`fastembed`](https://github.com/qdrant/fastembed) (all-MiniLM-L6-v2, 384 dims) |
-| PDF parsing | [PyMuPDF](https://pymupdf.readthedocs.io/) + pymupdf4llm |
+| Vector search | [Qdrant](https://qdrant.tech/) + [`fastembed-gpu`](https://github.com/qdrant/fastembed) (jina-embeddings-v3, 1024 dims) |
+| PDF parsing | [PyMuPDF](https://pymupdf.readthedocs.io/) + pymupdf4llm / [Marker](https://github.com/datalab-to/marker) (Surya OCR) |
 | LLM agents | Claude Sonnet (search) / Claude Opus (arbitration) |
 | MCP servers | bm25s built-in MCP / [mcp-server-qdrant](https://github.com/qdrant/mcp-server-qdrant) |
 | Python | 3.12, managed with [uv](https://docs.astral.sh/uv/) |
@@ -226,6 +239,11 @@ search_bench/
 ## Windows note
 
 On Windows, always prefix Python commands with `PYTHONIOENCODING=utf-8` to avoid encoding errors with PDF text output. On Linux/macOS this is typically not needed.
+
+PowerShell syntax:
+```powershell
+$env:PYTHONIOENCODING="utf-8"; uv run python tools/qdrant_index.py --reset
+```
 
 ## License
 

@@ -1,0 +1,8 @@
+{
+  "docs_dir": "./docs",
+  "collection_name": "dnd5e_chunks_marker",
+  "stemmer_language": "english",
+  "qdrant_url": "http://localhost:6333",
+  "embedding_model": "jinaai/jina-embeddings-v3",
+  "pdf_backend": "marker"
+}

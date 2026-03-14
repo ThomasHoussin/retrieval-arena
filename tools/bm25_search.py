@@ -1,12 +1,14 @@
 """Search the BM25-indexed D&D corpus."""
 
 import argparse
-from pathlib import Path
 
 import bm25s
 import Stemmer
 
-INDEX_DIR = Path(__file__).parent.parent / "data" / "bm25_index"
+from config import load_config
+
+cfg = load_config()
+INDEX_DIR = cfg["bm25_index_dir"]
 
 
 def main():
@@ -18,7 +20,7 @@ def main():
     args = parser.parse_args()
 
     retriever = bm25s.BM25.load(str(INDEX_DIR), load_corpus=True)
-    stemmer = Stemmer.Stemmer("english")
+    stemmer = Stemmer.Stemmer(cfg["stemmer_language"])
 
     query_tokens = bm25s.tokenize(args.query, stemmer=stemmer)
     results, scores = retriever.retrieve(query_tokens, k=args.top_k)

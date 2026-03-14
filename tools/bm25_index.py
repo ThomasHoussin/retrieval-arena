@@ -1,7 +1,6 @@
 """Index D&D PDF corpus with BM25s."""
 
 import sys
-from pathlib import Path
 
 # Fix Windows encoding
 if sys.stdout.encoding != "utf-8":
@@ -11,61 +10,39 @@ if sys.stdout.encoding != "utf-8":
 import bm25s
 import Stemmer
 
-from pdf_utils import extract_text_by_page, chunk_document
-
-DOCS_DIR = Path(__file__).parent.parent / "docs"
-INDEX_DIR = Path(__file__).parent.parent / "data" / "bm25_index"
+from config import load_config
+from pdf_utils import extract_corpus
 
 
-def main():
-    pdf_files = sorted(DOCS_DIR.glob("**/*.pdf"))
-    if not pdf_files:
-        print(f"No PDFs found in {DOCS_DIR}")
-        sys.exit(1)
+def build_bm25_index(chunks: list[dict], cfg: dict):
+    """Build and save a BM25 index from pre-extracted chunks."""
+    index_dir = cfg["bm25_index_dir"]
 
-    print(f"Found {len(pdf_files)} PDFs")
-
-    all_chunks = []
-    for pdf_path in pdf_files:
-        rel = pdf_path.relative_to(DOCS_DIR)
-        print(f"  Processing: {rel}")
-        try:
-            pages = extract_text_by_page(pdf_path)
-            chunks = chunk_document(pages, str(rel))
-            all_chunks.extend(chunks)
-            print(f"    {len(pages)} pages, {len(chunks)} chunks")
-        except Exception as e:
-            print(f"    ERROR: {e}", file=sys.stderr)
-
-    if not all_chunks:
-        print("No chunks extracted, aborting.")
-        sys.exit(1)
-
-    print(f"\nTotal: {len(all_chunks)} chunks")
-
-    # Apply corpus poison
-    from corpus_poison import apply_poison, log_poison_stats
-
-    all_chunks, poison_stats = apply_poison(all_chunks)
-    log_poison_stats(poison_stats)
-
-    # Tokenize
-    texts = [c["text"] for c in all_chunks]
-    stemmer = Stemmer.Stemmer("english")
+    texts = [c["text"] for c in chunks]
+    stemmer = Stemmer.Stemmer(cfg["stemmer_language"])
     print("Tokenizing...")
     corpus_tokens = bm25s.tokenize(texts, stemmer=stemmer)
 
-    # Index
-    print("Indexing...")
+    print("Indexing BM25...")
     retriever = bm25s.BM25()
     retriever.index(corpus_tokens)
 
-    # Save
-    INDEX_DIR.mkdir(parents=True, exist_ok=True)
-    print(f"Saving to {INDEX_DIR}")
-    retriever.save(str(INDEX_DIR), corpus=all_chunks)
+    index_dir.mkdir(parents=True, exist_ok=True)
+    print(f"Saving BM25 to {index_dir}")
+    retriever.save(str(index_dir), corpus=chunks)
+    print("BM25 done.")
 
-    print("Done.")
+
+def main():
+    cfg = load_config()
+    chunks = extract_corpus(cfg["docs_dir"], backend=cfg["pdf_backend"])
+
+    from corpus_poison import apply_poison, log_poison_stats
+
+    chunks, poison_stats = apply_poison(chunks)
+    log_poison_stats(poison_stats)
+
+    build_bm25_index(chunks, cfg)
 
 
 if __name__ == "__main__":

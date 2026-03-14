@@ -1,123 +1,109 @@
 """Index D&D PDF corpus into Qdrant with FastEmbed vectors."""
 
+import hashlib
 import os
 import sys
-import hashlib
-from pathlib import Path
+import time
+import warnings
 
 # Add cuDNN to PATH for CUDA support
 cudnn_path = r"C:\Program Files\NVIDIA\CUDNN\v9.20\bin\12.9\x64"
 if os.path.exists(cudnn_path):
     os.environ["PATH"] = cudnn_path + os.pathsep + os.environ.get("PATH", "")
 
-
 # Fix Windows encoding
 if sys.stdout.encoding != "utf-8":
     sys.stdout.reconfigure(encoding="utf-8")
     sys.stderr.reconfigure(encoding="utf-8")
 
-from fastembed import TextEmbedding
-from qdrant_client import QdrantClient
-from qdrant_client.models import Distance, PointStruct, VectorParams
+from fastembed import TextEmbedding  # noqa: E402
+from qdrant_client import QdrantClient  # noqa: E402
+from qdrant_client.models import Distance, PointStruct, VectorParams  # noqa: E402
 
-from pdf_utils import extract_text_by_page, chunk_document
+from config import load_config  # noqa: E402
+from pdf_utils import extract_corpus  # noqa: E402
 
-DOCS_DIR = Path(__file__).parent.parent / "docs"
-COLLECTION_NAME = "dnd5e_chunks"
-EMBEDDING_MODEL = "nomic-ai/nomic-embed-text-v1.5"
-# Must match mcp-server-qdrant's FastEmbedProvider.get_vector_name()
-VECTOR_NAME = "fast-nomic-embed-text-v1.5"
-VECTOR_SIZE = 768
 BATCH_SIZE = 8
-QDRANT_URL = "http://localhost:6333"
+
+
+def _get_vector_config(embedding_model: str) -> tuple[str, int]:
+    """Derive vector name and size from embedding model (matches mcp-server-qdrant)."""
+    vector_name = f"fast-{embedding_model.split('/')[-1].lower()}"
+    models_list = TextEmbedding.list_supported_models()
+    match = next((m for m in models_list if m["model"] == embedding_model), None)
+    if match is None:
+        print(
+            f"Embedding model '{embedding_model}' not found in FastEmbed registry.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    return vector_name, match["dim"]
 
 
 def chunk_id_to_uuid(source: str, chunk_id: int) -> str:
     """Deterministic UUID from source + chunk_id for idempotent upserts."""
     h = hashlib.sha256(f"{source}:{chunk_id}".encode()).hexdigest()
-    # Format as UUID: 8-4-4-4-12
     return f"{h[:8]}-{h[8:12]}-{h[12:16]}-{h[16:20]}-{h[20:32]}"
 
 
-def main():
-    reset = "--reset" in sys.argv
+def build_qdrant_index(chunks: list[dict], cfg: dict, reset: bool = False):
+    """Build Qdrant vector index from pre-extracted chunks."""
+    collection_name = cfg["qdrant_collection_name"]
+    embedding_model = cfg["embedding_model"]
+    qdrant_url = cfg["qdrant_url"]
+    vector_name, vector_size = _get_vector_config(embedding_model)
 
-    client = QdrantClient(url=QDRANT_URL)
+    client = QdrantClient(url=qdrant_url)
 
-    # Reset collection if requested
     if reset:
-        print(f"Resetting collection '{COLLECTION_NAME}'...")
-        client.delete_collection(COLLECTION_NAME)
+        print(f"Resetting collection '{collection_name}'...")
+        client.delete_collection(collection_name)
 
-    # Create collection if it doesn't exist
     collections = [c.name for c in client.get_collections().collections]
-    if COLLECTION_NAME not in collections:
+    if collection_name not in collections:
         print(
-            f"Creating collection '{COLLECTION_NAME}' (vector={VECTOR_NAME}, dim={VECTOR_SIZE}, cosine)..."
+            f"Creating collection '{collection_name}' (vector={vector_name}, dim={vector_size}, cosine)..."
         )
         client.create_collection(
-            collection_name=COLLECTION_NAME,
+            collection_name=collection_name,
             vectors_config={
-                VECTOR_NAME: VectorParams(size=VECTOR_SIZE, distance=Distance.COSINE),
+                vector_name: VectorParams(size=vector_size, distance=Distance.COSINE),
             },
         )
     else:
-        print(f"Collection '{COLLECTION_NAME}' already exists.")
+        print(f"Collection '{collection_name}' already exists.")
+        info = client.get_collection(collection_name)
+        existing = info.config.params.vectors.get(vector_name)
+        if existing and existing.size != vector_size:
+            print(
+                f"ERROR: collection '{collection_name}' has dim={existing.size} "
+                f"but model '{embedding_model}' requires dim={vector_size}. "
+                f"Run with --reset to recreate.",
+                file=sys.stderr,
+            )
+            sys.exit(1)
 
-    # Parse PDFs
-    pdf_files = sorted(DOCS_DIR.glob("**/*.pdf"))
-    if not pdf_files:
-        print(f"No PDFs found in {DOCS_DIR}")
-        sys.exit(1)
-
-    print(f"Found {len(pdf_files)} PDFs")
-
-    all_chunks = []
-    for pdf_path in pdf_files:
-        rel = pdf_path.relative_to(DOCS_DIR)
-        print(f"  Processing: {rel}")
-        try:
-            pages = extract_text_by_page(pdf_path)
-            chunks = chunk_document(pages, str(rel))
-            all_chunks.extend(chunks)
-            print(f"    {len(pages)} pages, {len(chunks)} chunks")
-        except Exception as e:
-            print(f"    ERROR: {e}", file=sys.stderr)
-
-    if not all_chunks:
-        print("No chunks extracted, aborting.")
-        sys.exit(1)
-
-    print(f"\nTotal: {len(all_chunks)} chunks")
-
-    # Apply corpus poison
-    from corpus_poison import apply_poison, log_poison_stats
-
-    all_chunks, poison_stats = apply_poison(all_chunks)
-    log_poison_stats(poison_stats)
-
-    # Embed and upsert in batches
-    print(f"Loading embedding model: {EMBEDDING_MODEL}...")
-    import warnings
+    # Load embedding model
+    print(f"Loading embedding model: {embedding_model}...")
     warnings.filterwarnings("ignore")
     os.environ["ORT_LOG_LEVEL"] = "3"
-    model = TextEmbedding(model_name=EMBEDDING_MODEL, cuda=True)
+    model = TextEmbedding(model_name=embedding_model, cuda=True)
 
-    # Verify CUDA
     import onnxruntime as ort
+
     providers = ort.get_available_providers()
     if "CUDAExecutionProvider" in providers:
-        print(f"  GPU: CUDA active")
+        print("  GPU: CUDA active")
     else:
-        print(f"  GPU: NOT available, running on CPU")
+        print("  GPU: NOT available, running on CPU")
 
-    texts = [c["text"] for c in all_chunks]
-    print(f"Embedding and upserting {len(all_chunks)} chunks in batches of {BATCH_SIZE}...")
+    # Embed and upsert in batches
+    texts = [c["text"] for c in chunks]
+    print(f"Embedding and upserting {len(chunks)} chunks in batches of {BATCH_SIZE}...")
 
-    import time
     total_start = time.time()
-    for i in range(0, len(all_chunks), BATCH_SIZE):
-        batch_chunks = all_chunks[i : i + BATCH_SIZE]
+    for i in range(0, len(chunks), BATCH_SIZE):
+        batch_chunks = chunks[i : i + BATCH_SIZE]
         batch_texts = texts[i : i + BATCH_SIZE]
 
         batch_start = time.time()
@@ -127,7 +113,7 @@ def main():
         points = [
             PointStruct(
                 id=chunk_id_to_uuid(chunk["source"], chunk["chunk_id"]),
-                vector={VECTOR_NAME: embedding.tolist()},
+                vector={vector_name: embedding.tolist()},
                 payload={
                     "document": chunk["text"],
                     "source": chunk["source"],
@@ -138,12 +124,26 @@ def main():
             for chunk, embedding in zip(batch_chunks, embeddings)
         ]
 
-        client.upsert(collection_name=COLLECTION_NAME, points=points)
-        done = min(i + BATCH_SIZE, len(all_chunks))
+        client.upsert(collection_name=collection_name, points=points)
+        done = min(i + BATCH_SIZE, len(chunks))
         elapsed = time.time() - total_start
-        print(f"  [{done}/{len(all_chunks)}] embed={embed_time:.2f}s total={elapsed:.1f}s")
+        print(f"  [{done}/{len(chunks)}] embed={embed_time:.2f}s total={elapsed:.1f}s")
 
-    print(f"Done in {time.time() - total_start:.1f}s.")
+    print(f"Qdrant done in {time.time() - total_start:.1f}s.")
+
+
+def main():
+    cfg = load_config()
+    reset = "--reset" in sys.argv
+
+    chunks = extract_corpus(cfg["docs_dir"], backend=cfg["pdf_backend"])
+
+    from corpus_poison import apply_poison, log_poison_stats
+
+    chunks, poison_stats = apply_poison(chunks)
+    log_poison_stats(poison_stats)
+
+    build_qdrant_index(chunks, cfg, reset=reset)
 
 
 if __name__ == "__main__":
