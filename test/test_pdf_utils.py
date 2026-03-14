@@ -12,9 +12,9 @@ pymupdf4llm is already installed in the project venv, so the top-level import
 in pdf_utils.py succeeds; we only need to mock the function calls themselves.
 """
 
-import sys
+import hashlib
 from pathlib import Path
-from unittest.mock import MagicMock, call, patch
+from unittest.mock import patch
 
 import pytest
 
@@ -261,44 +261,121 @@ class TestChunkDocument:
 class TestExtractTextByPage:
     """Verify that the correct backend function is called based on the argument."""
 
-    def test_default_backend_calls_pymupdf(self):
+    @staticmethod
+    def _make_pdf(tmp_path: Path, name: str = "dummy.pdf") -> Path:
+        """Create a minimal temp file to satisfy read_bytes() for SHA1."""
+        p = tmp_path / name
+        p.write_bytes(b"fake pdf content")
+        return p
+
+    def test_default_backend_calls_pymupdf(self, tmp_path):
+        pdf = self._make_pdf(tmp_path)
         fake_pages = [(1, "page one text")]
-        with patch("tools.pdf_utils._extract_pymupdf", return_value=fake_pages) as mock_pym, \
-             patch("tools.pdf_utils._extract_marker") as mock_mrk:
-            result = extract_text_by_page(Path("dummy.pdf"))
-        mock_pym.assert_called_once_with(Path("dummy.pdf"))
+        with (
+            patch("tools.pdf_utils._load_cache", return_value=None),
+            patch("tools.pdf_utils._save_cache"),
+            patch(
+                "tools.pdf_utils._extract_pymupdf", return_value=fake_pages
+            ) as mock_pym,
+            patch("tools.pdf_utils._extract_marker") as mock_mrk,
+        ):
+            pages, cached = extract_text_by_page(pdf)
+        mock_pym.assert_called_once_with(pdf)
         mock_mrk.assert_not_called()
-        assert result == fake_pages
+        assert pages == fake_pages
+        assert cached is False
 
-    def test_explicit_pymupdf_backend_calls_pymupdf(self):
+    def test_explicit_pymupdf_backend_calls_pymupdf(self, tmp_path):
+        pdf = self._make_pdf(tmp_path)
         fake_pages = [(1, "text")]
-        with patch("tools.pdf_utils._extract_pymupdf", return_value=fake_pages) as mock_pym, \
-             patch("tools.pdf_utils._extract_marker") as mock_mrk:
-            result = extract_text_by_page(Path("dummy.pdf"), backend="pymupdf")
-        mock_pym.assert_called_once_with(Path("dummy.pdf"))
+        with (
+            patch("tools.pdf_utils._load_cache", return_value=None),
+            patch("tools.pdf_utils._save_cache"),
+            patch(
+                "tools.pdf_utils._extract_pymupdf", return_value=fake_pages
+            ) as mock_pym,
+            patch("tools.pdf_utils._extract_marker") as mock_mrk,
+        ):
+            pages, cached = extract_text_by_page(pdf, backend="pymupdf")
+        mock_pym.assert_called_once_with(pdf)
         mock_mrk.assert_not_called()
-        assert result == fake_pages
+        assert pages == fake_pages
+        assert cached is False
 
-    def test_marker_backend_calls_marker(self):
+    def test_marker_backend_calls_marker(self, tmp_path):
+        pdf = self._make_pdf(tmp_path)
         fake_pages = [(1, "marker text")]
-        with patch("tools.pdf_utils._extract_marker", return_value=fake_pages) as mock_mrk, \
-             patch("tools.pdf_utils._extract_pymupdf") as mock_pym:
-            result = extract_text_by_page(Path("dummy.pdf"), backend="marker")
-        mock_mrk.assert_called_once_with(Path("dummy.pdf"))
+        with (
+            patch("tools.pdf_utils._load_cache", return_value=None),
+            patch("tools.pdf_utils._save_cache"),
+            patch(
+                "tools.pdf_utils._extract_marker", return_value=fake_pages
+            ) as mock_mrk,
+            patch("tools.pdf_utils._extract_pymupdf") as mock_pym,
+        ):
+            pages, cached = extract_text_by_page(pdf, backend="marker")
+        mock_mrk.assert_called_once_with(pdf)
         mock_pym.assert_not_called()
-        assert result == fake_pages
+        assert pages == fake_pages
+        assert cached is False
 
-    def test_pymupdf_backend_returns_value_from_backend(self):
+    def test_pymupdf_backend_returns_value_from_backend(self, tmp_path):
+        pdf = self._make_pdf(tmp_path)
         fake_pages = [(2, "hello"), (3, "world")]
-        with patch("tools.pdf_utils._extract_pymupdf", return_value=fake_pages):
-            result = extract_text_by_page(Path("x.pdf"), backend="pymupdf")
-        assert result == fake_pages
+        with (
+            patch("tools.pdf_utils._load_cache", return_value=None),
+            patch("tools.pdf_utils._save_cache"),
+            patch("tools.pdf_utils._extract_pymupdf", return_value=fake_pages),
+        ):
+            pages, cached = extract_text_by_page(pdf, backend="pymupdf")
+        assert pages == fake_pages
+        assert cached is False
 
-    def test_marker_backend_returns_value_from_backend(self):
+    def test_marker_backend_returns_value_from_backend(self, tmp_path):
+        pdf = self._make_pdf(tmp_path)
         fake_pages = [(1, "marker page")]
-        with patch("tools.pdf_utils._extract_marker", return_value=fake_pages):
-            result = extract_text_by_page(Path("x.pdf"), backend="marker")
-        assert result == fake_pages
+        with (
+            patch("tools.pdf_utils._load_cache", return_value=None),
+            patch("tools.pdf_utils._save_cache"),
+            patch("tools.pdf_utils._extract_marker", return_value=fake_pages),
+        ):
+            pages, cached = extract_text_by_page(pdf, backend="marker")
+        assert pages == fake_pages
+        assert cached is False
+
+    def test_cache_hit_skips_extraction(self, tmp_path):
+        pdf = self._make_pdf(tmp_path)
+        cached_pages = [(1, "cached text")]
+        with (
+            patch("tools.pdf_utils._load_cache", return_value=cached_pages),
+            patch("tools.pdf_utils._extract_pymupdf") as mock_pym,
+            patch("tools.pdf_utils._extract_marker") as mock_mrk,
+        ):
+            pages, cached = extract_text_by_page(pdf, backend="pymupdf")
+        mock_pym.assert_not_called()
+        mock_mrk.assert_not_called()
+        assert pages == cached_pages
+        assert cached is True
+
+    def test_cache_miss_saves_result(self, tmp_path):
+        pdf = self._make_pdf(tmp_path)
+        fake_pages = [(1, "new text")]
+        sha1 = hashlib.sha1(b"fake pdf content").hexdigest()
+        with (
+            patch("tools.pdf_utils._load_cache", return_value=None),
+            patch("tools.pdf_utils._save_cache") as mock_save,
+            patch("tools.pdf_utils._extract_pymupdf", return_value=fake_pages),
+        ):
+            extract_text_by_page(pdf, backend="pymupdf")
+        mock_save.assert_called_once_with(sha1, "pymupdf", fake_pages)
+
+    def test_unknown_backend_raises(self, tmp_path):
+        pdf = self._make_pdf(tmp_path)
+        with (
+            patch("tools.pdf_utils._load_cache", return_value=None),
+            pytest.raises(ValueError, match="Unknown backend"),
+        ):
+            extract_text_by_page(pdf, backend="typo")
 
 
 # ===========================================================================
@@ -319,7 +396,9 @@ class TestExtractCorpus:
         (tmp_path / "b.pdf").touch()
 
         fake_pages = [(1, "word")]
-        with patch("tools.pdf_utils.extract_text_by_page", return_value=fake_pages) as mock_ext:
+        with patch(
+            "tools.pdf_utils.extract_text_by_page", return_value=(fake_pages, False)
+        ) as mock_ext:
             extract_corpus(tmp_path, backend="pymupdf")
 
         assert mock_ext.call_count == 2
@@ -327,7 +406,9 @@ class TestExtractCorpus:
     def test_passes_backend_to_extract_text_by_page(self, tmp_path):
         (tmp_path / "x.pdf").touch()
         fake_pages = [(1, "word")]
-        with patch("tools.pdf_utils.extract_text_by_page", return_value=fake_pages) as mock_ext:
+        with patch(
+            "tools.pdf_utils.extract_text_by_page", return_value=(fake_pages, False)
+        ) as mock_ext:
             extract_corpus(tmp_path, backend="marker")
         _, kwargs = mock_ext.call_args
         assert kwargs.get("backend") == "marker" or mock_ext.call_args[0][1] == "marker"
@@ -338,7 +419,9 @@ class TestExtractCorpus:
         # Each PDF yields 600 words — enough for at least one chunk each
         words = " ".join(f"w{i}" for i in range(600))
         fake_pages = [(1, words)]
-        with patch("tools.pdf_utils.extract_text_by_page", return_value=fake_pages):
+        with patch(
+            "tools.pdf_utils.extract_text_by_page", return_value=(fake_pages, False)
+        ):
             chunks = extract_corpus(tmp_path, backend="pymupdf")
         # Two PDFs each producing chunks means total > 0
         assert len(chunks) > 0
@@ -349,7 +432,9 @@ class TestExtractCorpus:
         pdf = tmp_path / "book.pdf"
         pdf.touch()
         fake_pages = [(1, " ".join(f"w{i}" for i in range(600)))]
-        with patch("tools.pdf_utils.extract_text_by_page", return_value=fake_pages):
+        with patch(
+            "tools.pdf_utils.extract_text_by_page", return_value=(fake_pages, False)
+        ):
             chunks = extract_corpus(tmp_path, backend="pymupdf")
         assert all("book.pdf" in c["source"] for c in chunks)
         # Must be relative, not absolute
@@ -364,7 +449,7 @@ class TestExtractCorpus:
     def test_exits_when_all_pdfs_produce_no_chunks(self, tmp_path):
         (tmp_path / "empty.pdf").touch()
         # extract_text_by_page returns empty list → chunk_document returns [] → no chunks
-        with patch("tools.pdf_utils.extract_text_by_page", return_value=[]):
+        with patch("tools.pdf_utils.extract_text_by_page", return_value=([], False)):
             with pytest.raises(SystemExit) as exc_info:
                 extract_corpus(tmp_path, backend="pymupdf")
         assert exc_info.value.code == 1
@@ -378,7 +463,7 @@ class TestExtractCorpus:
         def side_effect(path, backend):
             if "bad" in str(path):
                 raise RuntimeError("simulated extraction failure")
-            return good_pages
+            return good_pages, False
 
         with patch("tools.pdf_utils.extract_text_by_page", side_effect=side_effect):
             # Should not raise; bad.pdf is skipped, good.pdf produces chunks
@@ -392,7 +477,27 @@ class TestExtractCorpus:
         subdir.mkdir()
         (subdir / "nested.pdf").touch()
         fake_pages = [(1, " ".join(f"w{i}" for i in range(600)))]
-        with patch("tools.pdf_utils.extract_text_by_page", return_value=fake_pages):
+        with patch(
+            "tools.pdf_utils.extract_text_by_page", return_value=(fake_pages, False)
+        ):
             chunks = extract_corpus(tmp_path, backend="pymupdf")
         sources = {c["source"] for c in chunks}
         assert any("nested.pdf" in s for s in sources)
+
+    def test_cached_label_shown(self, tmp_path, capsys):
+        (tmp_path / "a.pdf").touch()
+        fake_pages = [(1, "word")]
+        with patch(
+            "tools.pdf_utils.extract_text_by_page", return_value=(fake_pages, True)
+        ):
+            extract_corpus(tmp_path, backend="pymupdf")
+        assert "(cached)" in capsys.readouterr().out
+
+    def test_no_cached_label_on_miss(self, tmp_path, capsys):
+        (tmp_path / "a.pdf").touch()
+        fake_pages = [(1, "word")]
+        with patch(
+            "tools.pdf_utils.extract_text_by_page", return_value=(fake_pages, False)
+        ):
+            extract_corpus(tmp_path, backend="pymupdf")
+        assert "(cached)" not in capsys.readouterr().out
