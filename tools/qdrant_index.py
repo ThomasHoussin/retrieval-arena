@@ -18,7 +18,14 @@ if sys.stdout.encoding != "utf-8":
 
 from fastembed import TextEmbedding  # noqa: E402
 from qdrant_client import QdrantClient  # noqa: E402
-from qdrant_client.models import Distance, PointStruct, VectorParams  # noqa: E402
+from qdrant_client.models import (  # noqa: E402
+    Distance,
+    FieldCondition,
+    Filter,
+    MatchValue,
+    PointStruct,
+    VectorParams,
+)
 
 from config import load_config  # noqa: E402
 from pdf_utils import extract_corpus  # noqa: E402
@@ -44,6 +51,90 @@ def chunk_id_to_uuid(source: str, chunk_id: int) -> str:
     """Deterministic UUID from source + chunk_id for idempotent upserts."""
     h = hashlib.sha256(f"{source}:{chunk_id}".encode()).hexdigest()
     return f"{h[:8]}-{h[8:12]}-{h[12:16]}-{h[16:20]}-{h[20:32]}"
+
+
+def delete_source(client: QdrantClient, collection_name: str, source: str):
+    """Delete all points for a given source document."""
+    filt = Filter(
+        must=[FieldCondition(key="metadata.source", match=MatchValue(value=source))]
+    )
+    result = client.delete(collection_name=collection_name, points_selector=filt)
+    print(f"  Deleted existing points for '{source}' (status={result.status})")
+
+
+def upsert_chunks(
+    chunks: list[dict],
+    cfg: dict,
+    model: TextEmbedding | None = None,
+    client: QdrantClient | None = None,
+) -> tuple[TextEmbedding, QdrantClient]:
+    """Embed and upsert chunks into an existing Qdrant collection.
+
+    Returns (model, client) so caller can reuse both across multiple calls.
+    """
+    collection_name = cfg["qdrant_collection_name"]
+    embedding_model = cfg["embedding_model"]
+    vector_name, vector_size = _get_vector_config(embedding_model)
+
+    if client is None:
+        client = QdrantClient(url=cfg["qdrant_url"])
+        # Verify collection exists (only on first call)
+        collections = [c.name for c in client.get_collections().collections]
+        if collection_name not in collections:
+            print(
+                f"ERROR: collection '{collection_name}' does not exist. "
+                f"Run index_all.py first.",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+
+    if model is None:
+        print(f"Loading embedding model: {embedding_model}...")
+        warnings.filterwarnings("ignore")
+        os.environ["ORT_LOG_LEVEL"] = "3"
+        model = TextEmbedding(model_name=embedding_model, cuda=True)
+
+    # Delete existing points for each source in this batch
+    sources = sorted(set(c["source"] for c in chunks))
+    for source in sources:
+        delete_source(client, collection_name, source)
+
+    # Embed and upsert
+    texts = [c["text"] for c in chunks]
+    print(f"Embedding and upserting {len(chunks)} chunks in batches of {BATCH_SIZE}...")
+
+    total_start = time.time()
+    for i in range(0, len(chunks), BATCH_SIZE):
+        batch_chunks = chunks[i : i + BATCH_SIZE]
+        batch_texts = texts[i : i + BATCH_SIZE]
+
+        batch_start = time.time()
+        embeddings = list(model.passage_embed(batch_texts))
+        embed_time = time.time() - batch_start
+
+        points = [
+            PointStruct(
+                id=chunk_id_to_uuid(chunk["source"], chunk["chunk_id"]),
+                vector={vector_name: embedding.tolist()},
+                payload={
+                    "document": chunk["text"],
+                    "metadata": {
+                        "source": chunk["source"],
+                        "pages": chunk["pages"],
+                        "chunk_id": chunk["chunk_id"],
+                    },
+                },
+            )
+            for chunk, embedding in zip(batch_chunks, embeddings)
+        ]
+
+        client.upsert(collection_name=collection_name, points=points)
+        done = min(i + BATCH_SIZE, len(chunks))
+        elapsed = time.time() - total_start
+        print(f"  [{done}/{len(chunks)}] embed={embed_time:.2f}s total={elapsed:.1f}s")
+
+    print(f"Qdrant upsert done in {time.time() - total_start:.1f}s.")
+    return model, client
 
 
 def build_qdrant_index(chunks: list[dict], cfg: dict, reset: bool = False):
@@ -116,9 +207,11 @@ def build_qdrant_index(chunks: list[dict], cfg: dict, reset: bool = False):
                 vector={vector_name: embedding.tolist()},
                 payload={
                     "document": chunk["text"],
-                    "source": chunk["source"],
-                    "pages": chunk["pages"],
-                    "chunk_id": chunk["chunk_id"],
+                    "metadata": {
+                        "source": chunk["source"],
+                        "pages": chunk["pages"],
+                        "chunk_id": chunk["chunk_id"],
+                    },
                 },
             )
             for chunk, embedding in zip(batch_chunks, embeddings)

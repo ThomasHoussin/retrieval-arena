@@ -179,3 +179,62 @@ The Nephilim JDR corpus contains 218 PDFs but also 51 RTFs, 63 HTM/HTML files, 5
 ### Validation
 
 Extraction warning emitted when `len(text) < 50` for files > 1KB (catches silent parser failures).
+
+---
+
+## 2026-03-15 — Incremental indexing (`index_add.py`)
+
+### Why
+
+Full re-indexing (`index_all.py --reset`) reprocesses the entire corpus: extraction, embedding, and BM25 scoring. For a large corpus (300+ documents), this is slow and wasteful when only a few files changed or were added. Needed a way to add/update specific documents without touching the rest.
+
+### Design
+
+New script `tools/index_add.py` with three modes:
+
+| Mode | Command | What it does |
+|------|---------|-------------|
+| Default | `index_add.py <file1> [file2]` | Qdrant incremental + BM25 full rebuild |
+| Qdrant only | `index_add.py --qdrant-only <file1> [file2]` | Qdrant incremental, skip BM25 |
+| BM25 only | `index_add.py --bm25-only` | BM25 full rebuild, no files needed |
+
+### Qdrant: truly incremental
+
+1. Extract text from specified file(s) via `extract_text_by_page()` (uses cache if available)
+2. Chunk via `chunk_document()`
+3. **Delete** all existing points for that source (`delete_source()` — filter on `metadata.source`)
+4. **Upsert** new chunks with fresh embeddings
+
+The embedding model and Qdrant client are initialized once and reused across files to avoid repeated model loading.
+
+### BM25: full rebuild from cache
+
+BM25 (bm25s) doesn't support incremental updates — the scoring model depends on global corpus statistics (IDF). So BM25 is rebuilt from the full corpus, but extraction is instant thanks to the file-level cache in `extract_text_by_page()`. Only BM25 tokenization + scoring is recomputed.
+
+### Payload restructuring in `qdrant_index.py`
+
+To support deletion by source, the Qdrant payload was restructured to nest fields under `metadata`:
+
+```python
+# Before (flat)
+{"source": "...", "pages": "...", "chunk_id": "..."}
+
+# After (nested)
+{"metadata": {"source": "...", "pages": "...", "chunk_id": "..."}}
+```
+
+This enables filtering with `FieldCondition(key="metadata.source", match=MatchValue(value=source))`. The nested structure also keeps the payload organized as more fields are added.
+
+**Breaking change**: existing Qdrant collections indexed with the flat payload must be re-indexed (`index_all.py --reset`) for `delete_source()` to work correctly.
+
+### New functions in `qdrant_index.py`
+
+- `delete_source(client, collection_name, source)` — deletes all points matching a source path
+- `upsert_chunks(chunks, cfg, model?, client?)` — embed + upsert a batch of chunks, returns `(model, client)` for reuse
+
+### Validation
+
+- Files must be inside `docs_dir` (prevents indexing arbitrary paths)
+- File must exist and have a supported extension
+- Duplicate file arguments are deduplicated
+- Collection must already exist (run `index_all.py` first for initial setup)
