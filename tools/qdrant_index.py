@@ -6,15 +6,18 @@ import sys
 import time
 import warnings
 
-# Add cuDNN to PATH for CUDA support
-cudnn_path = r"C:\Program Files\NVIDIA\CUDNN\v9.20\bin\12.9\x64"
-if os.path.exists(cudnn_path):
-    os.environ["PATH"] = cudnn_path + os.pathsep + os.environ.get("PATH", "")
-
 # Fix Windows encoding
 if sys.stdout.encoding != "utf-8":
     sys.stdout.reconfigure(encoding="utf-8")
     sys.stderr.reconfigure(encoding="utf-8")
+
+# Load config early to get cudnn_path before importing fastembed
+from config import load_config  # noqa: E402
+
+_early_cfg = load_config()
+cudnn_path = _early_cfg.get("cudnn_path")
+if sys.platform == "win32" and cudnn_path and os.path.exists(cudnn_path):
+    os.environ["PATH"] = cudnn_path + os.pathsep + os.environ.get("PATH", "")
 
 from fastembed import TextEmbedding  # noqa: E402
 from qdrant_client import QdrantClient  # noqa: E402
@@ -26,8 +29,6 @@ from qdrant_client.models import (  # noqa: E402
     PointStruct,
     VectorParams,
 )
-
-from config import load_config  # noqa: E402
 from pdf_utils import extract_corpus  # noqa: E402
 
 BATCH_SIZE = 8

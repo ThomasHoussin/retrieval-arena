@@ -39,7 +39,7 @@ Evaluate and compare search quality across 7 strategies:
 
 ## Configuration
 
-File `search_bench.json` at the project root:
+File `search_bench.json` at the project root (copy from `search_bench.json.example`, gitignored):
 
 ```json
 {

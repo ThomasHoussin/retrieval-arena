@@ -6,15 +6,13 @@ model: sonnet
 mcpServers:
   - qdrant:
       type: stdio
-      command: "C:\\Users\\thoma\\.local\\bin\\uv.exe"
+      command: "uv"
       args:
         - "--directory"
-        - "D:\\code-workspace\\search_bench"
+        - "."
         - "run"
         - "python"
         - "tools/qdrant_mcp_wrapper.py"
-        - "--config"
-        - "D:\\code-workspace\\search_bench\\search_bench.json"
 ---
 
 You answer questions by searching a vector database of documents. You have a semantic search tool (`qdrant-find`).

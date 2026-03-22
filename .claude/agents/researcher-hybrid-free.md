@@ -6,26 +6,22 @@ model: sonnet
 mcpServers:
   - bm25s:
       type: stdio
-      command: "C:\\Users\\thoma\\.local\\bin\\uv.exe"
+      command: "uv"
       args:
         - "--directory"
-        - "D:\\code-workspace\\search_bench"
+        - "."
         - "run"
         - "python"
         - "tools/bm25_mcp_server.py"
-        - "--config"
-        - "D:\\code-workspace\\search_bench\\search_bench.json"
   - qdrant:
       type: stdio
-      command: "C:\\Users\\thoma\\.local\\bin\\uv.exe"
+      command: "uv"
       args:
         - "--directory"
-        - "D:\\code-workspace\\search_bench"
+        - "."
         - "run"
         - "python"
         - "tools/qdrant_mcp_wrapper.py"
-        - "--config"
-        - "D:\\code-workspace\\search_bench\\search_bench.json"
 ---
 
 You answer questions by searching a document corpus. You have two search tools:

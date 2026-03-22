@@ -18,5 +18,8 @@ docs/*
 data/
 qdrant_storage/
 
+# User config (copy search_bench.json.example to search_bench.json)
+search_bench.json
+
 # Environment
 .env

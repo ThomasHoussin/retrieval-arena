@@ -1,9 +1,0 @@
-{
-  "docs_dir": "C:\\Users\\thoma\\OneDrive\\loisirs\\JDR\\Nephilim",
-  "collection_name": "nephilim_marker",
-  "stemmer_language": "french",
-  "qdrant_url": "http://localhost:6333",
-  "embedding_model": "jinaai/jina-embeddings-v3",
-  "pdf_backend": "marker",
-  "poison": false
-}

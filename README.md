@@ -9,25 +9,31 @@ A benchmark comparing **7 search strategies** over the same document corpus, usi
 
 Each strategy is implemented as a Claude Code sub-agent (Claude Sonnet) with a different search tool. An arbiter (Claude Opus) then evaluates answer quality using a standardized scoring rubric.
 
-The example corpus uses D&D 5th Edition PDFs, but the approach is generic and works with any PDF collection.
+The example corpus uses D&D 5th Edition PDFs, but the approach is generic and works with any document collection (PDF, DOCX, PPTX, RTF, ODT, TXT, MD, HTML).
 
 ## How it works
 
 ```text
+  ┌─────────────────────────────────────────────────────────────┐
+  │                     INDEXING (one-time)                      │
+  │                                                             │
+  │  docs/*  ──►  extract + chunk  ──►  BM25 index + Qdrant DB │
+  └─────────────────────────────────────────────────────────────┘
+
                          ┌──────────────┐
-                         │  questions.json │
+                         │ questions.json │
                          └──────┬───────┘
                                 │
                     ┌───────────▼───────────┐
-                    │   Agent (Claude Sonnet) │
-                    │   1 agent per strategy  │
+                    │  Agent (Claude Sonnet)  │
+                    │  1 agent per strategy   │
                     └───────────┬───────────┘
                                 │
                  ┌──────────────┼──────────────┐
                  │              │               │
           ┌──────▼──────┐ ┌────▼────┐  ┌───────▼───────┐
-          │  BM25 (MCP) │ │  Qdrant │  │  PDF Corpus   │
-          │  bm25s      │ │  (MCP)  │  │  docs/*.pdf   │
+          │  BM25 (MCP) │ │  Qdrant │  │  Document      │
+          │  bm25s      │ │  (MCP)  │  │  Corpus docs/* │
           └──────┬──────┘ └────┬────┘  └───────────────┘
                  │              │
                  └──────┬───────┘
@@ -63,26 +69,30 @@ The example corpus uses D&D 5th Edition PDFs, but the approach is generic and wo
 
 ## Configuration
 
-All tools read from a single config file `search_bench.json`:
+All tools read from a single config file `search_bench.json` (copy from `search_bench.json.example` and customize):
 
 ```json
 {
   "docs_dir": "./docs",
-  "collection_name": "dnd5e_chunks",
+  "collection_name": "my_corpus",
   "stemmer_language": "english",
   "qdrant_url": "http://localhost:6333",
-  "embedding_model": "jinaai/jina-embeddings-v3"
+  "embedding_model": "jinaai/jina-embeddings-v3",
+  "pdf_backend": "marker",
+  "poison": false
 }
 ```
 
 | Key | Description |
 |-----|-------------|
-| `docs_dir` | Path to PDF corpus (relative to config file) |
+| `docs_dir` | Path to document corpus (relative to config file), recurses into subdirectories |
 | `collection_name` | Used to derive BM25 index dir (`data/bm25_{name}`) and Qdrant collection name |
 | `stemmer_language` | BM25 stemmer language (e.g. `english`, `french`) |
 | `qdrant_url` | Qdrant server URL |
 | `embedding_model` | FastEmbed model for vector embeddings |
 | `pdf_backend` | `"pymupdf"` (default, fast, CPU) or `"marker"` (OCR-capable, GPU) |
+| `poison` | `false` (default) or `true` — enable [corpus poisoning](#corpus-poisoning-anti-hallucination-detection) |
+| `cudnn_path` | `null` (default) — path to cuDNN DLLs directory, Windows only (e.g. `"C:\\Program Files\\NVIDIA\\CUDNN\\v9.20\\bin\\12.9\\x64"`) |
 
 To switch corpus or collection: edit `search_bench.json`, then re-index.
 
@@ -130,6 +140,18 @@ Vector name and dimension are derived dynamically from the model (same conventio
 
 See [`scoring.md`](scoring.md) for the full rubric.
 
+## Corpus poisoning (anti-hallucination detection)
+
+When `"poison": true` in `search_bench.json`, the indexer applies targeted text mutations to chunks before indexing (BM25 + Qdrant). This creates controlled discrepancies between the indexed corpus and widely-known facts (e.g. Fireball damage `8d6` becomes `6d8`).
+
+**Purpose**: Detect when an agent answers from training memory instead of search results. If an agent returns the original (well-known) value instead of the poisoned value, it's hallucinating. The Faithfulness score (0-2) penalizes this.
+
+**How it works** (`tools/corpus_poison.py`):
+- **Global rules**: regex replacements applied to all chunks
+- **Contextual rules**: replacements only when a specific keyword is present in the chunk
+- Rules are idempotent (match only original values, not replacements)
+- Gated by the `poison` config key — `false` by default
+
 ## Prerequisites
 
 - **Python 3.12** + [uv](https://docs.astral.sh/uv/)
@@ -138,7 +160,7 @@ See [`scoring.md`](scoring.md) for the full rubric.
 - **NVIDIA GPU** + CUDA (required for Marker OCR backend and recommended for embedding)
 - **Claude Code CLI** with an Anthropic API key
 
-> **Note on the corpus:** This repository does not include PDF files. You must provide your own documents in the `docs/` directory.
+> **Note on the corpus:** This repository does not include document files. You must provide your own documents in the `docs/` directory.
 
 ## Setup
 
@@ -155,11 +177,18 @@ uv sync
 yarn install
 ```
 
-### 2. Add your PDF corpus
+### 2. Configure
 
-Place your PDF files in the `docs/` directory.
+```bash
+cp search_bench.json.example search_bench.json
+# Edit search_bench.json: set docs_dir, collection_name, stemmer_language, etc.
+```
 
-### 3. Start Qdrant
+### 3. Add your document corpus
+
+Place your documents in the `docs/` directory (or wherever `docs_dir` points). Supported formats: PDF, DOCX, PPTX, RTF, ODT, TXT, MD, HTML.
+
+### 4. Start Qdrant
 
 ```bash
 docker run -d --name qdrant -p 6333:6333 \
@@ -167,10 +196,10 @@ docker run -d --name qdrant -p 6333:6333 \
   qdrant/qdrant
 ```
 
-### 4. Index
+### 5. Index
 
 ```bash
-# Build both indexes in one pass (recommended — extracts PDFs only once)
+# Build both indexes in one pass (recommended — extracts documents only once)
 PYTHONIOENCODING=utf-8 uv run python tools/index_all.py --reset
 
 # Or build individually:
@@ -179,6 +208,39 @@ PYTHONIOENCODING=utf-8 uv run python tools/qdrant_index.py
 ```
 
 Use `--reset` to drop and recreate the Qdrant collection. With Marker backend, always use `index_all.py` to avoid running OCR twice.
+
+To add new documents without re-indexing everything:
+
+```bash
+# Add specific documents (Qdrant incremental + BM25 rebuild)
+PYTHONIOENCODING=utf-8 uv run python tools/index_add.py docs/my_new_file.pdf
+
+# Rebuild BM25 index only (from cache, no new embedding)
+PYTHONIOENCODING=utf-8 uv run python tools/index_add.py --bm25-only
+```
+
+## Usage
+
+### Ask a single question
+
+The research agents are available as Claude Code sub-agents. Ask Claude to search your corpus:
+
+> "Search the corpus for combat rules"
+
+Claude will automatically select and use the appropriate researcher agent.
+
+Available agents: `researcher`, `researcher-2round`, `researcher-vector`, `researcher-vector-2round`, `researcher-bm25-free`, `researcher-vector-free`, `researcher-hybrid-free`.
+
+### Standalone CLI search (without Claude Code)
+
+```bash
+# BM25 keyword search
+PYTHONIOENCODING=utf-8 uv run python tools/bm25_search.py "fireball damage" --top-k 5
+```
+
+### Run the benchmark
+
+Ask Claude to run all agents against the questions in `questions.json`. No separate script is needed — Claude orchestrates the agents and collects results into `results/`.
 
 ## MCP servers
 
@@ -205,23 +267,29 @@ Wraps `mcp-server-qdrant` with config-driven env vars. Exposes a `qdrant-find` t
 ```text
 search_bench/
 ├── .claude/
-│   └── agents/              # Claude Code sub-agent definitions (1 per strategy)
+│   └── agents/               # Claude Code sub-agent definitions (1 per strategy)
 ├── data/
-│   └── bm25_{collection}/   # Serialized BM25 index (generated)
-├── docs/                    # PDF corpus (not included — bring your own)
+│   └── bm25_{collection}/    # Serialized BM25 index (generated)
+├── docs/                     # Document corpus (not included — bring your own)
+├── results/                  # Benchmark run results (generated)
+├── test/                     # Unit tests (pytest)
 ├── tools/
-│   ├── config.py            # Shared config loader (reads search_bench.json)
-│   ├── pdf_utils.py         # PDF extraction + clean_text() + chunking
-│   ├── bm25_index.py        # Build BM25 index from PDFs
-│   ├── bm25_search.py       # CLI search over BM25 index
-│   ├── bm25_mcp_server.py   # BM25 MCP server (config-driven)
-│   ├── qdrant_index.py      # Build Qdrant vector index from PDFs
+│   ├── config.py             # Shared config loader (reads search_bench.json)
+│   ├── pdf_utils.py          # PDF extraction + clean_text() + chunking
+│   ├── doc_utils.py          # Non-PDF format extractors (docx, pptx, rtf, odt, txt, html)
+│   ├── index_all.py          # Full index builder (BM25 + Qdrant in one pass)
+│   ├── index_add.py          # Incremental indexing (add new documents)
+│   ├── bm25_index.py         # Build BM25 index from documents
+│   ├── bm25_search.py        # CLI search over BM25 index
+│   ├── bm25_mcp_server.py    # BM25 MCP server (config-driven)
+│   ├── qdrant_index.py       # Build Qdrant vector index from documents
 │   ├── qdrant_mcp_wrapper.py # Wrapper for mcp-server-qdrant (config-driven)
-│   └── corpus_poison.py     # Anti-hallucination: injects modified stats
-├── search_bench.json        # Central config (corpus path, collection, model)
-├── questions.json           # Benchmark questions with expected answers
-├── scoring.md               # Full scoring rubric
-└── JOURNAL.md               # Technical decisions and findings log
+│   ├── extract_page.py       # Extract a single page from a document
+│   └── corpus_poison.py      # Anti-hallucination: injects modified stats
+├── search_bench.json.example # Config template (copy to search_bench.json)
+├── questions.json            # Benchmark questions with expected answers
+├── scoring.md                # Full scoring rubric
+└── JOURNAL.md                # Technical decisions and findings log
 ```
 
 ## Tech stack
@@ -244,6 +312,8 @@ PowerShell syntax:
 ```powershell
 $env:PYTHONIOENCODING="utf-8"; uv run python tools/qdrant_index.py --reset
 ```
+
+If you need GPU-accelerated embedding, set `cudnn_path` in `search_bench.json` to point to the directory containing the cuDNN DLLs.
 
 ## License
 

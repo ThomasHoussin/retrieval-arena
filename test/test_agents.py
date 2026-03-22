@@ -10,8 +10,17 @@ AGENTS_DIR = Path(__file__).parent.parent / ".claude" / "agents"
 AGENT_FILES = sorted(AGENTS_DIR.glob("*.md"))
 
 # Expected MCP server names per agent type
-BM25_AGENTS = {"researcher", "researcher-2round", "researcher-bm25-free", "researcher-bm25-free-haiku"}
-VECTOR_AGENTS = {"researcher-vector", "researcher-vector-2round", "researcher-vector-free"}
+BM25_AGENTS = {
+    "researcher",
+    "researcher-2round",
+    "researcher-bm25-free",
+    "researcher-bm25-free-haiku",
+}
+VECTOR_AGENTS = {
+    "researcher-vector",
+    "researcher-vector-2round",
+    "researcher-vector-free",
+}
 HYBRID_AGENTS = {"researcher-hybrid-free"}
 VALID_MODEL_SHORTCUTS = {"sonnet", "haiku", "opus"}
 VALID_MODEL_PREFIXES = ("claude-sonnet-", "claude-haiku-", "claude-opus-")
@@ -54,14 +63,18 @@ def test_has_valid_model(agent):
     assert "model" in fm, "Missing 'model' field"
     model = fm["model"]
     is_valid = model in VALID_MODEL_SHORTCUTS or model.startswith(VALID_MODEL_PREFIXES)
-    assert is_valid, f"Invalid model '{model}', expected shortcut {VALID_MODEL_SHORTCUTS} or full ID starting with {VALID_MODEL_PREFIXES}"
+    assert is_valid, (
+        f"Invalid model '{model}', expected shortcut {VALID_MODEL_SHORTCUTS} or full ID starting with {VALID_MODEL_PREFIXES}"
+    )
 
 
 def test_has_mcp_servers(agent):
     _, fm = agent
     assert "mcpServers" in fm, "Missing 'mcpServers' field"
     servers = fm["mcpServers"]
-    assert isinstance(servers, list) and len(servers) > 0, "mcpServers must be a non-empty list"
+    assert isinstance(servers, list) and len(servers) > 0, (
+        "mcpServers must be a non-empty list"
+    )
 
 
 def test_mcp_servers_have_type_and_command(agent):
@@ -69,7 +82,9 @@ def test_mcp_servers_have_type_and_command(agent):
     for server_entry in fm["mcpServers"]:
         for name, config in server_entry.items():
             assert "type" in config, f"MCP server '{name}' missing 'type'"
-            assert config["type"] == "stdio", f"MCP server '{name}' has unexpected type '{config['type']}'"
+            assert config["type"] == "stdio", (
+                f"MCP server '{name}' has unexpected type '{config['type']}'"
+            )
             assert "command" in config, f"MCP server '{name}' missing 'command'"
             assert "args" in config, f"MCP server '{name}' missing 'args'"
 
@@ -79,7 +94,9 @@ def test_bm25_agents_have_bm25_server(agent):
     if fm["name"] not in BM25_AGENTS:
         pytest.skip("Not a BM25 agent")
     server_names = [name for entry in fm["mcpServers"] for name in entry.keys()]
-    assert "bm25s" in server_names, f"BM25 agent '{fm['name']}' missing 'bm25s' MCP server"
+    assert "bm25s" in server_names, (
+        f"BM25 agent '{fm['name']}' missing 'bm25s' MCP server"
+    )
 
 
 def test_vector_agents_have_qdrant_server(agent):
@@ -87,7 +104,9 @@ def test_vector_agents_have_qdrant_server(agent):
     if fm["name"] not in VECTOR_AGENTS:
         pytest.skip("Not a vector agent")
     server_names = [name for entry in fm["mcpServers"] for name in entry.keys()]
-    assert "qdrant" in server_names, f"Vector agent '{fm['name']}' missing 'qdrant' MCP server"
+    assert "qdrant" in server_names, (
+        f"Vector agent '{fm['name']}' missing 'qdrant' MCP server"
+    )
 
 
 def test_hybrid_agents_have_both_servers(agent):
@@ -95,18 +114,26 @@ def test_hybrid_agents_have_both_servers(agent):
     if fm["name"] not in HYBRID_AGENTS:
         pytest.skip("Not a hybrid agent")
     server_names = [name for entry in fm["mcpServers"] for name in entry.keys()]
-    assert "bm25s" in server_names, f"Hybrid agent '{fm['name']}' missing 'bm25s' MCP server"
-    assert "qdrant" in server_names, f"Hybrid agent '{fm['name']}' missing 'qdrant' MCP server"
+    assert "bm25s" in server_names, (
+        f"Hybrid agent '{fm['name']}' missing 'bm25s' MCP server"
+    )
+    assert "qdrant" in server_names, (
+        f"Hybrid agent '{fm['name']}' missing 'qdrant' MCP server"
+    )
 
 
-def test_mcp_config_references_search_bench_json(agent):
-    """All MCP server args should reference search_bench.json config."""
+def test_mcp_uses_portable_paths(agent):
+    """All MCP servers should use portable paths (no hardcoded absolute paths)."""
     _, fm = agent
     for server_entry in fm["mcpServers"]:
         for name, config in server_entry.items():
-            args_str = " ".join(str(a) for a in config["args"])
-            assert "search_bench.json" in args_str, (
-                f"MCP server '{name}' in agent '{fm['name']}' does not reference search_bench.json"
+            assert config["command"] == "uv", (
+                f"MCP server '{name}' in agent '{fm['name']}' should use 'uv' command, got '{config['command']}'"
+            )
+            args = config["args"]
+            args_str = " ".join(str(a) for a in args)
+            assert "C:\\" not in args_str and "D:\\" not in args_str, (
+                f"MCP server '{name}' in agent '{fm['name']}' contains hardcoded absolute paths"
             )
 
 

@@ -1,0 +1,10 @@
+{
+  "docs_dir": "./docs",
+  "collection_name": "my_corpus",
+  "stemmer_language": "english",
+  "qdrant_url": "http://localhost:6333",
+  "embedding_model": "jinaai/jina-embeddings-v3",
+  "pdf_backend": "marker",
+  "poison": false,
+  "cudnn_path": "C:\\Program Files\\NVIDIA\\CUDNN\\v9.20\\bin\\12.9\\x64"
+}

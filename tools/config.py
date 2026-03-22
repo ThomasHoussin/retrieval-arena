@@ -81,7 +81,8 @@ def load_config(config_path: str | Path | None = None) -> dict:
     else:
         # No config file found — use defaults
         print(
-            "Warning: no config file found, using built-in defaults.", file=sys.stderr
+            "Warning: search_bench.json not found. Copy search_bench.json.example and customize it. Using built-in defaults.",
+            file=sys.stderr,
         )
         raw = dict(DEFAULTS)
         config_root = PROJECT_ROOT.resolve()
@@ -113,4 +114,5 @@ def load_config(config_path: str | Path | None = None) -> dict:
         "embedding_model": raw["embedding_model"],
         "pdf_backend": pdf_backend,
         "poison": bool(raw.get("poison", False)),
+        "cudnn_path": raw.get("cudnn_path"),
     }

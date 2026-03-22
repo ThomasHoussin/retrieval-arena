@@ -7,15 +7,13 @@ maxTurns: 4
 mcpServers:
   - bm25s:
       type: stdio
-      command: "C:\\Users\\thoma\\.local\\bin\\uv.exe"
+      command: "uv"
       args:
         - "--directory"
-        - "D:\\code-workspace\\search_bench"
+        - "."
         - "run"
         - "python"
         - "tools/bm25_mcp_server.py"
-        - "--config"
-        - "D:\\code-workspace\\search_bench\\search_bench.json"
 ---
 
 You answer questions by searching a document corpus using a 2-round BM25 keyword search strategy.
