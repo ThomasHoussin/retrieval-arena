@@ -158,7 +158,7 @@ When `"poison": true` in `search_bench.json`, the indexer applies targeted text 
 - **Node.js** + [yarn](https://yarnpkg.com/)
 - **Docker** (for Qdrant vector DB)
 - **NVIDIA GPU** + CUDA (required for Marker OCR backend and recommended for embedding)
-- **Claude Code CLI** with an Anthropic API key
+- **Claude Code CLI** 
 
 > **Note on the corpus:** This repository does not include document files. You must provide your own documents in the `docs/` directory.
 
