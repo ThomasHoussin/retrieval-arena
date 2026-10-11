@@ -23,3 +23,8 @@ search_bench.json
 
 # Environment
 .env
+
+# Benchmarks, generated reports and scratch work
+ocr-benchmark-*/
+output/
+tmp/

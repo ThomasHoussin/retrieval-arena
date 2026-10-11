@@ -209,6 +209,12 @@ PYTHONIOENCODING=utf-8 uv run python tools/qdrant_index.py
 
 Use `--reset` to drop and recreate the Qdrant collection. With Marker backend, always use `index_all.py` to avoid running OCR twice.
 
+BM25 indexes each chunk with the source filename (without its final extension)
+prepended once to its text. This makes the title and any edition in the filename
+searchable even when absent from the page. Directory names are not added. The
+saved chunk text and displayed results remain unchanged; Qdrant still embeds only
+the original text. Existing BM25 indexes require rebuilding to use this behavior.
+
 To add new documents without re-indexing everything:
 
 ```bash
@@ -217,6 +223,31 @@ PYTHONIOENCODING=utf-8 uv run python tools/index_add.py docs/my_new_file.pdf
 
 # Rebuild BM25 index only (from cache, no new embedding)
 PYTHONIOENCODING=utf-8 uv run python tools/index_add.py --bm25-only
+```
+
+### Dedicated Neph rebuild (BM25 only)
+
+`docs/Neph` (French *Nephilim* RPG corpus) has its own BM25-only pipeline, separate
+from `search_bench.json`. Its index ships with `mask_pj.npy`: weight 0 for every chunk
+whose path contains `MJ` (game-master material), 1 otherwise (player material).
+
+```powershell
+$env:PYTHONIOENCODING = 'utf-8'
+# 1. Build into a new directory (Marker OCR, GPU; a built index is never overwritten)
+.\.venv\Scripts\python.exe -u .\tools\rebuild_neph.py --output data\bm25_neph_<date>_v2
+# 2. Review ingestion_report.json: fix each empty_pending_review entry, or mark it
+#    excluded_after_review with a review_note
+# 3. Validate, then write the mask, manifest and index README
+.\.venv\Scripts\python.exe .\tools\finalize_neph.py --index-dir data\bm25_neph_<date>_v2
+```
+
+Extractions are cached by content hash in `data/pdf_cache/`, so reruns and renames skip
+OCR. EPUB needs Pandoc; `.doc` needs Microsoft Word. Scans that Marker 1 handles badly
+(empty pages, repeated lines) can be re-extracted with Marker 2 (isolated env, Docker +
+GPU) before rebuilding:
+
+```powershell
+uv run --no-project tools/marker2_reextract.py "docs/Neph/<book>.pdf"  # --dry-run --pages 3-7 to preview
 ```
 
 ## Usage

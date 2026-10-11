@@ -5,7 +5,12 @@ matching the contract of pdf_utils._extract_pymupdf.
 Non-paginated formats return [(1, full_text)].
 """
 
+import base64
+import re
+import shutil
+import subprocess
 import sys
+import tempfile
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -20,6 +25,8 @@ SUPPORTED_EXTENSIONS = {
     ".odt",
     ".htm",
     ".html",
+    ".epub",
+    ".doc",
 }
 
 
@@ -35,6 +42,8 @@ def extract_text(file_path: Path) -> list[tuple[int, str]]:
         ".odt": _extract_odt,
         ".htm": _extract_html,
         ".html": _extract_html,
+        ".epub": _extract_epub,
+        ".doc": _extract_doc,
     }
     extractor = extractors.get(ext)
     if extractor is None:
@@ -49,6 +58,56 @@ def extract_text(file_path: Path) -> list[tuple[int, str]]:
             file=sys.stderr,
         )
     return pages
+
+
+def _extract_epub(file_path: Path) -> list[tuple[int, str]]:
+    """Extract the EPUB reading order with the locally installed Pandoc."""
+    pandoc = shutil.which("pandoc")
+    if not pandoc:
+        raise RuntimeError("EPUB extraction requires pandoc on PATH")
+    result = subprocess.run(
+        [pandoc, "--from=epub", "--to=plain", "--wrap=none", str(file_path.resolve())],
+        capture_output=True,
+        encoding="utf-8",
+        check=True,
+        timeout=180,
+    )
+    text = clean_text(result.stdout.strip())
+    return [(1, text)] if text else []
+
+
+def _extract_doc(file_path: Path) -> list[tuple[int, str]]:
+    """Read legacy Word text (including tables) from a disposable source copy.
+
+    Word is isolated from any interactive instance, opens read-only with macros
+    disabled, and closes without saving. The source cannot acquire lock files.
+    """
+    if sys.platform != "win32":
+        raise RuntimeError("DOC extraction requires Microsoft Word on Windows")
+    helper = Path(__file__).with_name("extract_word.ps1")
+    with tempfile.TemporaryDirectory(prefix="neph-word-") as tmp:
+        copy = Path(tmp) / "source.doc"
+        shutil.copyfile(file_path, copy)
+        result = subprocess.run(
+            [
+                "powershell.exe",
+                "-NoProfile",
+                "-NonInteractive",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                str(helper),
+                "-DocumentPath",
+                str(copy),
+            ],
+            capture_output=True,
+            check=True,
+            timeout=180,
+            creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+        )
+    text = base64.b64decode(result.stdout.strip(), validate=True).decode("utf-8")
+    text = clean_text(text.replace("\r", "\n").replace("\x07", " | ").strip())
+    return [(1, text)] if text else []
 
 
 def _read_text_file(file_path: Path) -> str:
@@ -116,6 +175,12 @@ def _extract_rtf(file_path: Path) -> list[tuple[int, str]]:
 
     raw = _read_text_file(file_path)
     text = clean_text(rtf_to_text(raw).strip())
+    if not text and "\\shptxt" in raw:
+        # striprtf ignores drawing containers, including their text boxes.
+        # Expose only the primary shape text; keep shprslt (legacy duplicate),
+        # picture data and shape properties ignorable.
+        shape_text = re.sub(r"\\\*\\shpinst\b|\\(?:shp|shptxt)\b", "", raw)
+        text = clean_text(rtf_to_text(shape_text).strip())
     if not text:
         return []
     return [(1, text)]

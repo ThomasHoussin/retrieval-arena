@@ -809,5 +809,5 @@ class TestExtractText:
     # ------------------------------------------------------------------
 
     def test_supported_extensions_contains_all_expected(self):
-        expected = {".txt", ".md", ".docx", ".pptx", ".rtf", ".odt", ".htm", ".html"}
+        expected = {".txt", ".md", ".docx", ".pptx", ".rtf", ".odt", ".htm", ".html", ".epub", ".doc"}
         assert expected == SUPPORTED_EXTENSIONS

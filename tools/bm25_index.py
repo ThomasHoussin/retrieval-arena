@@ -1,6 +1,7 @@
 """Index PDF corpus with BM25s."""
 
 import sys
+from pathlib import PurePosixPath
 
 # Fix Windows encoding
 if sys.stdout.encoding != "utf-8":
@@ -18,7 +19,11 @@ def build_bm25_index(chunks: list[dict], cfg: dict):
     """Build and save a BM25 index from pre-extracted chunks."""
     index_dir = cfg["bm25_index_dir"]
 
-    texts = [c["text"] for c in chunks]
+    # Enrich only the search input; keep the saved corpus and displayed text intact.
+    texts = [
+        PurePosixPath(c["source"].replace("\\", "/")).stem + "\n" + c["text"]
+        for c in chunks
+    ]
     stemmer = Stemmer.Stemmer(cfg["stemmer_language"])
     print("Tokenizing...")
     corpus_tokens = bm25s.tokenize(texts, stemmer=stemmer)
