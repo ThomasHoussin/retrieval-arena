@@ -250,6 +250,26 @@ GPU) before rebuilding:
 uv run --no-project tools/marker2_reextract.py "docs/Neph/<book>.pdf"  # --dry-run --pages 3-7 to preview
 ```
 
+**Unindexed archive.** The top-level folder `docs/Neph/_non indexé/` is skipped by
+`rebuild_neph.py` and `finalize_neph.py` (`EXCLUDED_DIRS`, matched case- and
+Unicode-normalization-insensitively). It keeps on disk the files we own but do not want
+indexed: full originals of split books and near-duplicates (other scans or versions of a
+file that is already indexed).
+
+**Split core books.** Quintessence (5e) and Le Livre de base (2e) are indexed as
+extracts so the PJ mask exposes the rules without the GM secrets: a *Partie joueur*
+file under `livres/PJ/`, and the GM chapters and scenario under `MJ` paths. The full
+originals are in `_non indexé/`. Each extract's source ranges are recorded in
+`_non indexé/decoupages.json`: `pages_originales` lists, in order, the original page
+ranges concatenated into the extract.
+
+Known limitation: extract pages are renumbered from 1, so a citation's page is relative
+to the extract file. Only the first segment of each *Partie joueur* file keeps the
+book's page numbers. Map them back with `decoupages.json`; this is not handled yet.
+
+Purchased PDFs carry a per-page purchase watermark (buyer name and order number).
+`clean_text()` strips it, including when text is read back from the cache.
+
 ## Usage
 
 ### Ask a single question

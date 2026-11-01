@@ -9,7 +9,7 @@ from pathlib import Path, PurePosixPath
 import bm25s
 import numpy as np
 
-from rebuild_neph import DEFAULT_OUTPUT, fingerprint, now, write_json
+from rebuild_neph import DEFAULT_OUTPUT, fingerprint, now, source_files, write_json
 
 INDEX_FILES = (
     "corpus.jsonl",
@@ -34,9 +34,7 @@ def validate_corpus(corpus, report, source):
     rows = {row["source"]: row for row in report["files"]}
     if len(rows) != len(report["files"]):
         raise ValueError("Duplicate source paths in ingestion report")
-    actual = {
-        p.relative_to(source).as_posix(): p for p in source.rglob("*") if p.is_file()
-    }
+    actual = {p.relative_to(source).as_posix(): p for p in source_files(source)}
     if set(actual) != set(rows) or len(rows) != report["discovered_files"]:
         raise ValueError("Source inventory differs from ingestion report")
     for name, row in rows.items():

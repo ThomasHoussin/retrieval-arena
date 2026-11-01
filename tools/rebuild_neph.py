@@ -17,6 +17,7 @@ import subprocess
 import sys
 import tempfile
 import traceback
+import unicodedata
 
 from doc_utils import SUPPORTED_EXTENSIONS
 from pdf_utils import (
@@ -31,10 +32,30 @@ ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_SOURCE = ROOT / "docs" / "Neph"
 DEFAULT_OUTPUT = ROOT / "data" / "bm25_neph_20260928_v2"
 SUPPORTED = SUPPORTED_EXTENSIONS | {".pdf"}
+# Top-level folders of the source kept on disk (archives, full originals of split
+# books) but never indexed.
+EXCLUDED_DIRS = {"_non indexé"}
+
+
+def _norm(name: str) -> str:
+    # NTFS is case-insensitive and Explorer/OneDrive/macOS may store NFD names.
+    return unicodedata.normalize("NFC", name).casefold()
+
+
+_EXCLUDED_NORM = {_norm(d) for d in EXCLUDED_DIRS}
 
 
 def now():
     return datetime.now(timezone.utc).isoformat()
+
+
+def source_files(source: Path):
+    """Sorted source files, skipping top-level EXCLUDED_DIRS."""
+    return sorted(
+        p
+        for p in source.rglob("*")
+        if p.is_file() and _norm(p.relative_to(source).parts[0]) not in _EXCLUDED_NORM
+    )
 
 
 def fingerprint(path: Path):
@@ -152,7 +173,7 @@ def build_index(chunks, output):
 def run(source: Path, output: Path, *, preflight=True):
     source, output = source.resolve(), output.resolve()
     cfg = prepare_output(source, output)
-    files = sorted(p for p in source.rglob("*") if p.is_file())
+    files = source_files(source)
     if not any(p.suffix.lower() in SUPPORTED for p in files):
         raise RuntimeError("No supported source documents found.")
     report = {
@@ -246,7 +267,7 @@ def run(source: Path, output: Path, *, preflight=True):
             raise RuntimeError(
                 "Extraction errors remain; BM25 was not built. See ingestion_report.json."
             )
-        current = sorted(p for p in source.rglob("*") if p.is_file())
+        current = source_files(source)
         if current != files or any(
             fingerprint(p) != row["sha256"] for p, row in zip(files, report["files"])
         ):

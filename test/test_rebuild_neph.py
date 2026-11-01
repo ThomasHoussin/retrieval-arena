@@ -282,4 +282,76 @@ def test_v1_interrupted_build_cannot_resume_as_v2(tmp_path):
     rebuild.write_json(output / "build_config.json", config)
     with pytest.raises(RuntimeError, match="not an interrupted run"):
         rebuild.prepare_output(source, output)
-    assert json.loads((output / "build_config.json").read_text(encoding="utf-8")) == config
+    assert (
+        json.loads((output / "build_config.json").read_text(encoding="utf-8")) == config
+    )
+
+
+def test_source_files_skips_top_level_excluded_dir_only(tmp_path):
+    source = tmp_path / "source"
+    (source / "_non indexé" / "sub").mkdir(parents=True)
+    (source / "x" / "_non indexé").mkdir(parents=True)
+    (source / "_non indexé" / "archive.txt").write_text("a", encoding="utf-8")
+    (source / "_non indexé" / "sub" / "deep.txt").write_text("b", encoding="utf-8")
+    (source / "x" / "_non indexé" / "f.txt").write_text("c", encoding="utf-8")
+    (source / "x" / "g.txt").write_text("d", encoding="utf-8")
+    (source / "root.txt").write_text("e", encoding="utf-8")
+    found = rebuild.source_files(source)
+    relative = [p.relative_to(source).as_posix() for p in found]
+    assert relative == sorted(relative)
+    assert set(relative) == {"root.txt", "x/g.txt", "x/_non indexé/f.txt"}
+    assert all(p.is_file() for p in found)
+
+
+def test_source_files_without_excluded_dir_returns_all_sorted_files(tmp_path):
+    source = tmp_path / "source"
+    (source / "b").mkdir(parents=True)
+    (source / "b" / "2.txt").touch()
+    (source / "a.txt").touch()
+    # A top-level *file* whose name merely resembles the excluded folder is kept.
+    (source / "_non indexé.txt").touch()
+    assert rebuild.source_files(source) == sorted(
+        [source / "a.txt", source / "b" / "2.txt", source / "_non indexé.txt"]
+    )
+
+
+def test_run_ignores_excluded_dir_in_report_and_stability_check(
+    tmp_path, isolated_cache, monkeypatch
+):
+    source, output = tmp_path / "source", tmp_path / "output"
+    excluded = source / "_non indexé"
+    (excluded / "sub").mkdir(parents=True)
+    (source / "kept").mkdir()
+    (source / "kept" / "livre.txt").write_text("magie alchimie", encoding="utf-8")
+    (excluded / "archive.txt").write_text("secret archive", encoding="utf-8")
+    (excluded / "sub" / "deep.txt").write_text("secret deep", encoding="utf-8")
+    original = rebuild.extract_text_by_page
+
+    def extract_and_touch_excluded(*args, **kwargs):
+        # Activity inside the excluded folder must not trip the stability check.
+        (excluded / "added_during_run.txt").write_text("new", encoding="utf-8")
+        (excluded / "archive.txt").write_text("modified", encoding="utf-8")
+        return original(*args, **kwargs)
+
+    monkeypatch.setattr(rebuild, "extract_text_by_page", extract_and_touch_excluded)
+    builder = Mock()
+    monkeypatch.setattr(rebuild, "build_index", builder)
+    report = rebuild.run(source, output, preflight=False)
+    assert report["status"] == "index_built_pending_review"
+    assert report["discovered_files"] == 1
+    assert [row["source"] for row in report["files"]] == ["kept/livre.txt"]
+    saved = json.loads((output / "ingestion_report.json").read_text(encoding="utf-8"))
+    assert not any("_non indexé" in row["source"] for row in saved["files"])
+    builder.assert_called_once()
+    indexed_sources = {chunk["source"] for chunk in builder.call_args.args[0]}
+    assert indexed_sources == {"kept/livre.txt"}
+
+
+def test_run_with_only_excluded_documents_has_nothing_to_index(
+    tmp_path, isolated_cache
+):
+    source, output = tmp_path / "source", tmp_path / "output"
+    (source / "_non indexé").mkdir(parents=True)
+    (source / "_non indexé" / "archive.txt").write_text("a", encoding="utf-8")
+    with pytest.raises(RuntimeError, match="No supported source documents"):
+        rebuild.run(source, output, preflight=False)

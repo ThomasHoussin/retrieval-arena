@@ -27,6 +27,13 @@ _marker_converter = None
 _marker_forced_converter = None
 
 
+_WATERMARK_RE = re.compile(
+    r"PDF\s+réservé\s+à\s+l['’]usage\s+de\s+[\s\S]{1,120}?\.?\s*"
+    r"Commande\s+n\s*[°ºo]?\s*:?\s*\d[\d -]{0,15}?\s*\.\s*Partage\s+interdit\s*\.?",
+    re.IGNORECASE,
+)
+
+
 def clean_text(text: str) -> str:
     """Normalize text before chunking to avoid token-dense artifacts from pymupdf4llm.
 
@@ -41,6 +48,8 @@ def clean_text(text: str) -> str:
     text = re.sub(r"https?://\S+", "[url deleted]", text)
     # Long dot sequences (TOC lines) → "..."
     text = re.sub(r"\.{3,}", "...", text)
+    # Purchase watermark printed on every page of bought PDFs (buyer name + order)
+    text = _WATERMARK_RE.sub(" ", text)
     return text
 
 
@@ -239,7 +248,9 @@ def extract_text_by_page(
     )
     if cached is not None and (not retry_empty or any(t.strip() for _, t in cached)):
         details["steps"].append("cache")
-        return cached, True
+        # clean_text is idempotent: re-apply so caches written before a cleanup rule
+        # was added (e.g. the purchase watermark) get the same normalization.
+        return [(n, clean_text(t)) for n, t in cached], True
 
     if ext == ".pdf":
         if backend == "marker":

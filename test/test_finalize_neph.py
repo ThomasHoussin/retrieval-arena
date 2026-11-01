@@ -165,3 +165,39 @@ def test_coverage_notes_come_from_report_and_cache_engine(tmp_path):
     assert "MJ/old.pdf" not in notes
     assert "Les 1 fichiers" in notes and "CDA5_ADJ6" not in notes
     assert "Ar-Kaïm" not in notes
+
+
+def _report_for(book):
+    return {
+        "files": [
+            {
+                "source": "book.txt",
+                "status": "extracted",
+                "chunks": 1,
+                "sha256": hashlib.sha256(book.read_bytes()).hexdigest(),
+            }
+        ],
+        "discovered_files": 1,
+        "total_chunks": 1,
+    }
+
+
+def test_validation_ignores_excluded_dir_files_absent_from_report(tmp_path):
+    source = tmp_path / "source"
+    (source / "_non indexé").mkdir(parents=True)
+    (source / "_non indexé" / "archive.txt").write_text("old", encoding="utf-8")
+    book = source / "book.txt"
+    book.write_text("magie", encoding="utf-8")
+    corpus = [{"source": "book.txt", "text": "magie", "chunk_id": 0, "pages": [1]}]
+    assert list(validate_corpus(corpus, _report_for(book), source)) == ["book.txt"]
+
+
+def test_validation_still_rejects_unreported_file_in_nested_excluded_name(tmp_path):
+    source = tmp_path / "source"
+    (source / "x" / "_non indexé").mkdir(parents=True)
+    (source / "x" / "_non indexé" / "extra.txt").write_text("e", encoding="utf-8")
+    book = source / "book.txt"
+    book.write_text("magie", encoding="utf-8")
+    corpus = [{"source": "book.txt", "text": "magie", "chunk_id": 0, "pages": [1]}]
+    with pytest.raises(ValueError, match="Source inventory differs"):
+        validate_corpus(corpus, _report_for(book), source)
